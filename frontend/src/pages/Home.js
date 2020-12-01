@@ -1,17 +1,37 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 
 const Cover = styled.div `
 display: flex;
   align-items: center;
+  justify-content: flex-start;
   font-weight: bold;
-  &>div {
+  .title {
         transform: rotate(180deg);
-        margin: 0 150px;
-        text-transform: uppercase;   
+        margin: 0 20px;
+        text-transform: uppercase;
+        transition: all .4s ease-in-out;   
   }
-  &>div:hover {
-      transform: scale(1.2)
+  .title h1{
+    font-size: 1rem;
+  }
+  .title h2{
+    font-size: .8rem;
+  }
+  .title:hover {
+      transform: rotate(180deg) scale(1.2)
+  }
+  @media all and (min-width: 1000px) {
+    justify-content: flex-start;
+    .title {
+        margin: 0 150px;
+    }
+    .title h1{
+        font-size: 2rem;
+      }
+      .title h2{
+        font-size: 1.6rem;
+      }
   }
 `
 
@@ -34,7 +54,7 @@ const Home = () => {
             <div className="wrapper">
 
                 <Cover id="cover" className="slide one"> 
-                    <div>
+                    <div className="title">
                         <h1>Tierra Roja</h1>
                         <h2>Mujeres del barro</h2>
                     </div>

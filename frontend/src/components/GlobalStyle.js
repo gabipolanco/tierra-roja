@@ -4,7 +4,9 @@ const GlobalStyle = createGlobalStyle`
   body{
     margin: 0;
     padding: 0;
-    font-family: 'Quicksand', sans-serif;}
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+  }
 
 #brand{
     position: absolute;
@@ -39,7 +41,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-transform: rotate(180deg);
     background-size: 90%;
     background-repeat: no-repeat;
-    background-position: center -2vh;
+    background-position: center center;
     background-color: #FFF;
 }
 
@@ -69,6 +71,12 @@ const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
+}
+
+@media all and (min-width: 1000px) {
+  .one {
+    background-position: center -2vh;
+  }
 }
 
 

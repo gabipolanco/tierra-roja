@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import SignupForm from '../components/SignupForm'
 import styled from 'styled-components'
 
 const HeaderNavStyled = styled.div`
@@ -49,8 +49,8 @@ const HeaderNav = () => {
             </div>
             <div>
                 <ul>
-                    <li><Link>Registrate</Link></li>
-                    <li><Link>Log In</Link></li>
+                    <li><SignupForm /></li>
+                    <li>Log In</li>
                 </ul>
             </div>
         </HeaderNavStyled>
