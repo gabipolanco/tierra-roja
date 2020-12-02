@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox } from 'antd';
+import { signupFn } from '../services/auth'
+
 
 const layout = {
   labelCol: { span: 24 },
@@ -12,8 +15,10 @@ const tailLayout = {
 };
 
 const Formul = () => {
-  const onFinish = values => {
-    console.log('Success:', values);
+  const history = useHistory()
+  const onFinish = async (values) => {
+    await signupFn(values)
+    history.push("/")
   };
 
   const onFinishFailed = errorInfo => {
@@ -31,28 +36,58 @@ const Formul = () => {
       style={{margin: "0 80px"}}
     >
       <Form.Item
-        label="Usuario"
-        name="username"
+        label="Email"
+        name="email"
         
-        rules={[{ required: true, message: 'Por favor indica tu nombre de usuario!' }]}
+        rules={[
+          {
+            type: 'email',
+            message: 'Ingresa un correo electrónico válido!',
+          },
+          {
+            required: true,
+            message: 'Por favor ingresa tu correo electrónico!',
+          },
+        ]}
       >
         <Input style={{width: "300px"}}/>
       </Form.Item>
 
       <Form.Item
-        label="Contraseña"
         name="password"
-        rules={[{ required: true, message: 'Por favor indica una contraseña!' }]}
+        label="Contraseña"
+        rules={[
+          {
+            required: true,
+            message: 'Por favor ingresa una contraseña!',
+          },
+        ]}
+        hasFeedback
       >
         <Input.Password style={{width: "300px"}}/>
       </Form.Item>
 
       <Form.Item
+        name="confirm"
         label="Repite tu contraseña"
-        name="password2"
-        rules={[{ required: true, message: 'Por favor repite la contraseña!' }]}
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Por favor confirma tu contraseña!',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject('Las dos contraseñas no coinciden!');
+            },
+          }),
+        ]}
       >
-      <Input.Password style={{width: "300px"}}/>
+        <Input.Password style={{width: "300px"}}/>
       </Form.Item>
 
       <Form.Item {...tailLayout} name="remember" valuePropName="checked">

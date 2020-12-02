@@ -46,14 +46,15 @@ app.use(session({
   secret: 'irongenerator',
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
 app.use(cors({
-  origin: "*",
+  origin: ["http://localhost:3001"],
   credentials: true
 }))
 
+require('./config/passport')(app);
     
 
 const index = require('./routes/index');

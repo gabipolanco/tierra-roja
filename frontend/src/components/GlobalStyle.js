@@ -3,6 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
 
   body{
     margin: 0;
@@ -32,8 +35,8 @@ const GlobalStyle = createGlobalStyle`
     width: 600vw;
     transform:rotate(90deg) translateY(-100vh);
     transform-origin: top left;
-    scroll-snap-type: x mandatory;
-    scroll-snap-points-x: repeat(1000px);
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
 }
 
 .one {
@@ -44,7 +47,8 @@ const GlobalStyle = createGlobalStyle`
     background-position: center;
     background-color:white;
     overflow: hidden;
-    transition: all 1s linear;
+    transition: all 5s linear;
+    scroll-snap-align: start;
 }
 
 .one:hover {
@@ -53,14 +57,20 @@ const GlobalStyle = createGlobalStyle`
 
 .two{
     position: relative;
-    background-image: url("./images/clayhands.jpeg");
+    background-image: url("./images/sprout.jpeg");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: 25vw -13vh;
     background-color:white;
     overflow: hidden;
-    
+    transition: all 5s linear;
+    scroll-snap-align: start;
 }
+    
+.two:hover {
+  background-size: 90%;
+}
+
 .three{
     position: relative;
     background-image: url("./images/roots.jpeg");
@@ -68,6 +78,12 @@ const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
+    transition: all 5s linear;
+    scroll-snap-align: start;
+}
+
+.three:hover {
+  background-size: 95%;
 }
 
 .four{
@@ -77,6 +93,12 @@ const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
+    transition: all 5s linear;
+    scroll-snap-align: start;
+}
+
+.four:hover {
+  background-size: 90%;
 }
 
 .five{
@@ -86,6 +108,12 @@ const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
+    transition: all 5s linear;
+    scroll-snap-align: start;
+}
+
+.five:hover {
+  background-size: 90%;
 }
 
 .six {
@@ -98,6 +126,12 @@ const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     background-position: center center;
     background-color: #FFF;
+    transition: all 5s linear;
+    scroll-snap-align: start;
+}
+
+.six:hover {
+  background-size: 100%;
 }
 
 @media all and (min-width: 1000px) {

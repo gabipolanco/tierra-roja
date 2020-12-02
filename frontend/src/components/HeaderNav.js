@@ -4,6 +4,8 @@ import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
 import LoginForm from './LoginForm'
 import { Menu, Dropdown } from 'antd';
+import { useContextInfo } from '../hooks/context'
+import { logoutFn } from '../services/auth'
 
 const menu = (
     <Menu>
@@ -68,7 +70,15 @@ const HeaderNavStyled = styled.div`
     }
     `
 
-const HeaderNav = () => {
+const HeaderNav = ({history}) => {
+    const { user, logout } = useContextInfo()
+
+    async function handleLogout(e) {
+        e.preventDefault()
+        await logoutFn()
+        logout()
+      }
+
     return (
         <HeaderNavStyled>
             <div>
@@ -81,8 +91,9 @@ const HeaderNav = () => {
                     </a>
                 </Dropdown>
                 <ul className="menuLarge">
-                    <li><SignupForm /></li>
-                    <li><LoginForm /></li>
+                    {!user ? <><li><SignupForm /></li>
+                    <li><LoginForm /></li></> :
+                    <li><a onClick={handleLogout}>Logout</a></li>}
                 </ul>
             </div>
         </HeaderNavStyled>
