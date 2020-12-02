@@ -5,77 +5,7 @@ import { Modal, Form, Input, Typography, Checkbox } from 'antd';
 import { loginFn } from '../services/auth'
 
 
-const layout = {
-  labelCol: { span: 24 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 0, span: 24 },
-};
 
-const Formul = () => {
-  const onFinish = async (values) => {
-    await loginFn(values)
-  };
-
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
-
-  return (
-    <Form
-      {...layout}
-      name="basic"
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      layout="vertical"
-      style={{margin: "0 80px"}}
-    >
-      <Form.Item
-        label="Email"
-        name="email"
-        
-        rules={[
-          {
-            type: 'email',
-            message: 'Ingresa un correo electrónico válido!',
-          },
-          {
-            required: true,
-            message: 'Por favor ingresa tu correo electrónico!',
-          },
-        ]}
-      >
-        <Input style={{width: "300px"}}/>
-      </Form.Item>
-
-      <Form.Item
-        name="password"
-        label="Contraseña"
-        rules={[
-          {
-            required: true,
-            message: 'Por favor ingresa una contraseña!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password style={{width: "300px"}}/>
-      </Form.Item>
-
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Recordarme</Checkbox>
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <button className="btn" htmlType="submit" style={{width: "230px"}}>
-          Login
-        </button>
-      </Form.Item>
-    </Form>
-  );
-};
 
 const LoginForm = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -99,6 +29,79 @@ const LoginForm = () => {
   const responseGoogle = (response) => {
     console.log(response);
   }
+
+  const layout = {
+    labelCol: { span: 24 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 0, span: 24 },
+  };
+  
+  const Formul = () => {
+    const onFinish = async (values) => {
+      await loginFn(values)
+      setIsModalVisible(false);
+    };
+  
+    const onFinishFailed = errorInfo => {
+      console.log('Failed:', errorInfo);
+    };
+  
+    return (
+      <Form
+        {...layout}
+        name="basic"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+        style={{margin: "0 80px"}}
+      >
+        <Form.Item
+          label="Email"
+          name="email"
+          
+          rules={[
+            {
+              type: 'email',
+              message: 'Ingresa un correo electrónico válido!',
+            },
+            {
+              required: true,
+              message: 'Por favor ingresa tu correo electrónico!',
+            },
+          ]}
+        >
+          <Input style={{width: "300px"}}/>
+        </Form.Item>
+  
+        <Form.Item
+          name="password"
+          label="Contraseña"
+          rules={[
+            {
+              required: true,
+              message: 'Por favor ingresa una contraseña!',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password style={{width: "300px"}}/>
+        </Form.Item>
+  
+        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+          <Checkbox>Recordarme</Checkbox>
+        </Form.Item>
+  
+        <Form.Item {...tailLayout}>
+          <button className="btn" htmlType="submit" style={{width: "230px"}}>
+            Login
+          </button>
+        </Form.Item>
+      </Form>
+    );
+  };
 
   return (
     <>

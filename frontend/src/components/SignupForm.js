@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import { Modal, Form, Input, Typography, Checkbox } from 'antd';
+import { Modal, Form, Input, Typography, Checkbox, Alert } from 'antd';
 import { signupFn } from '../services/auth'
 
 
+<<<<<<< HEAD
 const layout = {
   labelCol: { span: 24 },
   wrapperCol: { span: 16 },
@@ -100,10 +101,13 @@ const Formul = ({onOk}) => {
     </Form>
   );
 };
+=======
+>>>>>>> e7b6da3cba31f95a39b77ed1aae50e7aa0367a8d
 
 const SignupForm = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [registered, setRegistered] = useState(false)
+  
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -124,8 +128,109 @@ const SignupForm = () => {
     console.log(response);
   }
 
+  const layout = {
+    labelCol: { span: 24 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 0, span: 24 },
+  };
+  
+  const Formul = () => {
+    const onFinish = async (values) => {
+      await signupFn(values)
+      setIsModalVisible(false);
+      setRegistered(true)
+      
+    };
+  
+    const onFinishFailed = errorInfo => {
+      console.log('Failed:', errorInfo);
+    };
+  
+    return (
+      <Form
+        {...layout}
+        name="basic"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+        style={{margin: "0 80px"}}
+      >
+        <Form.Item
+          label="Email"
+          name="email"
+          
+          rules={[
+            {
+              type: 'email',
+              message: 'Ingresa un correo electrónico válido!',
+            },
+            {
+              required: true,
+              message: 'Por favor ingresa tu correo electrónico!',
+            },
+          ]}
+        >
+          <Input style={{width: "300px"}}/>
+        </Form.Item>
+  
+        <Form.Item
+          name="password"
+          label="Contraseña"
+          rules={[
+            {
+              required: true,
+              message: 'Por favor ingresa una contraseña!',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password style={{width: "300px"}}/>
+        </Form.Item>
+  
+        <Form.Item
+          name="confirm"
+          label="Repite tu contraseña"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Por favor confirma tu contraseña!',
+            },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject('Las dos contraseñas no coinciden!');
+              },
+            }),
+          ]}
+        >
+          <Input.Password style={{width: "300px"}}/>
+        </Form.Item>
+  
+        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+          <Checkbox>Recordarme</Checkbox>
+        </Form.Item>
+  
+        <Form.Item {...tailLayout}>
+          <button className="btn" htmlType="submit" style={{width: "230px"}}>
+            Registrarse
+          </button>
+        </Form.Item>
+      </Form>
+    );
+  };
+
+
+
   return (
     <>
+      {registered && <Alert style={{top: "100px"}} message="Registro exitoso" description="Revisa tu email para confirmar el registro" closeText="X" type="success" showIcon />}
       <p style={{cursor: "pointer"}} type="primary" onClick={showModal}>
         Registrate
       </p>

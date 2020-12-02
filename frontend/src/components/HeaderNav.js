@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
@@ -71,7 +71,12 @@ const HeaderNavStyled = styled.div`
     `
 
 const HeaderNav = ({history}) => {
+    const [userLogged, setUserLogged ] = useState(null)
     const { user, logout } = useContextInfo()
+
+    useEffect(() => {
+        setUserLogged(user)
+    }, [user]) 
 
     async function handleLogout(e) {
         e.preventDefault()
