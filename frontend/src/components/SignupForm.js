@@ -4,11 +4,11 @@ import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox } from 'antd';
 
 const layout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 24 },
   wrapperCol: { span: 16 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+  wrapperCol: { offset: 0, span: 24 },
 };
 
 const Formul = () => {
@@ -27,14 +27,16 @@ const Formul = () => {
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      layout="vertical"
+      style={{margin: "0 80px"}}
     >
       <Form.Item
-        label="Nombre de usuario"
+        label="Usuario"
         name="username"
-        style={{color: "#996633!important"}}
+        
         rules={[{ required: true, message: 'Por favor indica tu nombre de usuario!' }]}
       >
-        <Input />
+        <Input style={{width: "300px"}}/>
       </Form.Item>
 
       <Form.Item
@@ -42,7 +44,7 @@ const Formul = () => {
         name="password"
         rules={[{ required: true, message: 'Por favor indica una contraseña!' }]}
       >
-        <Input.Password />
+        <Input.Password style={{width: "300px"}}/>
       </Form.Item>
 
       <Form.Item
@@ -50,7 +52,7 @@ const Formul = () => {
         name="password2"
         rules={[{ required: true, message: 'Por favor repite la contraseña!' }]}
       >
-      <Input.Password />
+      <Input.Password style={{width: "300px"}}/>
       </Form.Item>
 
       <Form.Item {...tailLayout} name="remember" valuePropName="checked">
@@ -58,7 +60,7 @@ const Formul = () => {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <button className="btn" htmlType="submit">
+        <button className="btn" htmlType="submit" style={{width: "230px"}}>
           Registrarse
         </button>
       </Form.Item>
@@ -113,7 +115,9 @@ const SignupForm = () => {
           <FacebookLogin
           appId="198741351868254"
           fields="name,email,picture"
+          data-size="medium" 
           callback={responseFacebook}
+          size="small"
         />
         <br />
         <br />
@@ -124,6 +128,9 @@ const SignupForm = () => {
           buttonText="LOGIN WITH GOOGLE"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
+          render={renderProps => (
+            <img src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
+          )}
         />
         </div>
       </Modal>
