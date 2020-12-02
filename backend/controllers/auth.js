@@ -21,7 +21,7 @@ exports.loginProcess = (req, res, next) => {
 
 exports.signupProcess = async (req, res) => {
     try {
-        const {username, password, campus, course } = req.body
+        const {username, password } = req.body
         if (!username || !password) {
             return res.status(406).json({
                 errorMessage: "Indicate username and password"
@@ -37,9 +37,7 @@ exports.signupProcess = async (req, res) => {
         const hashPass = bcrypt.hashSync(password, salt)
         await User.create({
             username,
-            password: hashPass,
-            campus,
-            course
+            password: hashPass
         })
         res.status(201).json({message: "User created"})
     } catch (err) {

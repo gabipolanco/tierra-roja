@@ -6,6 +6,7 @@ const express      = require('express');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const cors = require('cors')
 
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
@@ -47,6 +48,12 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore( { mongooseConnection: mongoose.connection })
 }))
+
+app.use(cors({
+  origin: "*",
+  credentials: true
+}))
+
     
 
 const index = require('./routes/index');
