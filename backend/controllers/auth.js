@@ -2,32 +2,34 @@ const bcrypt = require('bcrypt')
 const User = require('../models/User')
 const passport = require('passport')
 
-exports.loginProcess = (req, res, next) => {
-    passport.authenticate("local", (err, user, failureDetails) => {
-        if(err) {
-            return res.status(500).json("Error de autenticacion")
-        } if (!user) {
-            return res.status(401).json(failureDetails)
-        } 
-        req.login(user, err=> {
-            if(err) {
-                return res.status(500).json("Error de autenticacion")
-            }
-            user.password = null
-            res.status(200).json(user)
-        })
+exports.loginProcess = async (req, res, next) => {
+    passport.authenticate('local', (err, user, failureDetails) => {
+      if (err) {
+        return res.status(500).json({ message: 'Something went wrong authenticating user' })
+      }
+      if (!user) {
+        return res.status(401).json(failureDetails)
+      }
+  
+      req.login(user, err => {
+        if (err) {
+          return res.status(500).json({ message: 'Something went wrong authenticating user' })
+        }
+        user.password = null
+        res.status(200).json(user)
+      })
     })(req, res, next)
-}
+  }
 
 exports.signupProcess = async (req, res) => {
     try {
-        const {username, password } = req.body
-        if (!username || !password) {
+        const {email, password } = req.body
+        if (!email || !password) {
             return res.status(406).json({
-                errorMessage: "Indicate username and password"
+                errorMessage: "Indicate email and password"
             })
         }
-        const user = await User.findOne({ username })
+        const user = await User.findOne({ email })
         if (user) {
             return res.status(406).json({
                 errorMessage: "Error"
@@ -36,7 +38,8 @@ exports.signupProcess = async (req, res) => {
         const salt = bcrypt.genSaltSync(12)
         const hashPass = bcrypt.hashSync(password, salt)
         await User.create({
-            username,
+            username: email,
+            email,
             password: hashPass
         })
         res.status(201).json({message: "User created"})
@@ -51,8 +54,9 @@ exports.uploadProcess = (req, res) => {
 
 exports.editProcess = async (req, res) => {
     id = req.params.id
-    const {username, campus, course } = req.body
-    await User.findByIdAndUpdate(id, {username, campus, course })
+    const {username } = req.body
+    const {email, password} = await User.findById(id)
+    await User.findByIdAndUpdate(id, { email, password, username }, {new: true})
     return res.status(202).json({message: "User updated"})
 }
 
