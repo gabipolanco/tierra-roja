@@ -5,7 +5,6 @@ import { Modal, Form, Input, Typography, Checkbox, Alert } from 'antd';
 import { signupFn } from '../services/auth'
 
 
-<<<<<<< HEAD
 const layout = {
   labelCol: { span: 24 },
   wrapperCol: { span: 16 },
@@ -101,8 +100,6 @@ const Formul = ({onOk}) => {
     </Form>
   );
 };
-=======
->>>>>>> e7b6da3cba31f95a39b77ed1aae50e7aa0367a8d
 
 const SignupForm = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
