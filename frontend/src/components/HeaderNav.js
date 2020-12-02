@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
@@ -71,12 +72,7 @@ const HeaderNavStyled = styled.div`
     `
 
 const HeaderNav = ({history}) => {
-    const [userLogged, setUserLogged ] = useState(null)
     const { user, logout } = useContextInfo()
-
-    useEffect(() => {
-        setUserLogged(user)
-    }, [user]) 
 
     async function handleLogout(e) {
         e.preventDefault()
@@ -87,7 +83,7 @@ const HeaderNav = ({history}) => {
     return (
         <HeaderNavStyled>
             <div>
-                <h2>Tierra Roja</h2>
+                <h2><Link to="/">Tierra Roja</Link></h2>
             </div>
             <div>
                 <Dropdown className="menu-movil" overlay={menu}>
@@ -98,7 +94,9 @@ const HeaderNav = ({history}) => {
                 <ul className="menuLarge">
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
-                    <li><a onClick={handleLogout}>Logout</a></li>}
+                    <><li><Link to="/profile">Profile</Link></li>
+                    <li><a onClick={handleLogout}>Logout</a></li>
+                    </>}
                 </ul>
             </div>
         </HeaderNavStyled>

@@ -14,6 +14,10 @@ html {
     font-size: 16px;
   }
 
+  .page {
+    padding: 50px;
+  }
+
 #brand{
     position: absolute;
     bottom: 0;
