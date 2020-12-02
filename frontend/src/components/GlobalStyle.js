@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
  
 const GlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+
   body{
     margin: 0;
     padding: 0;
@@ -35,14 +38,17 @@ const GlobalStyle = createGlobalStyle`
 
 .one {
     position: relative;
-    background-image: url("./images/tierra.jpeg");
-    background-size: cover;
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    background-size: 90%;
+    background-image: url("./images/clayhands.jpeg");
+    background-size: 58%;
     background-repeat: no-repeat;
-    background-position: center center;
-    background-color: #FFF;
+    background-position: center;
+    background-color:white;
+    overflow: hidden;
+    transition: all 1s linear;
+}
+
+.one:hover {
+  background-size: 65%;
 }
 
 .two{
@@ -73,9 +79,30 @@ const GlobalStyle = createGlobalStyle`
     background-color:white;
 }
 
+.five{
+    position: relative;
+    background-image: url("./images/branch.jpeg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color:white;
+}
+
+.six {
+    position: relative;
+    background-image: url("./images/tierra.jpeg");
+    background-size: cover;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #FFF;
+}
+
 @media all and (min-width: 1000px) {
   .one {
-    background-position: center -2vh;
+    background-position: center center;
   }
 }
 
@@ -149,6 +176,7 @@ ul {
   box-sizing:border-box;
   margin-top:20px;
   padding:10px 40px;
+  cursor: pointer;
 }
 
 .anim-trans {

@@ -4,10 +4,10 @@ import styled from 'styled-components'
 const Cover = styled.div `
 display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   font-weight: bold;
   .title {
-        transform: rotate(180deg);
+        font-family: "Roboto", sans-serif;
         margin: 0 20px;
         text-transform: uppercase;
         transition: all .4s ease-in-out;   
@@ -19,10 +19,9 @@ display: flex;
     font-size: .8rem;
   }
   .title:hover {
-      transform: rotate(180deg) scale(1.2)
+      transform: scale(1.2)
   }
   @media all and (min-width: 1000px) {
-    justify-content: flex-start;
     .title {
         margin: 0 150px;
     }

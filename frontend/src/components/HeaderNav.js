@@ -1,6 +1,21 @@
 import React from 'react'
 import SignupForm from '../components/SignupForm'
+import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
+import LoginForm from './LoginForm'
+import { Menu, Dropdown } from 'antd';
+
+const menu = (
+    <Menu>
+      <Menu.Item>
+        <SignupForm />
+      </Menu.Item>
+      <Menu.Item>
+        <LoginForm />
+      </Menu.Item>
+    </Menu>
+  );
+
 
 const HeaderNavStyled = styled.div`
     position: fixed;
@@ -25,17 +40,29 @@ const HeaderNavStyled = styled.div`
 &>div>h2:hover {
     color: #996633;
 }
-    & div ul {
-        display: flex;
+
+@media all and (min-width: 600px) {
+    &>div .menu-movil {
+        display: none;
+    }
+}
+
+    &>div .menuLarge {
+        display: none;
         width: 100%;
         justify-content: flex-end;
     }
-    & div ul li {
+    @media all and (min-width: 600px) {
+    &>div .menuLarge {
+        display: flex;
+    }
+}
+    &>div .menuLarge li {
         margin: 0 50px;
         text-transform: uppercase;
         font-weight: bold;
     }
-    & div ul li:hover a {
+    &>div .menuLarge li:hover p {
         color: black;
         text-shadow: 0 0 1px black;
     }
@@ -48,9 +75,14 @@ const HeaderNav = () => {
                 <h2>Tierra Roja</h2>
             </div>
             <div>
-                <ul>
+                <Dropdown className="menu-movil" overlay={menu}>
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        <MenuHamburguesa/>
+                    </a>
+                </Dropdown>
+                <ul className="menuLarge">
                     <li><SignupForm /></li>
-                    <li>Log In</li>
+                    <li><LoginForm /></li>
                 </ul>
             </div>
         </HeaderNavStyled>
