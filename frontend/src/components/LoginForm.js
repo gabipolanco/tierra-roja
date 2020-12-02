@@ -138,7 +138,7 @@ const LoginForm = () => {
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           render={renderProps => (
-            <img src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
+            <img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
           )}
         />
         </div>

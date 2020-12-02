@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox } from 'antd';
@@ -14,11 +13,10 @@ const tailLayout = {
   wrapperCol: { offset: 0, span: 24 },
 };
 
-const Formul = () => {
-  const history = useHistory()
+const Formul = ({onOk}) => {
   const onFinish = async (values) => {
     await signupFn(values)
-    history.push("/")
+    onOk()
   };
 
   const onFinishFailed = errorInfo => {
@@ -132,6 +130,7 @@ const SignupForm = () => {
         Registrate
       </p>
       <Modal
+        style={{ top: 20 }}
         title="Registrate"
         visible={isModalVisible}
         onOk={handleOk}
@@ -164,7 +163,7 @@ const SignupForm = () => {
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           render={renderProps => (
-            <img src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
+            <img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
           )}
         />
         </div>

@@ -86,14 +86,14 @@ const HeaderNav = ({history}) => {
             </div>
             <div>
                 <Dropdown className="menu-movil" overlay={menu}>
-                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <a href="#" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         <MenuHamburguesa/>
                     </a>
                 </Dropdown>
                 <ul className="menuLarge">
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
-                    <li><a onClick={handleLogout}>Logout</a></li>}
+                    <li><a href="#" onClick={handleLogout}>Logout</a></li>}
                 </ul>
             </div>
         </HeaderNavStyled>
