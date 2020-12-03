@@ -16,8 +16,12 @@ const userSchema = new Schema({
   },
   artWork: [{
     type: Schema.Types.ObjectId,
-    ref: "Artwork"
-  }]
+    ref: "Work"
+  }],
+  artistId: {
+    type: Schema.Types.ObjectId,
+    ref: "Artist"
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',

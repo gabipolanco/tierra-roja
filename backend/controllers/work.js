@@ -8,7 +8,8 @@ exports.createWork = async (req, res) => {
     const {artistId} = await User.findById(userId)
     if (!artistId) return
     const newWork = await Work.create({title, media, artistId, description})
-    res.status(201).json({message: "Work created"}, newWork)
+    await User.findByIdAndUpdate(userId, { $push : { artWork: newWork._id } }, {new: true})
+    res.status(201).json({message: "Work created", newWork})
 }
 
 exports.editWork = async (req, res) => {
@@ -17,19 +18,20 @@ exports.editWork = async (req, res) => {
     const userId = req.user.id
     const {artistId} = await User.findById(userId)
     const editedWork = await Work.findByIdAndUpdate(workId, { workType, title, media, artistId, description, price}, {new: true})
-    res.status(200).json({message: "Work edited"}, editedWork)
+    res.status(200).json({message: "Work edited", editedWork})
 }
 
 exports.getAllWorks = async (req, res) => {
     const userId = req.user.id
-    const {artistId} = await User.findById(userId)
-    const {works} = await Artist.findById(artistId).populate("works")
-    res.status(200).json(works)
+    const { artWork } = await User.findById(userId).populate("artWork")
+    res.status(200).json(artWork)
 
 }
 
 exports.delteWork = async (req, res) => {
+    const userId = req.user.id
     const workId = req.params.id
     await Work.findByIdAndDelete(workId)
+    await User.findByIdAndUpdate(userId, { $pull : { artWork: workId } }, {new: true})
     res.status(200).json({message: "work deleted"})
 }
