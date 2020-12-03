@@ -3,11 +3,10 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox } from 'antd';
 import { loginFn } from '../services/auth'
-
-
-
+import { useContextInfo } from '../hooks/context'
 
 const LoginForm = () => {
+  const { login } = useContextInfo()
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -40,7 +39,8 @@ const LoginForm = () => {
   
   const Formul = () => {
     const onFinish = async (values) => {
-      await loginFn(values)
+      const user = await loginFn(values)
+      login(user)
       setIsModalVisible(false);
     };
   

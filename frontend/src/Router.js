@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import NotFound from './components/404/NotFound'
 import Home from './pages/Home'
+import MyAlterEgo from './pages/MyAlterEgo'
 import Profile from './pages/Profile'
 import MyWorks from './pages/MyWorks'
 import GlobalStyle from './components/GlobalStyle'
 import NavBar from './components/NavBar'
 import HeaderNav from './components/HeaderNav'
+import EditUser from './components/EditUser'
 
 
 const RouterApp = () => {
@@ -19,7 +21,9 @@ const RouterApp = () => {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/edit-user" component={EditUser} />
                 <Route path="/myworks" component={MyWorks} />
+                <Route path="/artist" component={MyAlterEgo} />
                 <Route componentt={NotFound} />
             </Switch>
         </Router>

@@ -4,6 +4,7 @@ const { isAuth, catchErrs } = require('../middlewares')
 const {
     loginProcess,
     signupProcess,
+    confirmSignup,
     editProcess,
     logoutProcess,
     loggedinProcess
@@ -11,8 +12,9 @@ const {
 
 router.post('/login', catchErrs(loginProcess))
 router.post('/signup', catchErrs(signupProcess))
+router.get('/:email/:id', catchErrs(confirmSignup))
 router.post('/edit/:id',isAuth, catchErrs(editProcess))
-router.get('/logout', catchErrs(logoutProcess))
+router.get('/logout', logoutProcess)
 router.get('/loggedin', loggedinProcess)
 
 module.exports = router;

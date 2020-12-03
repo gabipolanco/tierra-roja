@@ -71,7 +71,7 @@ const HeaderNavStyled = styled.div`
     }
     `
 
-const HeaderNav = ({history}) => {
+const HeaderNav = () => {
     const { user, logout } = useContextInfo()
 
     async function handleLogout(e) {
@@ -94,7 +94,7 @@ const HeaderNav = ({history}) => {
                 <ul className="menuLarge">
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
-                    <><li><Link to="/profile">Profile</Link></li>
+                    <><li><Link to="/profile">Perfil</Link></li>
                     <li><a onClick={handleLogout}>Logout</a></li>
                     </>}
                 </ul>

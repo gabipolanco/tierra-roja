@@ -47,12 +47,23 @@ exports.signupProcess = async (req, res) => {
         res.status(201).json({message: "User created"})
 }
 
+exports.confirmSignup = async (req, res) => {
+  const {email, id} = req.params
+  const user = await User.findOne({email: email})
+  if(!bcrypt.compareSync(user._id.toString(), id)) return res.status(400).json({message: "Confirm your email"})
+  await User.findByIdAndUpdate(user._id, {confirmed: true}, {new: true})
+  res.redirect("http://localhost:3001")
+}
+
 exports.editProcess = async (req, res) => {
     id = req.params.id
-    const {username } = req.body
-    const {email, password} = await User.findById(id)
-    await User.findByIdAndUpdate(id, { email, password, username }, {new: true})
-    return res.status(202).json({message: "User updated"})
+    let { password } = await User.findById(id)
+    const {username, email, role, confirm } = req.body
+    if (confirm !== "undefined") {
+      password = confirm
+    }
+    const editedUser = await User.findByIdAndUpdate(id, { username, email, password, role }, {new: true})
+    return res.status(202).json({message: "User updated", editedUser})
 }
 
 exports.logoutProcess = (req, res) => {

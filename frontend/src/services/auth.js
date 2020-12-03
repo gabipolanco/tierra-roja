@@ -10,14 +10,12 @@ const authService = axios.create({
 })
 
 // 1. Signup 
-export const signupFn = userInfo =>
-  authService.post('/signup', userInfo)
+export const signupFn = userInfo => authService.post('/signup', userInfo)
 
-export const loginFn = userInfo =>
-  authService.post('/login', userInfo)
+export const loginFn = userInfo => authService.post('/login', userInfo)
 
-export const loggedFn = () =>
-  authService.get('/loggedin')
+export const editFn = (id, userInfo) => authService.post(`/edit/${id}`, userInfo)
 
-export const logoutFn = () =>
-  authService.get('/logout')
+export const loggedFn = () => authService.get('/loggedin')
+
+export const logoutFn = () => authService.get('/logout')

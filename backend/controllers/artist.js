@@ -3,9 +3,9 @@ const Work = require('../models/Work')
 const Artist = require('../models/Artist')
 
 exports.createArtist = async (req, res) => {
-    const { name, bio } = req.body
+    const { name, profession, coverImage, instagram, facebook, twitter, other, bio } = req.body
     const userId = req.user.id
-    const newArtist = await Artist.create({name, userId, bio})
+    const newArtist = await Artist.create({name, userId, profession, coverImage, instagram, facebook, twitter, other, bio})
     await User.findByIdAndUpdate(userId, {artistId: newArtist._id}, {new: true})
     return res.status(200).json({message: "Artist created", newArtist} )
 }
