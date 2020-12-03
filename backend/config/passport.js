@@ -14,7 +14,10 @@ passport.use(new LocalStrategy({
           done(null, false, { message: 'Incorrect email' });
           return;
         }
-
+        if (!foundUser.confirmed) {
+          done(null, false, {message: 'You need to confirm your email'})
+          return
+        }
         if (!bcrypt.compareSync(password, foundUser.password)) {
           done(null, false, { message: 'Incorrect password' });
           return;

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
 const passport = require('passport')
+const { emailConfirmacion } = require('../config/nodemailer')
 
 exports.loginProcess = async (req, res, next) => {
     passport.authenticate('local', (err, user, failureDetails) => {
@@ -36,11 +37,13 @@ exports.signupProcess = async (req, res) => {
         }
         const salt = bcrypt.genSaltSync(12)
         const hashPass = bcrypt.hashSync(password, salt)
-        await User.create({
+        const newUser = await User.create({
             username: email,
             email,
             password: hashPass
         })
+        const hashId = bcrypt.hashSync(newUser._id, salt)
+        await emailConfirmacion(email, hashId)
         res.status(201).json({message: "User created"})
 }
 

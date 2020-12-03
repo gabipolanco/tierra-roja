@@ -5,6 +5,10 @@ const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
+  confirmed: {
+    type: Boolean,
+    default: false
+  },
   role: {
     type: String,
     enum: ["admin", "artist", "guest"],
