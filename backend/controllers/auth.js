@@ -42,13 +42,9 @@ exports.signupProcess = async (req, res) => {
             email,
             password: hashPass
         })
-        const hashId = bcrypt.hashSync(newUser._id, salt)
+        const hashId = bcrypt.hashSync(newUser._id.toString(), salt)
         await emailConfirmacion(email, hashId)
         res.status(201).json({message: "User created"})
-}
-
-exports.uploadProcess = (req, res) => {
-
 }
 
 exports.editProcess = async (req, res) => {
