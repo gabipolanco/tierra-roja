@@ -22,7 +22,6 @@ exports.loginProcess = async (req, res, next) => {
   }
 
 exports.signupProcess = async (req, res) => {
-    try {
         const {email, password } = req.body
         if (!email || !password) {
             return res.status(406).json({
@@ -43,9 +42,6 @@ exports.signupProcess = async (req, res) => {
             password: hashPass
         })
         res.status(201).json({message: "User created"})
-    } catch (err) {
-        console.log(err)
-    }
 }
 
 exports.uploadProcess = (req, res) => {

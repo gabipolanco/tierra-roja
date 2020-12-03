@@ -62,6 +62,12 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+const workRoutes = require('./routes/work');
+app.use('/work', workRoutes);
+
+const artistRoutes = require('./routes/artist');
+app.use('/artist', artistRoutes);
       
 
 module.exports = app;

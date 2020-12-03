@@ -6,11 +6,11 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import MyWorks from './pages/MyWorks'
 import GlobalStyle from './components/GlobalStyle'
-import NavBar from './components/NavBar'
 import HeaderNav from './components/HeaderNav'
+import NavBar from './components/NavBar'
 
 
-const RouterApp = () => {
+function RouterApp() {
     return (
         <Router>
             <GlobalStyle />
@@ -20,10 +20,10 @@ const RouterApp = () => {
                 <Route exact path="/" component={Home} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/myworks" component={MyWorks} />
-                <Route componentt={NotFound} />
+                <Route component={NotFound} />
             </Switch>
         </Router>
     )
 }
 
-export default RouterApp
+export default RouterApp;

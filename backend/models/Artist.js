@@ -6,7 +6,41 @@ const artistSchema = new Schema({
   userId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
+  },
+  profession: {
+    type: String,
+    default: ""
+  },
+  bio: {
+    type: String,
+  default: ""
+},
+  coverImage: {
+    type: String,
+    default: ""
+  },
+  socialMedia: {
+    instagram: {
+      type: String,
+      default: "instagram.com"
+    },
+    facebook: {
+      type: String,
+    default: "facebook.com"
+  },
+    twitter: {
+      type: String,
+      default: "twitter.com"
+    },
+    other: {
+      type: String,
+    default: ""
   }
+  },
+  works: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Work'
+  }]
 }, {
     timestamps: {
       createdAt: 'created_at',
