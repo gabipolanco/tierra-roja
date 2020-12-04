@@ -35,7 +35,7 @@ app.use(cookieParser());
 
 // Express View engine setup
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/build')));
 
 
 // default value for title local
@@ -69,6 +69,9 @@ app.use('/work', workRoutes);
 
 const artistRoutes = require('./routes/artist');
 app.use('/artist', artistRoutes);
-      
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/build/index.html'))
+})      
 
 module.exports = app;
