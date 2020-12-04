@@ -244,6 +244,7 @@ exports.emailConfirmacion = (email, hashId) => {
         </tr>
         </tbody>
         </table>
+        <a href="https://tierra-roja.herokuapp.com//auth/${email}/${hashId}">Link de confirmacion deploy</a>
         <!--[if (IE)]></div><![endif]-->
         </body>
         </html>

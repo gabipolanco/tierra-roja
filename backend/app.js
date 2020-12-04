@@ -51,7 +51,7 @@ app.use(session({
 }))
 
 app.use(cors({
-  origin: ["http://localhost:3001"],
+  origin: ["http://localhost:3001", "https://tierra-roja.herokuapp.com/"],
   credentials: true
 }))
 
