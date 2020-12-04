@@ -102,8 +102,9 @@ const EditUser = () => {
                     label="Rol"
                     initialValue={user.role}>
                         <Select placeholder="Elegi tu rol" >
-                            <Select.Option value="guest">Cliente</Select.Option>
+                            <Select.Option value="user">Usuario</Select.Option>
                             <Select.Option value="artist">Artista</Select.Option>
+                            <Select.Option value="student">Estudiante</Select.Option>
                         </Select>
                     </Form.Item>
                 

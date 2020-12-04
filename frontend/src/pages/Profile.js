@@ -1,28 +1,27 @@
-import React, {useState} from 'react'
-import { Typography, Row, Col, Descriptions, Button, Form, Upload, message } from 'antd'
+import React from 'react'
+import { Typography, Row, Col, Descriptions, Button } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
 
-const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
 
 const Profile = () => {
-    const [form] = Form.useForm()
     const { user } = useContextInfo()
-    const [img, setImg] = useState(null)
-
+    
     async function handleSubmit() {
-        console.log(img)
+        console.log(null)
     }
-
-    async function handleUploadFile(file) {
+    
+    async function handleUploadFile({target: {files}}) {
+        const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
         const data = new FormData()
-        data.append('file', file)
-        data.append('tierra_roja', 'tierra-roja')
+        data.append('file', files[0])
+        data.append('upload_preset', 'tierra-roja-preset')
         
-        const { data: { secure_url } } = await axios.post(cloudinaryAPI, data)
-        setImg(secure_url);
-        handleSubmit()
+        const res = await axios.post(cloudinaryAPI, data)
+        console.log(res.data.secure_url)
+        // setImg(secure_url);
+        // handleSubmit()
       }
 
     
@@ -34,13 +33,11 @@ const Profile = () => {
                     <div style={{width: "100px", marginLeft: "60px", borderRadius: "50%", overflow: "hidden"}}>
                         <img style={{width: "100%"}} src={user.image} alt=""/>
                     </div>
-                    <Form form={form} layout="vertical">
-                        <Form.Item name="title">  
-                            <Upload name="file" beforeUpload={handleUploadFile} style={{float: "left", margin: "40px"}}>
-                                <Button >Cambiar imagen</Button>
-                            </Upload>
-                        </Form.Item>
-                    </Form>
+                    
+                        <form>  
+                            <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px"}} />
+                        </form>
+                    
                 </Col>
                 <Col offset={2} span={20}>    
                     <Descriptions column={4} title="Información personal" layout="vertical">

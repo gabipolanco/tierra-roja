@@ -43,6 +43,7 @@ const MyAlterEgo = () => {
                         <Descriptions.Item label="Instagram">{artist.socialMedia.instagram}</Descriptions.Item>
                         <Descriptions.Item label="Facebook">{artist.socialMedia.facebook}</Descriptions.Item>
                         <Descriptions.Item label="Twitter">{artist.socialMedia.twitter}</Descriptions.Item>
+                        <Descriptions.Item label="Página personal">{artist.socialMedia.other}</Descriptions.Item>
                      
                         <Descriptions.Item span={1}><Link to="/"><Button>Editar alter ego</Button></Link></Descriptions.Item>
                     </Descriptions>

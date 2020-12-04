@@ -50,6 +50,7 @@ exports.signupProcess = async (req, res) => {
 exports.confirmSignup = async (req, res) => {
   const {email, id} = req.params
   const user = await User.findOne({email: email})
+  if(!user) return res.status(404).json({message: "user not found"})
   if(!bcrypt.compareSync(user._id.toString(), id)) return res.status(400).json({message: "Confirm your email"})
   await User.findByIdAndUpdate(user._id, {confirmed: true}, {new: true})
   res.redirect("http://localhost:3001")
