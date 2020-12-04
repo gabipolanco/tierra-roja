@@ -1,27 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typography, Row, Col, Descriptions, Button } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
-
+import { uploadPhotoFn } from '../services/auth'
 
 const Profile = () => {
-    const { user } = useContextInfo()
+    const [img, setImg] = useState(null)
+    const [status, setStatus] = useState('Elige una foto')
+    const { user, login } = useContextInfo()
     
-    async function handleSubmit() {
-        console.log(null)
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const id = user._id
+        const { data: { editedUser } } = await uploadPhotoFn(id, {image: img})
+        login(editedUser)
     }
     
     async function handleUploadFile({target: {files}}) {
+        
         const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
         const data = new FormData()
         data.append('file', files[0])
         data.append('upload_preset', 'tierra-roja-preset')
         
-        const res = await axios.post(cloudinaryAPI, data)
-        console.log(res.data.secure_url)
-        // setImg(secure_url);
-        // handleSubmit()
+        const {data: {secure_url}}= await axios.post(cloudinaryAPI, data)
+        setImg(secure_url);
+       
+        setStatus("Cambiar la foto")
       }
 
     
@@ -29,14 +35,15 @@ const Profile = () => {
         (<div className="page">
             <Typography.Title level={2}>Perfil de {user.username}</Typography.Title>
             <Row>
-                <Col offset={2} span={20}>
-                    <div style={{width: "100px", marginLeft: "60px", borderRadius: "50%", overflow: "hidden"}}>
+                <Col offset={2} span={8}>
+                    <div style={{width: "100px", height: "100px", marginLeft: "60px", borderRadius: "50%", overflow: "hidden"}}>
                         <img style={{width: "100%"}} src={user.image} alt=""/>
                     </div>
                     
-                        <form>  
-                            <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px"}} />
-                        </form>
+                    <form onSubmit={handleSubmit}>  
+                        <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px 0", width: "200px"}} />
+                        <button type="submit" disabled={!img}>{status}</button>
+                    </form>
                     
                 </Col>
                 <Col offset={2} span={20}>    

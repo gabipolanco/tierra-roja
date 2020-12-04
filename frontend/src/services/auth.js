@@ -16,6 +16,8 @@ export const loginFn = userInfo => authService.post('/login', userInfo)
 
 export const editFn = (id, userInfo) => authService.post(`/edit/${id}`, userInfo)
 
+export const uploadPhotoFn = (id, image) => authService.post(`/upload-photo/${id}`, image)
+
 export const loggedFn = () => authService.get('/loggedin')
 
 export const logoutFn = () => authService.get('/logout')
