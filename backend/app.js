@@ -10,10 +10,11 @@ const cors = require('cors')
 
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
-    
+
+const DBConnection = process.env.DB || 'mongodb://localhost/tierra-roja'
 
 mongoose
-  .connect('mongodb://localhost/tierra-roja', {useNewUrlParser: true})
+  .connect(DBConnection, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
