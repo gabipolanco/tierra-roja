@@ -1,10 +1,13 @@
-import React from 'react'
-import { Row, Col, Form, Input, Upload, Typography, Button, Descriptions } from 'antd'
+import React, {useState} from 'react'
+import { Row, Col, Form, Input, Upload, Typography, Button } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { createArtistFn } from '../services/artist'
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
+import Portfolio from '../components/Portfolio'
+import axios from 'axios'
 
 const MyAlterEgo = () => {
+    const [img, setImg] = useState(null)
     const { user, artist, setUserArtistFn } = useContextInfo()
     let history = useHistory();
 
@@ -28,26 +31,21 @@ const MyAlterEgo = () => {
           console.log('Failed:', errorInfo);
         };
 
+        async function handleUploadFile({target: {files}}) {
+        
+            const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
+            const data = new FormData()
+            data.append('file', files[0])
+            data.append('upload_preset', 'tierra-roja-preset')
+            
+            const {data: {secure_url}}= await axios.post(cloudinaryAPI, data)
+            setImg(secure_url);
+          }
+
     return (
         <div className="page">
-            <h1>Mi perfil de artista</h1>
             {artist ? <Row>
-                <Col offset={2} span={20}>    
-                    <Descriptions column={2} title="Información artística" layout="vertical">
-                        <Descriptions.Item label="Nombre artístico">{artist.name}</Descriptions.Item>
-                        <Descriptions.Item label="Profesión">{artist.profession}</Descriptions.Item>
-                        <Descriptions.Item span={2} label="Biografía">{artist.bio}</Descriptions.Item>
-                       
-                        <Typography.title level={4}>Redes sociales</Typography.title>
-                       
-                        <Descriptions.Item label="Instagram">{artist.socialMedia.instagram}</Descriptions.Item>
-                        <Descriptions.Item label="Facebook">{artist.socialMedia.facebook}</Descriptions.Item>
-                        <Descriptions.Item label="Twitter">{artist.socialMedia.twitter}</Descriptions.Item>
-                        <Descriptions.Item label="Página personal">{artist.socialMedia.other}</Descriptions.Item>
-                     
-                        <Descriptions.Item span={1}><Link to="/"><Button>Editar alter ego</Button></Link></Descriptions.Item>
-                    </Descriptions>
-                </Col>
+                <Portfolio />
             </Row> : <div>
             <Row style={{marginTop: "70px"}}>
                 <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
@@ -60,6 +58,7 @@ const MyAlterEgo = () => {
                     layout="vertical"
                     style={{margin: "0 80px"}}
                     >
+                    <Typography.Title level={2}>Crear portfolio</Typography.Title>
                      <Form.Item
                         label="Nombre de artista"
                         name="name"
@@ -78,7 +77,7 @@ const MyAlterEgo = () => {
                         label="Imagen banner"
                         name="coverImage"
                     >       
-                        <Upload name="file">
+                        <Upload beforeUpload={handleUploadFile} name="file">
                             <Button >Elegir imagen</Button>
                         </Upload>
                     </Form.Item>
@@ -107,10 +106,10 @@ const MyAlterEgo = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label="Twitter"
-                        name="twitter"
+                        label="Email"
+                        name="email"
                     >
-                        <Input addonBefore="https://twitter.com/" />
+                        <Input />
                     </Form.Item>
 
                     <Form.Item

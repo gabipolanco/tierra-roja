@@ -62,7 +62,7 @@ const Profile = () => {
                     <Col offset={2} span={20}>
                         <Link to="/myworks"><Button>Mis trabajos</Button></Link>
                         <br/><br/>
-                        <Link to="/artist"><Button>Mi alter ego</Button></Link>
+                        <Link to="/artist"><Button>Portfolio</Button></Link>
                     </Col>
                 </Row>
             </div> 
