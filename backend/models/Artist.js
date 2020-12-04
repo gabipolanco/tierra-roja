@@ -17,7 +17,7 @@ const artistSchema = new Schema({
 },
   coverImage: {
     type: String,
-    default: ""
+    default: "https://res.cloudinary.com/gabipf/image/upload/v1607097840/bannerportfolio_psi9u4.jpg"
   },
   socialMedia: {
     instagram: {
@@ -28,9 +28,9 @@ const artistSchema = new Schema({
       type: String,
     default: "facebook.com"
   },
-    twitter: {
+    email: {
       type: String,
-      default: "twitter.com"
+      default: "ejemplo@ejemplo.com"
     },
     other: {
       type: String,
