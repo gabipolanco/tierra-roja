@@ -2,12 +2,14 @@ import React, { useState, createContext, useContext, useEffect} from 'react'
   
 import { loggedFn } from '../services/auth'
 import { getArtistFn } from '../services/artist'
+import { getWorksFn } from '../services/works'
   
   export const AppContext = createContext()
   
   export const AppCtxProvider = props => {
     const [user, setUser] = useState(null)
     const [artist, setArtist] = useState(null)
+    const [works, setWorks] = useState(null)
   
     useEffect(() => {
       async function getSessionData() {
@@ -27,8 +29,26 @@ import { getArtistFn } from '../services/artist'
       getArtist()
     }, [])
 
+    useEffect(() => {
+      async function getWorks() {
+        const { data } = await getWorksFn()
+        if (data.length !== 0) setUserWorksFn(data);
+      }
+  
+      getWorks()
+    }, [])
+
     const setUserArtistFn = artistInfo => {
       setArtist(artistInfo)
+    }
+
+    const setUserWorksFn = worksInfo => {
+      setWorks(worksInfo)
+    }
+
+    const getUserWorksFn = async () => {
+      const { data } = await getWorksFn()
+      if (data.length !== 0) setUserWorksFn(data);
     }
   
     const login = userInfo => {
@@ -39,7 +59,7 @@ import { getArtistFn } from '../services/artist'
       setUser(null)
     }
   
-    const value = { user, login, logout, artist, setUserArtistFn }
+    const value = { user, login, logout, artist, setUserArtistFn, getUserWorksFn, works, setUserWorksFn }
   
     return (
       <AppContext.Provider {...props} value={value} />

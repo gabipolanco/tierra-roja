@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import { useContextInfo } from '../hooks/context'
+import { Card, Col, Row, Typography } from 'antd';
 import styled from 'styled-components'
 
 const PortfolioStyled = styled.div`
@@ -111,7 +112,7 @@ overflow: hidden;
     transition: all .4s ease;
 }
 & .inner-btn:hover {
-    transform: scale(.9);
+    transform: scale(.95);
     cursor: pointer;
 }
 
@@ -130,12 +131,12 @@ overflow: hidden;
     height: 70vh;
 }
 & .inner-rest2 {
-    height: 30vh;
+    height: 40vh;
     width: 100%;
     margin: 2px 4px;
     background-color: rgba(0,0,0, .4);
 }
-&>div.bio {
+&>div.bio, .arte {
     position: absolute;
     display: flex;
     right: 0;
@@ -147,12 +148,13 @@ overflow: hidden;
     transition: all .4s ease;
     overflow-y: scroll;
 }
-&>div.bio img {
+&>div.bio>img {
     height: 50%;
     width: 30%;
+    object-fit: cover;
     margin: 70px 40px 0 0;
 }
-&>div.bio .close{
+&>div .close{
     position: fixed;
     right: 100px;
     top: 100px;
@@ -161,7 +163,7 @@ overflow: hidden;
 `
 
 const Portfolio = () => {
-    const { user, artist } = useContextInfo()
+    const { user, artist, works } = useContextInfo()
     const [bio, setBio] = useState(null)
     const [arte, setArte] = useState(null)
 
@@ -224,18 +226,27 @@ const Portfolio = () => {
             
             {bio && <div className="bio">
                 <div onClick={close} className="close">X</div>
-                   <img src={user.image} alt={artist.name}/>
+                <img src={user.image} alt={artist.name}/>
                 <div>
                     <h2>Bio</h2>
                     <p>{artist.bio}</p>
                 </div>
             </div>}
 
-            {arte && <div className="bio arte">
+            {arte && <div className="arte">
                 <div onClick={close} className="close">X</div>
                 <div>
                     <h2>Arte</h2>
-                    
+                    {works ? 
+                        <Row gutter={16, 16}>
+                        {works.map(work => (<Link to="/myworks"><Col xs={{offset: 6,span: 12}}>
+                            <Card hoverable cover={<img style={{objectFit: "cover", height: "250px", width: "100%"}} src={work.media} alt={work.title} />} title={work.title} bordered={false}>
+                            <Typography.Text>{work.description}</Typography.Text><br />
+                            <Typography.Text>{work.price}</Typography.Text><br />
+                            {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                            </Card>
+                        </Col></Link>))}
+                    </Row> : <div></div>}
                 </div>
             </div>}
 

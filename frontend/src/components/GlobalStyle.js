@@ -202,6 +202,7 @@ ul {
   color:#000;
   z-index:10;
   height:300px;
+  width: 500px;
 }
 
 .btn {
@@ -228,7 +229,8 @@ ul {
   transform: skewX(-3deg);
   opacity: 0;
   width: 30%;
-  margin: 50px;
+  height: 80vh;
+  margin: 100px 50px;
   padding: 50px;
   background-color: rgba(255, 255, 255, .5);
   text-align: justify;

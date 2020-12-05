@@ -6,6 +6,7 @@ display: flex;
   align-items: center;
   justify-content: flex-end;
   font-weight: bold;
+  
   .title {
         font-family: "Roboto", sans-serif;
         margin: 0 20px;
@@ -18,9 +19,7 @@ display: flex;
   .title h2{
     font-size: .8rem;
   }
-  .title:hover {
-      transform: scale(1.2)
-  }
+
   @media all and (min-width: 1000px) {
     .title {
         margin: 0 150px;
@@ -46,6 +45,7 @@ const Home = () => {
         setSideDivStyles("side-div transition anim-trans")
         setTimeout(() => setAboutStyles({opacity: "1"}), 500)
     }
+ 
 
     return (
         <div>
@@ -53,7 +53,7 @@ const Home = () => {
                 <div className="wrapper">
 
                     <Cover id="cover" className="slide one"> 
-                        <div className="title">
+                        <div className="title animate__animated animate__zoomIn">
                             <h1>Tierra Roja</h1>
                             <h2>Mujeres del barro</h2>
                         </div>

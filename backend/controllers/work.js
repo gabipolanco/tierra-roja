@@ -3,11 +3,11 @@ const Work = require('../models/Work')
 const Artist = require('../models/Artist')
 
 exports.createWork = async (req, res) => {
-    const { title, media, description } = req.body
+    const { workType, title, media, description, price } = req.body
     const userId = req.user.id
     const {artistId} = await User.findById(userId)
     if (!artistId) return
-    const newWork = await Work.create({title, media, artistId, description})
+    const newWork = await Work.create({workType, title, media, artistId, description, price})
     await User.findByIdAndUpdate(userId, { $push : { artWork: newWork._id } }, {new: true})
     res.status(201).json({message: "Work created", newWork})
 }
@@ -25,7 +25,12 @@ exports.getAllWorks = async (req, res) => {
     const userId = req.user.id
     const { artWork } = await User.findById(userId).populate("artWork")
     res.status(200).json(artWork)
+}
 
+exports.getOneWork = async (req, res) => {
+    const {workId} = req.params
+    const oneWork = await Work.findById(workId)
+    res.status(200).json(oneWork)
 }
 
 exports.delteWork = async (req, res) => {
