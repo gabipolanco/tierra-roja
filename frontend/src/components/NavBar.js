@@ -44,7 +44,7 @@ const NavBar = () => {
                     <li><a href="/#portfolios">PORTFOLIOS </a></li>
                     <li><a href="/#galeria">GALERIA</a></li>
                     <li><a href="/#aula">AULA</a></li>
-                    <li><a href="/#contacto">CANTACTO </a></li>
+                    <li><a href="/#contacto">CONTACTO </a></li>
                 </ul>
             </NavBarSyled>
     )

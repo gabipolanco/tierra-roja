@@ -1,15 +1,18 @@
-import React, {useState} from 'react'
-import { Row, Col, Form, Input, Upload, Typography, Button } from 'antd'
+import React, {useState, useEffect} from 'react'
+import { Row, Col, Form, Input, Typography } from 'antd'
 import { useContextInfo } from '../hooks/context'
-import { createArtistFn } from '../services/artist'
-import { useHistory} from "react-router-dom";
-import Portfolio from '../components/Portfolio'
+import { editArtistFn } from '../services/artist'
+import { useHistory, Link} from "react-router-dom";
 import axios from 'axios'
 
 const EditPortfolio = () => {
+    const { artist, setUserArtistFn } = useContextInfo()
     const [img, setImg] = useState(null)
-    const { user, artist, setUserArtistFn } = useContextInfo()
     let history = useHistory();
+
+    useEffect(() => {
+        artist && setImg(artist.coverImage)
+    }, [artist])
 
     const layout = {
         labelCol: { span: 24 },
@@ -20,10 +23,9 @@ const EditPortfolio = () => {
       };
 
         const onFinish = async (values) => {
-            const id = user._id
-            console.log(values)
-            const {data: { newArtist } } = await createArtistFn( values)
-            setUserArtistFn(newArtist)
+            const id = artist._id
+            const {data: { editedArtist } } = await editArtistFn(id, {...values, coverImage: img})
+            setUserArtistFn(editedArtist)
             history.push("/artist")
         };
       
@@ -32,7 +34,6 @@ const EditPortfolio = () => {
         };
 
         async function handleUploadFile({target: {files}}) {
-        
             const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
             const data = new FormData()
             data.append('file', files[0])
@@ -42,10 +43,11 @@ const EditPortfolio = () => {
             setImg(secure_url);
           }
 
-    return (
+    return artist && (
         <div>
-            <Row style={{marginTop: "70px"}}>
-                <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
+            <Row>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/artist"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Portfolio</Link>
+                <Col style={{marginTop: "100px"}} xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
                 <Form
                     {...layout}
                     name="basic"
@@ -55,10 +57,11 @@ const EditPortfolio = () => {
                     layout="vertical"
                     style={{margin: "0 80px"}}
                     >
-                    <Typography.Title level={2}>Crear portfolio</Typography.Title>
+                    <Typography.Title level={2}>Editar portfolio</Typography.Title>
                      <Form.Item
                         label="Nombre de artista"
                         name="name"
+                        initialValue={artist.name}
                     >
                         <Input/>
                     </Form.Item>
@@ -66,22 +69,19 @@ const EditPortfolio = () => {
                     <Form.Item
                         label="Profesión"
                         name="profession"
+                        initialValue={artist.profession}
                     >
                         <Input/>
                     </Form.Item>
 
-                    <Form.Item
-                        label="Imagen banner"
-                        name="coverImage"
-                    >       
-                        <Upload beforeUpload={handleUploadFile} name="file">
-                            <Button >Elegir imagen</Button>
-                        </Upload>
-                    </Form.Item>
+                    <label htmlFor="coverImage" style={{width: "100%", margin: "40px 0"}}>Imagen de fondo:</label>   
+                    <input type="file" style={{margin: "40px auto"}} onChange={handleUploadFile} name="coverImage" />
+                    
 
                     <Form.Item
                         label="Bio"
                         name="bio"
+                        initialValue={artist.bio}
                     >
                         <Input.TextArea rows={6} />
                     </Form.Item>
@@ -91,6 +91,7 @@ const EditPortfolio = () => {
                     <Form.Item
                         label="Instagram"
                         name="instagram"
+                        initialValue={artist.socialMedia.instagram}
                     >
                         <Input addonBefore="https://www.instagram.com/" />
                     </Form.Item>
@@ -98,6 +99,7 @@ const EditPortfolio = () => {
                     <Form.Item
                         label="Facebook"
                         name="facebook"
+                        initialValue={artist.socialMedia.facebook}
                     >
                         <Input addonBefore="https://www.facebook.com/" />
                     </Form.Item>
@@ -105,6 +107,7 @@ const EditPortfolio = () => {
                     <Form.Item
                         label="Email"
                         name="email"
+                        initialValue={artist.socialMedia.email}
                     >
                         <Input />
                     </Form.Item>
@@ -112,13 +115,14 @@ const EditPortfolio = () => {
                     <Form.Item
                         label="Otra"
                         name="other"
+                        initialValue={artist.socialMedia.other}
                     >
                         <Input />
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
                         <button className="btn" htmlType="submit" style={{width: "230px"}}>
-                        Crear artista
+                        Guardar cambios
                         </button>
                     </Form.Item>
                     </Form>

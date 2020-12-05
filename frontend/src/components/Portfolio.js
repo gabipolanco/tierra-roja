@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useHistory, Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import { useContextInfo } from '../hooks/context'
 import styled from 'styled-components'
 
@@ -17,38 +17,53 @@ overflow: hidden;
         width: 100%;
         opacity: .9;
     }
+    &>.back {
+        position: fixed;
+        top: 70px;
+        left: 70px;
+        color: white;
+        z-index: 5;
+    }
+    &>.back i {
+        margin-right: 10px;
+    }
     &>.edit {
-        position: absolute;
+        position: fixed;
         color: white;
         font-size: 20px;
-        top: 40px;
-        left: 40px;
+        top: 100px;
+        left: 100px;
         cursor: pointer;
         z-index: 5;
     }
-    &>div.left {
+
+    &>div.wrapper {
+        transform: rotate(-30deg);
+        position: absolute;
+        height: 100vw;
+        width: 120vw;
+        top: 12vw;
+        left: -30vw;
+    }
+    &>div>div.left {
         display: flex;
         justify-content: flex-end;
         align-items: flex-start;
         position: relative;
-        left: -10vw;
-        top: -10vw;
         height: 100%;
-        height: 200%;
-        width: 50%;
-        transform: rotate(-30deg);
+        width: 40%;
         background-color: rgba(0,0,0, .4);
     }
-    &>div.left>div {
+    &>div>div.left>div {
         display: flex;
         flex-direction: column;
         space-between: center;
         align-items: center;
-        margin-top: 80%;
-        margin-right: 8vw;
+        margin-top: 60%;
+        margin-right: 30%;
         transform: rotate(30deg);
     }
-    &>div.left>div h2, h3 {
+    &>div>div.left>div h2, h3 {
         color: white;
         font-weight: bold;
         text-transform: uppercase;
@@ -63,25 +78,21 @@ overflow: hidden;
         color: white;
         font-size: 24px;
     }
-&>div.right {
+&>div>div.right {
     display: flex;
-    position: absolute;
-    right: -5vw;
-    top: -60vh;
-    transform: rotate(-30deg);
-    height: 200%;
-    width: 70%;
+    width: 60%;
+    height: 100%;
 }
 
 &>div .left-left {
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
 }
 &>div .left-right {
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,15 +153,15 @@ overflow: hidden;
     margin: 70px 40px 0 0;
 }
 &>div.bio .close{
-    position: absolute;
-    right: 40px;
-    top: 40px;
+    position: fixed;
+    right: 100px;
+    top: 100px;
     cursor: pointer;
 }
 `
 
 const Portfolio = () => {
-    const { user, artist, setUserArtistFn } = useContextInfo()
+    const { user, artist } = useContextInfo()
     const [bio, setBio] = useState(null)
     const [arte, setArte] = useState(null)
 
@@ -169,42 +180,49 @@ const Portfolio = () => {
 
     return artist ? (
         <PortfolioStyled>
-            <img className="cover-image" src={artist.coverImage}/>
+            <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
+            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i>Perfil</Link>
             <Link className="edit" to="/edit-portfolio"><i class="far fa-edit"></i></Link>
-            <div className="left" >
-                <div>
-                   <h2>{artist.name}</h2>
-                   <h3>{artist.profession}</h3>
-                   <div className="social">
-                   <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
-                   <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
-                   <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
-                   <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
-                   </div>
+            
+            <div className="wrapper">
+                <div className="left" >
+                    <div>
+                    <h2>{artist.name}</h2>
+                    <h3>{artist.profession}</h3>
+                    <div className="social">
+                    <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
+                    <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
+                    </div>
+                    </div>
                 </div>
-            </div>
-            <div className="right" >   
-                <div className="left-left">
-                    <div className="inner-rest"></div>
-                    <div onClick={showBio} className="inner-btn">
-                        <h3>Sobre mi</h3>
+
+                <div className="right" >   
+                    <div className="left-left">
+                        <div className="inner-rest"></div>
+                        <div onClick={showBio} className="inner-btn">
+                            <h3>Sobre mi</h3>
+                        </div>
+                        <div onClick={showArte} className="inner-btn">
+                            <h3>Mi arte</h3>
+                        </div>
+                        <div className="inner-btn">
+                            <h3>Clases</h3>
+                        </div>
+                        <div className="inner-rest"></div>
                     </div>
-                    <div onClick={showArte} className="inner-btn">
-                        <h3>Mi arte</h3>
+                    <div className="left-right">
+                        <div className="inner-rest"></div>
+                        <div className="inner-btn">
+                            <h3>Tienda</h3>
+                        </div>
+                        <div className="inner-rest2"></div>
                     </div>
-                    <div className="inner-btn">
-                        <h3>Clases</h3>
-                    </div>
-                    <div className="inner-rest"></div>
                 </div>
-                <div className="left-right">
-                    <div className="inner-rest"></div>
-                    <div className="inner-btn">
-                        <h3>Tienda</h3>
-                    </div>
-                    <div className="inner-rest2"></div>
-                </div>
-            </div> {bio && <div className="bio">
+            </div> 
+            
+            {bio && <div className="bio">
                 <div onClick={close} className="close">X</div>
                    <img src={user.image} alt={artist.name}/>
                 <div>
@@ -212,6 +230,7 @@ const Portfolio = () => {
                     <p>{artist.bio}</p>
                 </div>
             </div>}
+
             {arte && <div className="bio arte">
                 <div onClick={close} className="close">X</div>
                 <div>
@@ -219,6 +238,7 @@ const Portfolio = () => {
                     
                 </div>
             </div>}
+
         </PortfolioStyled>
     ) : (<div></div>)
 }

@@ -39,8 +39,6 @@ html {
     width: 600vw;
     transform:rotate(90deg) translateY(-100vh);
     transform-origin: top left;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
 }
 
 .one {
@@ -51,8 +49,8 @@ html {
     background-position: center;
     background-color:white;
     overflow: hidden;
-    transition: all 5s linear;
-    scroll-snap-align: start;
+    transition: background-size 5s linear;
+    scroll-snap-align: center;
 }
 
 .one:hover {
@@ -67,8 +65,8 @@ html {
     background-position: 25vw -13vh;
     background-color:white;
     overflow: hidden;
-    transition: all 5s linear;
-    scroll-snap-align: start;
+    transition: background-size 5s linear;
+    scroll-snap-align: center;
 }
     
 .two:hover {
@@ -82,8 +80,8 @@ html {
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
-    transition: all 5s linear;
-    scroll-snap-align: start;
+    transition: background-size 5s linear;
+    scroll-snap-align: center;
 }
 
 .three:hover {
@@ -97,8 +95,8 @@ html {
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
-    transition: all 5s linear;
-    scroll-snap-align: start;
+    transition: background-size 5s linear;
+    scroll-snap-align: center;
 }
 
 .four:hover {
@@ -112,8 +110,8 @@ html {
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
-    transition: all 5s linear;
-    scroll-snap-align: start;
+    transition: background-size 5s linear;
+    scroll-snap-align: center;
 }
 
 .five:hover {
@@ -130,8 +128,8 @@ html {
     background-repeat: no-repeat;
     background-position: center center;
     background-color: #FFF;
-    transition: all 5s linear;
-    scroll-snap-align: start;
+    transition: background-size 5s linear;
+    scroll-snap-align: center;
 }
 
 .six:hover {
@@ -155,6 +153,8 @@ html {
     position: absolute;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar{

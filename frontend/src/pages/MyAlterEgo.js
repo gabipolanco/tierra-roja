@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Row, Col, Form, Input, Upload, Typography, Button } from 'antd'
+import { Row, Col, Form, Input, Typography } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { createArtistFn } from '../services/artist'
 import { useHistory} from "react-router-dom";
@@ -7,8 +7,8 @@ import Portfolio from '../components/Portfolio'
 import axios from 'axios'
 
 const MyAlterEgo = () => {
-    const [img, setImg] = useState(null)
-    const { user, artist, setUserArtistFn } = useContextInfo()
+    const [img, setImg] = useState("https://res.cloudinary.com/gabipf/image/upload/v1607097840/bannerportfolio_psi9u4.jpg")
+    const { artist, setUserArtistFn } = useContextInfo()
     let history = useHistory();
 
     const layout = {
@@ -20,9 +20,7 @@ const MyAlterEgo = () => {
       };
 
         const onFinish = async (values) => {
-            const id = user._id
-            console.log(values)
-            const {data: { newArtist } } = await createArtistFn( values)
+            const {data: { newArtist } } = await createArtistFn( {...values, coverImage: img})
             setUserArtistFn(newArtist)
             history.push("/artist")
         };
@@ -32,7 +30,6 @@ const MyAlterEgo = () => {
         };
 
         async function handleUploadFile({target: {files}}) {
-        
             const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
             const data = new FormData()
             data.append('file', files[0])
@@ -73,14 +70,9 @@ const MyAlterEgo = () => {
                         <Input/>
                     </Form.Item>
 
-                    <Form.Item
-                        label="Imagen banner"
-                        name="coverImage"
-                    >       
-                        <Upload beforeUpload={handleUploadFile} name="file">
-                            <Button >Elegir imagen</Button>
-                        </Upload>
-                    </Form.Item>
+                    <label htmlFor="coverImage" style={{width: "100%"}}>Imagen de fondo:</label>   
+                    <input type="file" onChange={handleUploadFile} name="coverImage" />
+                    
 
                     <Form.Item
                         label="Bio"
@@ -120,7 +112,7 @@ const MyAlterEgo = () => {
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
-                        <button className="btn" htmlType="submit" style={{width: "230px"}}>
+                        <button className="btn" type="submit" style={{width: "230px"}}>
                         Crear artista
                         </button>
                     </Form.Item>
