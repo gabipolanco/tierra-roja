@@ -42,14 +42,12 @@ import { getWorksFn } from '../services/works'
       setArtist(artistInfo)
     }
 
-    const setUserWorksFn = worksInfo => {
-      setWorks(worksInfo)
+    const setUserWorksFn = async () => {
+      const { data } = await getWorksFn()
+      if(!data) return setWorks(null)
+      setWorks(data)
     }
 
-    const getUserWorksFn = async () => {
-      const { data } = await getWorksFn()
-      if (data.length !== 0) setUserWorksFn(data);
-    }
   
     const login = userInfo => {
       setUser(userInfo)
@@ -59,7 +57,7 @@ import { getWorksFn } from '../services/works'
       setUser(null)
     }
   
-    const value = { user, login, logout, artist, setUserArtistFn, getUserWorksFn, works, setUserWorksFn }
+    const value = { user, login, logout, artist, setUserArtistFn, works, setUserWorksFn }
   
     return (
       <AppContext.Provider {...props} value={value} />

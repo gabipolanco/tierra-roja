@@ -6,20 +6,23 @@ import { createWorkFn, getOneWorkFn, editWorkFn, deleteWorkFn } from '../service
 import axios from 'axios'
 
 const MyWorks = () => {
-    const { artist, works, setUserWorksFn, getUserWorksFn } = useContextInfo()
+    const { artist, works, setUserWorksFn } = useContextInfo()
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModal2Visible, setIsModal2Visible] = useState(false);
     const [isModal3Visible, setIsModal3Visible] = useState(false);
     const [editWork, setEditWork] = useState(null)
     const [workToBeEdited, setWorkToBeEdited] = useState(null)
     const [img, setImg] = useState(null)
-
+    const [form] = Form.useForm();
+    let userWorks
+    if(works) userWorks = [...works]
+    
     useEffect(() => {
         async function setWorkToEdit() {
-       const {data} = await getOneWorkFn(editWork)
-       setWorkToBeEdited(data)
-    }
-    setWorkToEdit()
+            const {data} = await getOneWorkFn(editWork)
+            setWorkToBeEdited(data)
+        }
+        setWorkToEdit()
     }, [isModal2Visible, isModal3Visible])
 
     const layout = {
@@ -32,9 +35,10 @@ const MyWorks = () => {
 
         const onFinish = async (values) => {
             const {data: { newWork } } = await createWorkFn({...values, media: img})
-            setUserWorksFn(newWork)
+            setUserWorksFn()
             setIsModalVisible(false)
             setImg(null)
+            form.resetFields()
         };
 
         const onFinish2 = async (values) => {
@@ -42,8 +46,8 @@ const MyWorks = () => {
             img ? media = img : media = workToBeEdited.media
             const workId = workToBeEdited._id
             const {data: { editedWork }} = await editWorkFn(workId, {...values, media})
-            setUserWorksFn(editedWork)
-            setIsModalVisible(false)
+            setUserWorksFn()
+            setIsModal2Visible(false)
             setWorkToBeEdited(null)
             setEditWork(null)
             setImg(null)
@@ -52,7 +56,7 @@ const MyWorks = () => {
         const deleteWork = async () => {
             const id = workToBeEdited._id
             await deleteWorkFn(id)
-            getUserWorksFn()
+            setUserWorksFn()
             setIsModal3Visible(false)
             setWorkToBeEdited(null)
         }
@@ -107,6 +111,7 @@ const MyWorks = () => {
 
                 <Form
                     {...layout}
+                    form={form}
                     name="addWork"
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
@@ -135,7 +140,7 @@ const MyWorks = () => {
                         label="Tipo de trabajo"
                         name="workType"
                     >
-                        <Select placeholder="Elegi tu rol" >
+                        <Select placeholder="Tipo de trabajo" >
                             <Select.Option value="art">Obra de arte</Select.Option>
                             <Select.Option value="craft">Artesanía</Select.Option>
                         </Select>
@@ -198,7 +203,7 @@ const MyWorks = () => {
                         name="workType"
                         initialValue={workToBeEdited.workType}
                     >
-                        <Select placeholder="Elegi tu rol" >
+                        <Select placeholder="Tipo de trabajo" >
                             <Select.Option value="art">Obra de arte</Select.Option>
                             <Select.Option value="craft">Artesanía</Select.Option>
                         </Select>
@@ -236,9 +241,9 @@ const MyWorks = () => {
 
             </Modal>
 
-            {works ?
+            {userWorks ?
                 <Row style={{padding: "40px"}} gutter={16}>
-                {works.map(work => (<Col lg={{span:8}} md={{span:12}} xs={{span: 24}}>
+                {userWorks.map(work => (<Col lg={{span:8}} md={{span:12}} xs={{span: 24}}>
                     <i onClick={() => {
                         setEditWork(work._id)
                         showModal2()
