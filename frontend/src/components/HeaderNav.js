@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
@@ -73,11 +73,13 @@ const HeaderNavStyled = styled.div`
 
 const HeaderNav = () => {
     const { user, logout } = useContextInfo()
+    let history = useHistory();
 
     async function handleLogout(e) {
         e.preventDefault()
         await logoutFn()
         logout()
+        history.push("/")
       }
 
     return (

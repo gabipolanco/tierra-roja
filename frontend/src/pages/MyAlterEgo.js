@@ -100,6 +100,7 @@ const MyAlterEgo = () => {
                     <Form.Item
                         label="Email"
                         name="email"
+                        type="email"
                     >
                         <Input />
                     </Form.Item>

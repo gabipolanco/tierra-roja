@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import { Modal, Form, Input, Typography, Checkbox } from 'antd';
+import { Modal, Form, Input, Typography, Checkbox, message } from 'antd';
 import { loginFn } from '../services/auth'
 import { useContextInfo } from '../hooks/context'
 
 const LoginForm = () => {
   const { login } = useContextInfo()
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [error, setError] = useState(null)
+  const [form] = Form.useForm();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -39,9 +41,13 @@ const LoginForm = () => {
   
   const Formul = () => {
     const onFinish = async (values) => {
-      const user = await loginFn(values)
-      login(user)
+      try {
+      const {data} = await loginFn(values)
+      login(data.user)
       setIsModalVisible(false);
+    } catch(err) {
+      console.log(err)
+    }
     };
   
     const onFinishFailed = errorInfo => {
@@ -55,6 +61,7 @@ const LoginForm = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        form={form}
         layout="vertical"
         style={{margin: "0 80px"}}
       >
@@ -75,6 +82,8 @@ const LoginForm = () => {
         >
           <Input style={{width: "300px"}}/>
         </Form.Item>
+
+        {error && <Typography.text type="secondary">{error}</Typography.text>}
   
         <Form.Item
           name="password"
@@ -85,7 +94,6 @@ const LoginForm = () => {
               message: 'Por favor ingresa una contraseña!',
             },
           ]}
-          hasFeedback
         >
           <Input.Password style={{width: "300px"}}/>
         </Form.Item>
@@ -124,11 +132,11 @@ const LoginForm = () => {
         <br />
 
         <div>
-          <FacebookLogin
+          {/* <FacebookLogin
           appId="198741351868254"
           fields="name,email,picture"
           data-size="medium" 
-          callback={responseFacebook}
+          // callback={responseFacebook}
           size="small"
         />
         <br />
@@ -138,12 +146,12 @@ const LoginForm = () => {
         <GoogleLogin
           clientId="779423123737-7pe82dh5tvckbo7nm0svivitsqj3f72m.apps.googleusercontent.com"
           buttonText="LOGIN WITH GOOGLE"
-          onSuccess={responseGoogle}
+          // onSuccess={responseGoogle}
           onFailure={responseGoogle}
           render={renderProps => (
             <img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
           )}
-        />
+        /> */}
         </div>
       </Modal>
     </>
