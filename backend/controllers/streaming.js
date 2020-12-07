@@ -14,7 +14,7 @@ exports.createStreaming = async (req, res) => {
           username: process.env.MUX_TOKEN_ID,
           password: process.env.MUX_TOKEN_SECRET
       }})
-    const newStreaming = await Streaming.create({title, description, hour, streamKey: stream_key, streamId: id, playbackId: playback_ids[0].id, type})
+    const newStreaming = await Streaming.create({title, description, hour, streamKey: stream_key, streamId: id, playbackId: playback_ids[0].id, type })
     await User.findByIdAndUpdate(userId, { $push : { streamings: newStreaming._id } }, {new: true})
     res.status(201).json({message: "Streaming created", newStreaming})
 }

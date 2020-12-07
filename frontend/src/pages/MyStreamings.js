@@ -34,7 +34,10 @@ const MyStreamings = () => {
       };
 
         const onFinish = async (values) => {
-            const h = values.hours.toString() + ":" + values.minutes.toString() + "hs"
+            let h = null
+            if(values.hours && values.minutes){
+                h = values.hours.toString() + ":" + values.minutes.toString() + "hs"
+            }
             const {data: { newStreaming } } = await createStreamingFn({...values, hour: h})
             setMyStreamingsFn()
             setIsModalVisible(false)
@@ -244,34 +247,21 @@ const MyStreamings = () => {
                     <i onClick={() => {
                         setEditStreaming(stream._id)
                         showModal2()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "40px", zIndex: "5"}} class="far fa-edit"></i>
+                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "40px", zIndex: "5", color: "white"}} class="far fa-edit"></i>
                     <i onClick={() => {
                         setEditStreaming(stream._id)
                         showModal3()
                     } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "40px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
-                    <Card hoverable cover={<video id="myVideo" controls></video>} title={stream.title} bordered={false}>
+                    <Card cover={<video controls></video>} bordered={false}>
+                    <Typography.Title level={3}>{stream.title}</Typography.Title>
+                    <Typography.Text>{stream.hour}</Typography.Text><br />
                     <Typography.Text>{stream.description}</Typography.Text><br />
+                    <Typography.Text>Copiá el siguiente código para empezar a stremear:</Typography.Text><br />
+                    <Typography.Text>{stream.streamKey}</Typography.Text><br />
+                    <Typography.Text>Te recomendamos <a href="https://obsproject.com/es">OBS</a> que es gratis y de código abierto</Typography.Text><br />
+                    <Link to={`/streaming/${stream._id}`}><Button>Accion</Button></Link><br />
                     {artist && <Typography.Text>{artist.name}</Typography.Text>}
                     </Card>
-
-                    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-                    
-                    {/* {(function(){
-                        // Replace with your asset's playback ID
-                        var playbackId = stream.playbackId
-                        var url = "https://stream.mux.com/"+playbackId+".m3u8";
-                        var video = document.getElementById("myVideo");
-                        
-                        // Let native HLS support handle it if possible
-                        if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = url;
-                        } else if (Hls.isSupported()) {
-                        // HLS.js-specific setup code
-                        hls = new Hls();
-                        hls.loadSource(url);
-                        hls.attachMedia(video);
-                        }
-                    })()} */}
                     
                 </Col>))}
             </Row> : <div></div>}

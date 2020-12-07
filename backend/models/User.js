@@ -29,7 +29,9 @@ const userSchema = new Schema({
   streamings: [{
     type: Schema.Types.ObjectId,
     ref: "Streaming"
-  }]
+  }],
+  googleId: String,
+  facebookId: String
 }, {
   timestamps: {
     createdAt: 'created_at',

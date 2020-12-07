@@ -23,7 +23,7 @@ overflow: hidden;
         top: 70px;
         left: 70px;
         color: white;
-        z-index: 5;
+        z-index: 10;
     }
     &>.back i {
         margin-right: 10px;
@@ -35,7 +35,7 @@ overflow: hidden;
         top: 100px;
         left: 100px;
         cursor: pointer;
-        z-index: 5;
+        z-index: 10;
     }
 
     &>div.wrapper {
@@ -136,7 +136,7 @@ overflow: hidden;
     margin: 2px 4px;
     background-color: rgba(0,0,0, .4);
 }
-&>div.bio, .arte {
+&>div.bio, .arte, .streamings {
     position: absolute;
     display: flex;
     right: 0;
@@ -163,9 +163,10 @@ overflow: hidden;
 `
 
 const Portfolio = () => {
-    const { user, artist, works } = useContextInfo()
+    const { user, artist, works, myStreamings } = useContextInfo()
     const [bio, setBio] = useState(null)
     const [arte, setArte] = useState(null)
+    const [streamings, setStreamings] = useState(null)
 
     function showBio() {
         setBio(true)
@@ -175,9 +176,14 @@ const Portfolio = () => {
         setArte(true)
     }
 
+    function showStreamings() {
+        setStreamings(true)
+    }
+
     function close() {
         setBio(null)
         setArte(null)
+        setStreamings(null)
     }
 
     return artist && (
@@ -209,7 +215,7 @@ const Portfolio = () => {
                         <div onClick={showArte} className="inner-btn">
                             <h3>Mi arte</h3>
                         </div>
-                        <div className="inner-btn">
+                        <div onClick={showStreamings} className="inner-btn">
                             <h3>Clases</h3>
                         </div>
                         <div className="inner-rest"></div>
@@ -250,6 +256,24 @@ const Portfolio = () => {
                 </div>
             </div>}
 
+            {streamings && <div className="streamings">
+                <div onClick={close} className="close">X</div>
+                <div>
+                    <Link to="/mystreamings"><h2>Clases</h2></Link>
+                    {myStreamings ? 
+                        <Row gutter={16, 16}>
+                        {myStreamings.map(stream => (
+                            <Link to="/mystreamings"><Col xs={{offset: 2,span: 20}}>
+                            <Card hoverable cover={<video controls></video>} title={stream.title} bordered={false}>
+                            <Typography.Text>{stream.description}</Typography.Text><br />
+                            <Typography.Text>{stream.hour}</Typography.Text><br />
+                            {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                            </Card>
+                        </Col></Link>))}
+                    </Row> : <div></div>}
+                </div>
+            </div>}
+            
         </PortfolioStyled>
     )
 }
