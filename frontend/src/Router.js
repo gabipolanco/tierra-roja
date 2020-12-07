@@ -7,6 +7,7 @@ import MyAlterEgo from './pages/MyAlterEgo'
 import EditPortfolio from './components/EditPortfolio'
 import Profile from './pages/Profile'
 import MyWorks from './pages/MyWorks'
+import MyStreamings from './pages/MyStreamings'
 import GlobalStyle from './components/GlobalStyle'
 import NavBar from './components/NavBar'
 import HeaderNav from './components/HeaderNav'
@@ -24,9 +25,10 @@ const RouterApp = () => {
                 <Route path="/profile" component={Profile} />
                 <Route path="/edit-user" component={EditUser} />
                 <Route path="/myworks" component={MyWorks} />
+                <Route path="/mystreamings" component={MyStreamings} />
                 <Route path="/artist" component={MyAlterEgo} />
                 <Route path="/edit-portfolio" component={EditPortfolio} />
-                <Route componentt={NotFound} />
+                <Route component={NotFound} />
             </Switch>
         </Router>
     )

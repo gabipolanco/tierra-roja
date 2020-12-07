@@ -12,7 +12,7 @@ const authService = axios.create({
 // 1. Signup 
 export const signupFn = userInfo => authService.post('/signup', userInfo)
 
-export const loginFn = userInfo => authService.post('/login', userInfo)
+export const loginFn = userData => authService.post('/login', userData)
 
 export const editFn = (id, userInfo) => authService.post(`/edit/${id}`, userInfo)
 

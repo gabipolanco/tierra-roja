@@ -180,7 +180,7 @@ const Portfolio = () => {
         setArte(null)
     }
 
-    return artist ? (
+    return artist && (
         <PortfolioStyled>
             <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
             <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i>Perfil</Link>
@@ -251,7 +251,7 @@ const Portfolio = () => {
             </div>}
 
         </PortfolioStyled>
-    ) : (<div></div>)
+    )
 }
 
 export default Portfolio

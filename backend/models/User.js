@@ -25,7 +25,11 @@ const userSchema = new Schema({
   artistId: {
     type: Schema.Types.ObjectId,
     ref: "Artist"
-  }
+  },
+  streamings: [{
+    type: Schema.Types.ObjectId,
+    ref: "Streaming"
+  }]
 }, {
   timestamps: {
     createdAt: 'created_at',

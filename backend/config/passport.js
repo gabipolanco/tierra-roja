@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'password'
+  passwordField: 'password',
+  session: "false"
 },
   (email, password, done) => {
     User.findOne({ email })

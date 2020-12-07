@@ -63,6 +63,8 @@ const Profile = () => {
                         <Link to="/myworks"><Button>Mis trabajos</Button></Link>
                         <br/><br/>
                         <Link to="/artist"><Button>Portfolio</Button></Link>
+                        <br/><br/>
+                        <Link to="/mystreamings"><Button>Mis streamings</Button></Link>
                     </Col>
                 </Row>
             </div> 
