@@ -57,7 +57,6 @@ app.use(cors({
 
 require('./config/passport')(app);
     
-
 const index = require('./routes/index');
 app.use('/', index);
 
@@ -66,6 +65,9 @@ app.use('/auth', authRoutes);
 
 const workRoutes = require('./routes/work');
 app.use('/work', workRoutes);
+
+const streamingRoutes = require('./routes/streaming');
+app.use('/streaming', streamingRoutes);
 
 const artistRoutes = require('./routes/artist');
 app.use('/artist', artistRoutes);

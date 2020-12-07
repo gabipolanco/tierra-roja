@@ -47,7 +47,7 @@ exports.signupProcess = async (req, res) => {
         res.status(201).json({message: "User created"})
 }
 
-exports.confirmSignup = async (req, res) => {
+exports.confirmSignup = async (req, res, next) => {
   const {email, id} = req.params
   const user = await User.findOne({email: email})
   if(!user) return res.status(404).json({message: "user not found"})

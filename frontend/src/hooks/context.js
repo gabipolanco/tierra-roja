@@ -3,6 +3,7 @@ import React, { useState, createContext, useContext, useEffect} from 'react'
 import { loggedFn } from '../services/auth'
 import { getArtistFn } from '../services/artist'
 import { getWorksFn } from '../services/works'
+import { getMyStreamingsFn } from '../services/streaming'
   
   export const AppContext = createContext()
   
@@ -10,6 +11,8 @@ import { getWorksFn } from '../services/works'
     const [user, setUser] = useState(null)
     const [artist, setArtist] = useState(null)
     const [works, setWorks] = useState(null)
+    const [myStreamings, setMyStreamings] = useState(null)
+    const [publicStreamings, setPublicStreamings] = useState(null)
   
     useEffect(() => {
       async function getSessionData() {
@@ -37,6 +40,15 @@ import { getWorksFn } from '../services/works'
   
       getWorks()
     }, [])
+    
+    useEffect(() => {
+      async function getMyStreamings() {
+        const { data } = await getMyStreamingsFn()
+        if (data.length !== 0) setMyStreamingsFn(data);
+      }
+  
+      getMyStreamings()
+    }, [])
 
     const setUserArtistFn = artistInfo => {
       setArtist(artistInfo)
@@ -48,6 +60,12 @@ import { getWorksFn } from '../services/works'
       setWorks(data)
     }
 
+    const setMyStreamingsFn = async () => {
+      const { data } = await getMyStreamingsFn()
+      if(!data) return setMyStreamings(null)
+      setMyStreamings(data)
+    }
+
   
     const login = userInfo => {
       setUser(userInfo)
@@ -57,7 +75,7 @@ import { getWorksFn } from '../services/works'
       setUser(null)
     }
   
-    const value = { user, login, logout, artist, setUserArtistFn, works, setUserWorksFn }
+    const value = { user, login, logout, artist, setUserArtistFn, works, setUserWorksFn, myStreamings, publicStreamings, setMyStreamingsFn }
   
     return (
       <AppContext.Provider {...props} value={value} />
