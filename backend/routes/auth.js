@@ -11,7 +11,7 @@ const {
     loggedinProcess
 } = require('../controllers/auth')
 
-router.post('/login', catchErrs(loginProcess))
+router.post('/login', loginProcess)
 router.post('/signup', catchErrs(signupProcess))
 router.get('/:email/:id', catchErrs(confirmSignup))
 router.post('/edit/:id',isAuth, catchErrs(editProcess))

@@ -33,10 +33,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Express View engine setup
-
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 // default value for title local
 app.locals.title = 'Tierra Roja';
@@ -44,19 +40,22 @@ app.locals.title = 'Tierra Roja';
 
 // Enable authentication using session + passport
 app.use(session({
-  secret: 'irongenerator',
+  secret: 'iuhlkjhiucyt',
+  cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 },
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
+require('./config/passport')(app);
 
 app.use(cors({
   origin: ["http://localhost:3001", "https://tierra-roja.herokuapp.com/"],
+  // origin: "*",
   credentials: true
 }))
 
-require('./config/passport')(app);
     
+app.use(express.static(path.join(__dirname, 'public')));
 
 const index = require('./routes/index');
 app.use('/', index);

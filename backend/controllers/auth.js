@@ -3,7 +3,7 @@ const User = require('../models/User')
 const passport = require('passport')
 const { emailConfirmacion } = require('../config/nodemailer')
 
-exports.loginProcess = async (req, res, next) => {
+exports.loginProcess = (req, res, next) => {
     passport.authenticate('local', (err, user, failureDetails) => {
       if (err) {
         return res.status(500).json({ message: 'Something went wrong authenticating user' })
@@ -80,5 +80,6 @@ exports.logoutProcess = (req, res) => {
 }
 
 exports.loggedinProcess = (req, res) => {
-    return res.json(req.user || null)
+    const user = req.user
+    return res.status(200).json(user || null)
 }

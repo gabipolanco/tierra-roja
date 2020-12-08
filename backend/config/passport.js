@@ -35,8 +35,8 @@ passport.serializeUser((loggedInUser, cb) => {
   
   passport.deserializeUser((userIdFromSession, cb) => {
     User.findById(userIdFromSession)
-    .then(userDocument => {
-      cb(null, userDocument);
+    .then(user => {
+      cb(null, user);
     })
     .catch(err => {
       cb(err);
