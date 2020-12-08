@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-const GoogleStrategy = require('passport-google-oauth20').Strategy
+const googleStrategy = require("passport-google-oauth20").Strategy
 const User = require("../models/User")
 
 passport.use(
@@ -40,19 +40,20 @@ passport.serializeUser((user, cb) => {
     }
   });
 
-  passport.use(new GoogleStrategy({
+  passport.use(new googleStrategy({
     clientID: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: '/auth/google/callback'
   },
-    async (_, __, profile, done) => {
-      const user = await User.findOne({ googleId: profile.id })
+    async (_, __, { id, emails, photos }, done) => {
+      const user = await User.findOne({ googleID: id })
   
       if (!user) {
         const newUser = await User.create({
-          googleId: profile.id,
-          username: profile.emails[0].value,
-          email: profile.emails[0].value,
+          googleID: id,
+          username: emails[0].value,
+          email: emails[0].value,
+          image: photos[0].value,
           confirmed: true
         })
         done(null, newUser)

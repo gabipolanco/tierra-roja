@@ -7,7 +7,7 @@ let transporter = nodemailer.createTransport({
     }
 })
 exports.emailConfirmacion = (email, id) => {
-    const url = process.env.NODE_ENV === 'development' ? `http://localhost:3000/auth/${email}/${id}` : `https://tierra-roja.herokuapp.com//auth/${email}/${id}`
+    const url = `http://localhost:3000/auth/${email}/${id}`
 
     return transporter.sendMail({
         from: 'mujeresdelbarro@gmail.com',
@@ -150,10 +150,10 @@ exports.emailConfirmacion = (email, id) => {
         <tr style="vertical-align: top;" valign="top">
         <td style="word-break: break-word; vertical-align: top;" valign="top">
         <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color:#ece8e5"><![endif]-->
-        <div style="background-image:url('https://res.cloudinary.com/tomiscattini/image/upload/v1607440229/tierra-roja/vasija_o3mib6.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;">
+        <div style="background-image:url('https://res.cloudinary.com/tomiscattini/image/upload/v1607455275/tierra-roja/kmvsxhguv1wpnjilzubq.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;">
         <div class="block-grid" style="min-width: 320px; max-width: 600px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; Margin: 0 auto; background-color: #ffffff;">
         <div style="border-collapse: collapse;display: table;width: 100%;background-color:#ffffff;">
-        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-image:url('https://res.cloudinary.com/tomiscattini/image/upload/v1607440229/tierra-roja/vasija_o3mib6.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px"><tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
+        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-image:url('https://res.cloudinary.com/tomiscattini/image/upload/v1607455275/tierra-roja/kmvsxhguv1wpnjilzubq.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px"><tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
         <!--[if (mso)|(IE)]><td align="center" width="600" style="background-color:#ffffff;width:600px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:60px; padding-bottom:60px;"><![endif]-->
         <div class="col num12" style="min-width: 320px; max-width: 600px; display: table-cell; vertical-align: top; width: 600px;">
         <div class="col_cont" style="width:100% !important;">
@@ -214,8 +214,8 @@ exports.emailConfirmacion = (email, id) => {
         <table align="center" cellpadding="0" cellspacing="0" class="social_table" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-tspace: 0; mso-table-rspace: 0; mso-table-bspace: 0; mso-table-lspace: 0;" valign="top">
         <tbody>
         <tr align="center" style="vertical-align: top; display: inline-block; text-align: center;" valign="top">
-        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 2.5px; padding-left: 2.5px;" valign="top"><a href="https://www.facebook.com/" target="_blank"><img alt="Facebook" height="32" src="images/facebook2x.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;" title="Facebook" width="32"/></a></td>
-        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 2.5px; padding-left: 2.5px;" valign="top"><a href="https://instagram.com/" target="_blank"><img alt="Instagram" height="32" src="images/instagram2x.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;" title="Instagram" width="32"/></a></td>
+        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 2.5px; padding-left: 2.5px;" valign="top"><a href="https://www.facebook.com/" target="_blank"><img alt="Facebook" height="32" src="https://res.cloudinary.com/tomiscattini/image/upload/v1607455248/tierra-roja/tqzcvcucqgwdsqivrtbs.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;" title="Facebook" width="32"/></a></td>
+        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 2.5px; padding-left: 2.5px;" valign="top"><a href="https://instagram.com/" target="_blank"><img alt="Instagram" height="32" src="https://res.cloudinary.com/tomiscattini/image/upload/v1607455267/tierra-roja/wxmq0uvpbvchout2jd5s.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;" title="Instagram" width="32"/></a></td>
         </tr>
         </tbody>
         </table>

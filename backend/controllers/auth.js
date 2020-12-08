@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
+const express = require ('express')
 const User = require('../models/User')
-const passport = require('passport')
+const passport = require('../config/passport')
 const { emailConfirmacion } = require('../config/nodemailer')
 
 exports.loginProcess = (req, res, next) => {
@@ -83,22 +84,15 @@ exports.loggedinProcess = (req, res) => {
     return res.status(200).json(req.user || null)
 }
 
-exports.googleInit = passport.authenticate('google', {
-  scope: [
-    "https://www.googleapis.com/auth/userinfo.profile",
-    "https://www.googleapis.com/auth/userinfo.email"
-  ]
-})
+exports.googleProcess =  passport.authenticate("google", { scope: ["profile", "email"] })
 
-exports.googleCb = (req, res, next) => {
-  passport.authenticate('google', (err, user, errDetails) => {
-    if (err) return res.status(500).json({ err, errDetails })
-    if (!user) return res.status(401).json({ err, errDetails })
-
-    req.login(user, err => {
-      if (err) return res.status(500).json({ err })
-      return res.redirect(process.env.NODE_ENV === 'development' ?
-        'http://localhost:3001/profile' : '/profile')
-    })
-  })(req, res, next)
+exports.googleRedirect = (req, res, next) => {
+    passport.authenticate("google", { scope: ["email"] }, (err, user, info) => {
+        if (err) return res.status(500).json({ err, info })
+        if (!user) return res.status(401).json({ err, info })
+        req.login(user, error => {
+            if (error) return res.status(401).json({ error })
+            return res.redirect(process.env.FRONTENDPOINT + "/profile")
+        })
+    })(req, res, next)
 }

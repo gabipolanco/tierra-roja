@@ -34,7 +34,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Course"
   }],
-  googleId: String,
+  googleID: String,
   facebookId: String
 }, {
   timestamps: {
