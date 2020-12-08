@@ -25,7 +25,17 @@ const userSchema = new Schema({
   artistId: {
     type: Schema.Types.ObjectId,
     ref: "Artist"
-  }
+  },
+  streamings: [{
+    type: Schema.Types.ObjectId,
+    ref: "Streaming"
+  }],
+  courses: [{
+    type: Schema.Types.ObjectId,
+    ref: "Course"
+  }],
+  googleId: String,
+  facebookId: String
 }, {
   timestamps: {
     createdAt: 'created_at',

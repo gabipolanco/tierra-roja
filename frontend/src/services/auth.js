@@ -9,7 +9,6 @@ const authService = axios.create({
   withCredentials: true
 })
 
-// 1. Signup 
 export const signupFn = userInfo => authService.post('/signup', userInfo)
 
 export const loginFn = userData => authService.post('/login', userData)

@@ -6,7 +6,9 @@ let transporter = nodemailer.createTransport({
         pass: process.env.GMAIL_PASS
     }
 })
-exports.emailConfirmacion = (email, hashId) => {
+exports.emailConfirmacion = (email, id) => {
+    const url = process.env.NODE_ENV === 'development' ? `http://localhost:3000/auth/${email}/${id}` : `https://tierra-roja.herokuapp.com//auth/${email}/${id}`
+
     return transporter.sendMail({
         from: 'mujeresdelbarro@gmail.com',
         to: email,
@@ -180,7 +182,7 @@ exports.emailConfirmacion = (email, hashId) => {
         </div>
         <!--[if mso]></td></tr></table><![endif]-->
         <div align="center" class="button-container" style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-        <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:3000/auth/${email}/${hashId}" style="height:51.75pt; width:209.25pt; v-text-anchor:middle;" arcsize="0%" stroke="false" fillcolor="#000000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Georgia, serif; font-size:22px"><![endif]--><a href="http://localhost:3000/auth/${email}/${hashId}" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #ffffff; background-color: #000000; border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; width: auto; width: auto; border-top: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; padding-top: 15px; padding-bottom: 10px; font-family: Georgia, Times, Times New Roman, serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank"><span style="padding-left:40px;padding-right:40px;font-size:22px;display:inline-block;"><span style="line-height: 24px; word-break: break-word;"><span data-mce-style="font-size: 22px; line-height: 44px;" style="font-size: 22px; line-height: 44px;">Confirma tu email</span></span></span></a>
+        <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href=${url} style="height:51.75pt; width:209.25pt; v-text-anchor:middle;" arcsize="0%" stroke="false" fillcolor="#000000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Georgia, serif; font-size:22px"><![endif]--><a href=${url} style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #ffffff; background-color: #000000; border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; width: auto; width: auto; border-top: 1px solid #000000; border-right: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; padding-top: 15px; padding-bottom: 10px; font-family: Georgia, Times, Times New Roman, serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank"><span style="padding-left:40px;padding-right:40px;font-size:22px;display:inline-block;"><span style="line-height: 24px; word-break: break-word;"><span data-mce-style="font-size: 22px; line-height: 44px;" style="font-size: 22px; line-height: 44px;">Confirma tu email</span></span></span></a>
         <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
         </div>
         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Arial, sans-serif"><![endif]-->
@@ -244,7 +246,6 @@ exports.emailConfirmacion = (email, hashId) => {
         </tr>
         </tbody>
         </table>
-        <a href="https://tierra-roja.herokuapp.com//auth/${email}/${hashId}">Link de confirmacion deploy</a>
         <!--[if (IE)]></div><![endif]-->
         </body>
         </html>

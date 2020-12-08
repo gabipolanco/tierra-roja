@@ -42,18 +42,18 @@ exports.signupProcess = async (req, res) => {
             email,
             password: hashPass
         })
-        const hashId = bcrypt.hashSync(newUser._id.toString(), salt)
-        await emailConfirmacion(email, hashId)
+        const id = newUser._id.toString()
+        await emailConfirmacion(email, id)
         res.status(201).json({message: "User created"})
 }
 
-exports.confirmSignup = async (req, res) => {
+exports.confirmSignup = async (req, res, next) => {
   const {email, id} = req.params
-  const user = await User.findOne({email: email})
+  const user = await User.findOne({email})
   if(!user) return res.status(404).json({message: "user not found"})
-  if(!bcrypt.compareSync(user._id.toString(), id)) return res.status(400).json({message: "Confirm your email"})
+  if(id !== user._id.toString()) return res.status(400).json({message: "Confirm your email"})
   await User.findByIdAndUpdate(user._id, {confirmed: true}, {new: true})
-  res.redirect("http://localhost:3001")
+  res.redirect("http://localhost:3001/confirmed")
 }
 
 exports.editProcess = async (req, res) => {
@@ -80,6 +80,25 @@ exports.logoutProcess = (req, res) => {
 }
 
 exports.loggedinProcess = (req, res) => {
-    const user = req.user
-    return res.status(200).json(user || null)
+    return res.status(200).json(req.user || null)
+}
+
+exports.googleInit = passport.authenticate('google', {
+  scope: [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
+})
+
+exports.googleCb = (req, res, next) => {
+  passport.authenticate('google', (err, user, errDetails) => {
+    if (err) return res.status(500).json({ err, errDetails })
+    if (!user) return res.status(401).json({ err, errDetails })
+
+    req.login(user, err => {
+      if (err) return res.status(500).json({ err })
+      return res.redirect(process.env.NODE_ENV === 'development' ?
+        'http://localhost:3001/profile' : '/profile')
+    })
+  })(req, res, next)
 }

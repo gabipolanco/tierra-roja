@@ -8,7 +8,9 @@ const {
     editProcess,
     uploadProcess,
     logoutProcess,
-    loggedinProcess
+    loggedinProcess,
+    googleInit,
+    googleCb
 } = require('../controllers/auth')
 
 router.post('/login', loginProcess)
@@ -18,5 +20,8 @@ router.post('/edit/:id',isAuth, catchErrs(editProcess))
 router.post('/upload-photo/:id',isAuth, catchErrs(uploadProcess))
 router.get('/logout', logoutProcess)
 router.get('/loggedin', loggedinProcess)
+
+router.get('/google', googleInit)
+router.get('/google/callback', googleCb)
 
 module.exports = router;

@@ -8,6 +8,8 @@
     "animate.css": "^4.1.1",
     "antd": "^4.9.1",
     "axios": "^0.19.2",
+    "hls.js": "^0.14.16",
+    "mux-embed": "^3.4.3",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
     "react-facebook-login": "^4.1.1",

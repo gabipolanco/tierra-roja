@@ -48,11 +48,10 @@ const SignupForm = () => {
   };
   
   const Formul = () => {
-    const onFinish = async (values) => {
-      await signupFn(values)
+    const onFinish = async ({email, password}) => {
+      await signupFn({email, password})
       setIsModalVisible(false);
       setRegistered(true)
-      
     };
   
     const onFinishFailed = errorInfo => {

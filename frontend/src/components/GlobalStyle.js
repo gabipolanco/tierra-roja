@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
  
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 html {
   scroll-behavior: smooth;
@@ -10,12 +9,42 @@ html {
   body{
     margin: 0;
     padding: 0;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: lighter;
     font-size: 16px;
   }
 
+  
+a {
+  text-decoration:none;
+  color: black;
+}
+li {
+  list-style:none;
+  font-size: 12px;
+}
+ul {
+  padding:0;
+  margin:0;
+}
+
+.btn {
+  outline:none;
+  border:none;
+  text-decoration:none;
+  text-transform:uppercase;
+  background:#202020;
+  color:#eaeaea;
+  letter-spacing: 2px;
+  box-sizing:border-box;
+  margin-top:20px;
+  padding:10px 40px;
+  cursor: pointer;
+}
+
   .page {
     padding: 50px;
+    font-family: 'Quicksand', sans-serif;
   }
 
 #brand{
@@ -44,17 +73,17 @@ html {
 .one {
     position: relative;
     background-image: url("./images/clayhands.jpeg");
-    background-size: 58%;
+    background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
     background-color:white;
     overflow: hidden;
-    transition: background-size 5s linear;
+    transition: background-size 1s linear;
     scroll-snap-align: center;
 }
 
 .one:hover {
-  background-size: 65%;
+  background-size: 54%;
 }
 
 .two{
@@ -65,71 +94,62 @@ html {
     background-position: 25vw -13vh;
     background-color:white;
     overflow: hidden;
-    transition: background-size 5s linear;
+    transition: background-size 1s linear;
     scroll-snap-align: center;
 }
     
 .two:hover {
-  background-size: 90%;
+  background-size: 83%;
 }
 
 .three{
     position: relative;
     background-image: url("./images/roots.jpeg");
-    background-size: 85%;
+    background-size: 65%;
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
-    transition: background-size 5s linear;
+    transition: background-size 1s linear;
     scroll-snap-align: center;
 }
 
 .three:hover {
-  background-size: 95%;
+  background-size: 68%;
 }
 
 .four{
     position: relative;
-    background-image: url("./images/lapacho.jpeg");
-    background-size: 80%;
+    background-image: url("./images/branch.jpeg");
+    background-size: 78%;
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
-    transition: background-size 5s linear;
+    transition: background-size 1s linear;
     scroll-snap-align: center;
 }
 
 .four:hover {
-  background-size: 90%;
+  background-size: 81%;
 }
 
 .five{
     position: relative;
-    background-image: url("./images/branch.jpeg");
-    background-size: 80%;
+    background-image: url("./images/tierra.jpeg");
+    transform: rotate(180deg);
+    background-size: 70%;
     background-repeat: no-repeat;
     background-position: center center;
     background-color:white;
-    transition: background-size 5s linear;
+    transition: background-size 1s linear;
     scroll-snap-align: center;
 }
 
 .five:hover {
-  background-size: 90%;
+  background-size: 74%;
 }
 
 .six {
-    position: relative;
-    background-image: url("./images/tierra.jpeg");
-    background-size: cover;
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    background-size: 90%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color: #FFF;
-    transition: background-size 5s linear;
-    scroll-snap-align: center;
+  background-color: #FDFAF7;
 }
 
 .six:hover {
@@ -153,7 +173,7 @@ html {
     position: absolute;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
 }
 
@@ -168,54 +188,41 @@ html {
     writing-mode:lr-tb;
 }
 
-a {
-  text-decoration:none;
-  color: black;
-}
-li {
-  list-style:none;
-  font-size: 12px;
-}
-ul {
-  padding:0;
-  margin:0;
-}
-
-
-
-
 #about .side-div {
   display: flex;
   justify-content: flex-end;
   position:absolute;
   height:100%;
-  width:30%;
-  background:rgba(218, 110, 22, 0.445);
+  width: 0;
+  background:rgba(253, 250, 247, 0.445);
   transform: skewX(-5deg) translateX(-50px);
   transition: 1s all ease-in-out;
   -webkit-transition: 1s all ease-in-out;
 }
 
 #about .content {
+  display: flex;
   position:relative;
-  padding:200px 0 0 200px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  top: calc(50vh - 150px);
+  padding-right: 20vw;
+  box-sizing: border-box;
+  left: 70px;
   color:#000;
   z-index:10;
   height:300px;
-  width: 500px;
+  width: 30%;
 }
 
-.btn {
-  outline:none;
-  border:none;
-  text-decoration:none;
-  text-transform:uppercase;
-  background:#202020;
-  color:#eaeaea;
-  box-sizing:border-box;
-  margin-top:20px;
-  padding:10px 40px;
-  cursor: pointer;
+#about .content h2 {
+  font-size: 4rem;
+  text-align: left;
+}
+
+#about .content .btn {
+  height: 50px;
 }
 
 .anim-trans {
@@ -243,22 +250,98 @@ ul {
   justify-content: flex-end;
 }
 
-#portfolios .side-div {
-  position:absolute;
-  height:100%;
-  width:30%;
-  background:rgba(218, 110, 22, 0.445);
-  transform: skewX(5deg) translateX(100px);
+#portfolios .content {
+  position: relative;
+  height: 100vh;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  color:#000;
+  z-index:10;
+  padding: 0;
+  text-align: left;
 }
 
-#portfolios .content {
+#portfolios .content h2 {
+  transform: rotate(-90deg);
+  font-size: 3rem;
+}
+#portfolios .content .btn {
+  margin-top: 100px;
+  margin-right: 100px;
+}
+
+#galeria {
+  position: relative;
+}
+
+#galeria .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 25%;
+  height: 100vh;
+  z-index: 10;
+}
+
+#galeria .content h2 {
+  transform: rotate(90deg);
+  margin-top: 100px; 
+  text-align: left;
+  font-size: 3rem; 
+}
+
+#galeria .content .btn {
+  margin-top: 150px;
+}
+
+#aula {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 100px;
+}
+
+#aula .content {
+  transform: rotate(180deg);
+}
+
+#aula .content h2 {
+  font-size: 3rem;
+}
+
+#contacto {
+  position: relative;
+  display: flex;
+}
+#contacto .content {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  color:#000;
-  z-index:10;
-  padding: 100px;
-  text-align: right;
+  padding: 100px 50px;
+  width: 50vw;
+  box-sizing: border-box;
+  margin: 0;
+  height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+#contacto .banner-contacto {
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#contacto .banner-contacto h2 {
+  transform: rotate(-90deg);
+  font-size: 10vh;
+  text-align: left;
+  margin: 30px;
+  font-family: 'Bebas Neue', sans-serif;
 }
 `
  
