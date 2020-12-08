@@ -41,19 +41,19 @@ passport.serializeUser((user, cb) => {
   });
 
   passport.use(new googleStrategy({
-    clientID: process.env.GOOGLE_ID,
+    clientID: process.env.GOOGLE_KEY,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: '/auth/google/callback'
+    callbackURL: process.env.GOOGLE_CALLBACK
   },
-    async (_, __, { id, emails, photos }, done) => {
-      const user = await User.findOne({ googleID: id })
+    async (_, __, profile, done) => {
+      const user = await User.findOne({ googleID: profile.id })
   
       if (!user) {
         const newUser = await User.create({
-          googleID: id,
-          username: emails[0].value,
-          email: emails[0].value,
-          image: photos[0].value,
+          googleID: profile.id,
+          username: profile.emails[0].value,
+          email: profile.emails[0].value,
+          image: profile.photos[0].value,
           confirmed: true
         })
         done(null, newUser)
