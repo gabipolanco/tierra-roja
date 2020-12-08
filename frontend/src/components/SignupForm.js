@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import FacebookLogin from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox, Alert } from 'antd';
 import { signupFn } from '../services/auth'
 
+const googleUrl = process.env.NODE_ENV === 'development' ?
+  "http://localhost:3000/auth/google" : '/auth/google'
 
 const layout = {
   labelCol: { span: 24 },
@@ -31,14 +31,6 @@ const SignupForm = () => {
     setIsModalVisible(false);
   };
 
-  const responseFacebook = (response) => {
-    console.log(response);
-  }
-
-  const responseGoogle = (response) => {
-    console.log(response);
-  }
-
   const layout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 16 },
@@ -48,11 +40,10 @@ const SignupForm = () => {
   };
   
   const Formul = () => {
-    const onFinish = async (values) => {
-      await signupFn(values)
+    const onFinish = async ({email, password}) => {
+      await signupFn({email, password})
       setIsModalVisible(false);
       setRegistered(true)
-      
     };
   
     const onFinishFailed = errorInfo => {
@@ -67,7 +58,7 @@ const SignupForm = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         layout="vertical"
-        style={{margin: "0 80px"}}
+        style={{margin: "0 80px", fontFamily: "Roboto"}}
       >
         <Form.Item
           label="Email"
@@ -141,7 +132,7 @@ const SignupForm = () => {
 
   return (
     <>
-      {registered && <Alert style={{top: "100px"}} message="Registro exitoso" description="Revisa tu email para confirmar el registro" closeText="X" type="success" showIcon />}
+      {registered && <Alert style={{top: "100px", width: "300px", backgroundColor: "#FDFAF7", border: "none"}} message="Registro exitoso" description="Revisa tu email para confirmar el registro" closeText="X" type="success" />}
       <p style={{cursor: "pointer"}} type="primary" onClick={showModal}>
         Registrate
       </p>
@@ -162,7 +153,7 @@ const SignupForm = () => {
         <br />
 
         <div>
-          <FacebookLogin
+          {/* <FacebookLogin
           appId="198741351868254"
           fields="name,email,picture"
           data-size="medium" 
@@ -170,18 +161,12 @@ const SignupForm = () => {
           size="small"
         />
         <br />
-        <br />
+        <br /> */}
 
 
-        <GoogleLogin
-          clientId="779423123737-7pe82dh5tvckbo7nm0svivitsqj3f72m.apps.googleusercontent.com"
-          buttonText="LOGIN WITH GOOGLE"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          render={renderProps => (
-            <img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
-          )}
-        />
+          <div>
+              <a href={googleUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a>
+            </div>
         </div>
       </Modal>
     </>

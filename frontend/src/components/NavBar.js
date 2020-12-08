@@ -19,6 +19,8 @@ const NavBarSyled = styled.div `
   }
   ul.menu li {
     padding-top:110px;
+    margin: 15px 5px;
+    font-size: 18px;
   }
   ul.menu li a {
     -webkit-transform:rotate(270deg);
@@ -28,7 +30,7 @@ const NavBarSyled = styled.div `
     float:left;
     width:25px;
     color:black;
-    font-weight: bold;
+    letter-spacing: 2px;
   }
   ul.menu li:hover a {
     color: black;
@@ -44,7 +46,7 @@ const NavBar = () => {
                     <li><a href="/#portfolios">PORTFOLIOS </a></li>
                     <li><a href="/#galeria">GALERIA</a></li>
                     <li><a href="/#aula">AULA</a></li>
-                    <li><a href="/#contacto">CANTACTO </a></li>
+                    <li><a href="/#contacto">CONTACTO </a></li>
                 </ul>
             </NavBarSyled>
     )

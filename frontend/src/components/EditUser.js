@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Form, Input, Select } from 'antd'
 import { useContextInfo } from '../hooks/context'   
 import { editFn } from '../services/auth'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const EditUser = () => {
     const { user, login } = useContextInfo()
@@ -29,6 +29,7 @@ const EditUser = () => {
 
     return user && (
         <div className="page">
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Perfil</Link>
             <h1>Editá tu perfil</h1>
             <Row style={{marginTop: "70px"}}>
                 <Col xs={{ span: 24 }} lg={{ span: 8, offset: 8 }}>

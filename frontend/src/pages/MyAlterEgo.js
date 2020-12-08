@@ -1,11 +1,14 @@
-import React from 'react'
-import { Row, Col, Form, Input, Upload, Typography, Button, Descriptions } from 'antd'
+import React, {useState} from 'react'
+import { Row, Col, Form, Input, Typography } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { createArtistFn } from '../services/artist'
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link} from "react-router-dom";
+import Portfolio from '../components/Portfolio'
+import axios from 'axios'
 
 const MyAlterEgo = () => {
-    const { user, artist, setUserArtistFn } = useContextInfo()
+    const [img, setImg] = useState("https://res.cloudinary.com/gabipf/image/upload/v1607097840/bannerportfolio_psi9u4.jpg")
+    const { artist, setUserArtistFn } = useContextInfo()
     let history = useHistory();
 
     const layout = {
@@ -16,10 +19,9 @@ const MyAlterEgo = () => {
         wrapperCol: { offset: 0, span: 24 },
       };
 
-        const onFinish = async (values) => {
-            const id = user._id
-            console.log(values)
-            const {data: { newArtist } } = await createArtistFn( values)
+        const onFinish = async ({bio, email, instagram, facebook, name, other, profession}) => {
+            // console.log({bio, email, instagram, facebook, name, other, profession})
+            const {data: { newArtist } } = await createArtistFn( {bio, email, instagram, facebook, other, name, profession,  coverImage: img})
             setUserArtistFn(newArtist)
             history.push("/artist")
         };
@@ -28,28 +30,24 @@ const MyAlterEgo = () => {
           console.log('Failed:', errorInfo);
         };
 
+        async function handleUploadFile({target: {files}}) {
+            const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/tomiscattini/image/upload'
+            const data = new FormData()
+            data.append('file', files[0])
+            data.append('upload_preset', 'tierra-roja-preset')
+            
+            const {data: {secure_url}}= await axios.post(cloudinaryAPI, data)
+            setImg(secure_url);
+          }
+
     return (
         <div className="page">
-            <h1>Mi perfil de artista</h1>
             {artist ? <Row>
-                <Col offset={2} span={20}>    
-                    <Descriptions column={2} title="Información artística" layout="vertical">
-                        <Descriptions.Item label="Nombre artístico">{artist.name}</Descriptions.Item>
-                        <Descriptions.Item label="Profesión">{artist.profession}</Descriptions.Item>
-                        <Descriptions.Item span={2} label="Biografía">{artist.bio}</Descriptions.Item>
-                       
-                        <Typography.title level={4}>Redes sociales</Typography.title>
-                       
-                        <Descriptions.Item label="Instagram">{artist.socialMedia.instagram}</Descriptions.Item>
-                        <Descriptions.Item label="Facebook">{artist.socialMedia.facebook}</Descriptions.Item>
-                        <Descriptions.Item label="Twitter">{artist.socialMedia.twitter}</Descriptions.Item>
-                        <Descriptions.Item label="Página personal">{artist.socialMedia.other}</Descriptions.Item>
-                     
-                        <Descriptions.Item span={1}><Link to="/"><Button>Editar alter ego</Button></Link></Descriptions.Item>
-                    </Descriptions>
-                </Col>
+                <Portfolio />
             </Row> : <div>
             <Row style={{marginTop: "70px"}}>
+            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i>Perfil</Link>
+
                 <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
                 <Form
                     {...layout}
@@ -60,6 +58,7 @@ const MyAlterEgo = () => {
                     layout="vertical"
                     style={{margin: "0 80px"}}
                     >
+                    <Typography.Title level={2}>Crear portfolio</Typography.Title>
                      <Form.Item
                         label="Nombre de artista"
                         name="name"
@@ -74,14 +73,9 @@ const MyAlterEgo = () => {
                         <Input/>
                     </Form.Item>
 
-                    <Form.Item
-                        label="Imagen banner"
-                        name="coverImage"
-                    >       
-                        <Upload name="file">
-                            <Button >Elegir imagen</Button>
-                        </Upload>
-                    </Form.Item>
+                    <label htmlFor="coverImage" style={{width: "100%"}}>Imagen de fondo:</label>   
+                    <input type="file" onChange={handleUploadFile} name="coverImage" />
+                    
 
                     <Form.Item
                         label="Bio"
@@ -95,6 +89,7 @@ const MyAlterEgo = () => {
                     <Form.Item
                         label="Instagram"
                         name="instagram"
+                        initialValue=""
                     >
                         <Input addonBefore="https://www.instagram.com/" />
                     </Form.Item>
@@ -102,26 +97,30 @@ const MyAlterEgo = () => {
                     <Form.Item
                         label="Facebook"
                         name="facebook"
+                        initialValue=""
                     >
                         <Input addonBefore="https://www.facebook.com/" />
                     </Form.Item>
 
                     <Form.Item
-                        label="Twitter"
-                        name="twitter"
+                        label="Email"
+                        name="email"
+                        type="email"
+                        initialValue=""
                     >
-                        <Input addonBefore="https://twitter.com/" />
+                        <Input />
                     </Form.Item>
 
                     <Form.Item
                         label="Otra"
                         name="other"
+                        initialValue=""
                     >
                         <Input />
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
-                        <button className="btn" htmlType="submit" style={{width: "230px"}}>
+                        <button className="btn" type="submit" style={{width: "230px"}}>
                         Crear artista
                         </button>
                     </Form.Item>

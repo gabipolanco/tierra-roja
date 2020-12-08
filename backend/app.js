@@ -1,15 +1,13 @@
 require('dotenv').config();
 
-const bodyParser   = require('body-parser');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const express      = require('express');
-const mongoose     = require('mongoose');
-const logger       = require('morgan');
-const path         = require('path');
+const express = require('express');
+const mongoose = require('mongoose');
+const logger = require('morgan');
+const path = require('path');
 const cors = require('cors')
-
-const session    = require("express-session");
-const MongoStore = require('connect-mongo')(session);
+const passport = require('./config/passport')
 
 const DBConnection = process.env.DB || 'mongodb://localhost/tierra-roja'
 
@@ -33,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Express View engine setup
+// Static files
 
 app.use(express.static(path.join(__dirname, 'public/build')));
 
@@ -41,23 +39,26 @@ app.use(express.static(path.join(__dirname, 'public/build')));
 // default value for title local
 app.locals.title = 'Tierra Roja';
 
+app.use(cors({
+  origin: ["http://localhost:3001", "https://tierra-roja.herokuapp.com/"],
+  credentials: true
+}))
 
 // Enable authentication using session + passport
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
+
 app.use(session({
-  secret: 'irongenerator',
+  secret: 'iuhlkjhiucyt',
+  cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 },
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
-app.use(cors({
-  origin: ["http://localhost:3001"],
-  credentials: true
-}))
-
-require('./config/passport')(app);
+app.use(passport.initialize());
+app.use(passport.session());
     
-
 const index = require('./routes/index');
 app.use('/', index);
 
@@ -67,11 +68,14 @@ app.use('/auth', authRoutes);
 const workRoutes = require('./routes/work');
 app.use('/work', workRoutes);
 
+const streamingRoutes = require('./routes/streaming');
+app.use('/streaming', streamingRoutes);
+
 const artistRoutes = require('./routes/artist');
 app.use('/artist', artistRoutes);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/build/index.html'))
-})      
+const courseRoutes = require('./routes/course');
+app.use('/course', courseRoutes);
+      
 
 module.exports = app;

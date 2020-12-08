@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
@@ -24,23 +24,30 @@ const HeaderNavStyled = styled.div`
     position: fixed;
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: calc(100vw - 50px);
     height: 50px;
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
     background: rgba(255, 255, 255,1);
     z-index: 15;
+    margin: 0 50px;
+    letter-spacing: 2px;
 
+&>div:first-child {
+    width: 70%;
+}
 &>div {
-    width: 50%;
+    width: 30%;
 }
 &>div>h2 {
-    margin: 0 30px;
+    margin: 30px;
+    font-weight: bold;
     padding: 0;
     text-align: left;
+    letter-spacing: 4px;
 }
-&>div>h2:hover {
+&>div>h2:hover a {
     color: #996633;
 }
 
@@ -52,6 +59,7 @@ const HeaderNavStyled = styled.div`
 
     &>div .menuLarge {
         display: none;
+        margin-right: 50px;
         width: 100%;
         justify-content: flex-end;
     }
@@ -63,9 +71,9 @@ const HeaderNavStyled = styled.div`
     &>div .menuLarge li {
         margin: 0 50px;
         text-transform: uppercase;
-        font-weight: bold;
+        font-size: 18px;
     }
-    &>div .menuLarge li:hover p {
+    &>div .menuLarge li:hover a {
         color: black;
         text-shadow: 0 0 1px black;
     }
@@ -73,21 +81,22 @@ const HeaderNavStyled = styled.div`
 
 const HeaderNav = () => {
     const { user, logout } = useContextInfo()
+    let history = useHistory();
 
-    async function handleLogout(e) {
-        e.preventDefault()
+    async function handleLogout() {
         await logoutFn()
         logout()
+        history.push("/")
       }
 
     return (
         <HeaderNavStyled>
             <div>
-                <h2><Link to="/">Tierra Roja</Link></h2>
+                <h2><a href="/#cover">Tierra Roja</a></h2>
             </div>
             <div>
                 <Dropdown className="menu-movil" overlay={menu}>
-                    <a href="#" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <a href="/" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         <MenuHamburguesa/>
                     </a>
                 </Dropdown>
@@ -95,7 +104,7 @@ const HeaderNav = () => {
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
                     <><li><Link to="/profile">Perfil</Link></li>
-                    <li><a onClick={handleLogout}>Logout</a></li>
+                    <li><p onClick={handleLogout} style={{cursor: "pointer"}}>Logout</p></li>
                     </>}
                 </ul>
             </div>
