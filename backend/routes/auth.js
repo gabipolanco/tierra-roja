@@ -12,7 +12,9 @@ const {
     logoutProcess,
     loggedinProcess,
     googleProcess,
-    googleRedirect
+    googleRedirect,
+    facebookProcess,
+    facebookRedirect
 } = require('../controllers/auth')
 
 router.post('/login', loginProcess)
@@ -25,5 +27,8 @@ router.get('/loggedin', loggedinProcess)
 
 router.get('/google', googleProcess)
 router.get('/google/callback', googleRedirect)
+
+router.get("/facebook", facebookProcess)
+router.get("/facebook/callback", facebookRedirect)
 
 module.exports = router;
