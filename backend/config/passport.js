@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-const googleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const User = require("../models/User")
 
 passport.use(
@@ -26,33 +26,34 @@ passport.use(
     )
 )
 
-passport.serializeUser((loggedInUser, cb) => {
-    cb(null, loggedInUser._id);
+passport.serializeUser((user, cb) => {
+    cb(null, user._id);
   });
   
-  passport.deserializeUser((userIdFromSession, cb) => {
-    User.findById(userIdFromSession)
-    .then(userDocument => {
-      cb(null, userDocument);
-    })
-    .catch(err => {
+  passport.deserializeUser(async (id, cb) => {
+    try { 
+      const user = await User.findById(id)
+      cb(null, user)
+    }
+    catch (err) {
       cb(err);
-    })
+    }
   });
 
-  passport.use(new googleStrategy({
+  passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: '/auth/google/callback'
   },
-    async (_, __, { id, emails, photos }, done) => {
-      const user = await User.findOne({ googleID: id })
+    async (_, __, profile, done) => {
+      const user = await User.findOne({ googleId: profile.id })
   
       if (!user) {
         const newUser = await User.create({
-          googleID: id,
-          email: emails[0].value,
-          image: photos[0].value
+          googleId: profile.id,
+          username: profile.emails[0].value,
+          email: profile.emails[0].value,
+          confirmed: true
         })
         done(null, newUser)
         return;

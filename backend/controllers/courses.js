@@ -47,8 +47,8 @@ exports.deleteCourse = async (req, res) => {
 exports.addClass = async (req, res) => {
     const courseId = req.params.id
     const { name, description, contentLink } = req.body
-    const _id = mongoose.Types.ObjectId();
-    await Course.findByIdAndUpdate(courseId, { $push : { classes: { _id, name, description, contentLink }}}, {new: true})
+    // const _id = mongoose.Types.ObjectId();
+    await Course.findByIdAndUpdate(courseId, { $push : { classes: {name }}}, {new: true})
     res.status(200).json({message: "Class added"})
 } 
 

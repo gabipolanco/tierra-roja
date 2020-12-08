@@ -150,10 +150,10 @@ exports.emailConfirmacion = (email, id) => {
         <tr style="vertical-align: top;" valign="top">
         <td style="word-break: break-word; vertical-align: top;" valign="top">
         <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color:#ece8e5"><![endif]-->
-        <div style="background-image:url('images/mailimage.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;">
+        <div style="background-image:url('https://res.cloudinary.com/tomiscattini/image/upload/v1607440229/tierra-roja/vasija_o3mib6.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;">
         <div class="block-grid" style="min-width: 320px; max-width: 600px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; Margin: 0 auto; background-color: #ffffff;">
         <div style="border-collapse: collapse;display: table;width: 100%;background-color:#ffffff;">
-        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-image:url('images/mailimage.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px"><tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
+        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-image:url('https://res.cloudinary.com/tomiscattini/image/upload/v1607440229/tierra-roja/vasija_o3mib6.png');background-position:top center;background-repeat:no-repeat;background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px"><tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
         <!--[if (mso)|(IE)]><td align="center" width="600" style="background-color:#ffffff;width:600px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:60px; padding-bottom:60px;"><![endif]-->
         <div class="col num12" style="min-width: 320px; max-width: 600px; display: table-cell; vertical-align: top; width: 600px;">
         <div class="col_cont" style="width:100% !important;">

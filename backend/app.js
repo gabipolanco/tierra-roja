@@ -55,7 +55,6 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
-require('./config/passport')(app);
 
 app.use(passport.initialize());
 app.use(passport.session());
