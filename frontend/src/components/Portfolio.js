@@ -197,12 +197,12 @@ const Portfolio = () => {
                     <div>
                     <h2>{artist.name}</h2>
                     <h3>{artist.profession}</h3>
-                    <div className="social">
-                    <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
-                    <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
-                    </div>
+                    {artist.socialMedia && <div className="social">
+                        <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
+                        <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
+                    </div>}
                     </div>
                 </div>
 
@@ -244,7 +244,7 @@ const Portfolio = () => {
                 <div>
                     <h2>Arte</h2>
                     {works ? 
-                        <Row gutter={16, 16}>
+                        <Row gutter={[16, 16]}>
                         {works.map(work => (<Link to="/myworks"><Col xs={{offset: 6,span: 12}}>
                             <Card hoverable cover={<img style={{objectFit: "cover", height: "250px", width: "100%"}} src={work.media} alt={work.title} />} title={work.title} bordered={false}>
                             <Typography.Text>{work.description}</Typography.Text><br />
@@ -261,7 +261,7 @@ const Portfolio = () => {
                 <div>
                     <Link to="/mystreamings"><h2>Clases</h2></Link>
                     {myStreamings ? 
-                        <Row gutter={16, 16}>
+                        <Row gutter={[16, 16]}>
                         {myStreamings.map(stream => (
                             <Link to="/mystreamings"><Col xs={{offset: 2,span: 20}}>
                             <Card hoverable cover={<video controls></video>} title={stream.title} bordered={false}>

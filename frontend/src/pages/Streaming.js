@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef } from 'react'
+import React, {useState, useEffect } from 'react'
 import { getOneStreamingFn } from '../services/streaming'
 import { Row, Col, Skeleton, Typography } from 'antd'
 
@@ -11,7 +11,7 @@ const Streaming = ({match: {params: {id}}}) => {
             setStreaming(data)
         }
         setStream()
-    }, [])
+    }, [id])
 
     return (
         <div className="page">

@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { Card, Col, Row, Button, Modal, Form, Input, Select, DatePicker, InputNumber, Typography } from 'antd';
 import { useContextInfo } from '../hooks/context'
-import { createWorkFn, getOneWorkFn, editWorkFn, deleteWorkFn } from '../services/works'
 import { createStreamingFn, getMyStreamingsFn, getOneStreamingFn, editStreamingFn, deleteStreamingFn } from '../services/streaming'
 import axios from 'axios'
 
 const MyStreamings = () => {
-    const { artist, myStreamings, setMyStreamingsFn } = useContextInfo()
+    const { user, artist, myStreamings, setMyStreamingsFn } = useContextInfo()
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModal2Visible, setIsModal2Visible] = useState(false);
     const [isModal3Visible, setIsModal3Visible] = useState(false);
@@ -23,7 +22,7 @@ const MyStreamings = () => {
             setStreamingToBeEdited(data)
         }
         setStreamingToEdit()
-    }, [isModal2Visible, isModal3Visible])
+    }, [isModal2Visible, isModal3Visible, editStreaming])
 
     const layout = {
         labelCol: { span: 24 },
@@ -47,7 +46,7 @@ const MyStreamings = () => {
 
         const onFinish2 = async (values) => {
             const id = streamingToBeEdited._id
-            const {data: { editStreaming }} = await editStreamingFn(id, {...values})
+            await editStreamingFn(id, {...values})
             setMyStreamingsFn()
             setIsModal2Visible(false)
             setStreamingToBeEdited(null)
@@ -86,10 +85,11 @@ const MyStreamings = () => {
         setEditStreaming(null)
     };
 
-    return (
+    return user && (
         <div className="page">
             <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Perfil</Link>
             <h1>Mis streamings</h1>
+            {user.role === "artist" ? <div>
             <Button onClick={showModal}>Agregar un streaming</Button>
 
             <Modal
@@ -242,7 +242,7 @@ const MyStreamings = () => {
                     
                 </Col>))}
             </Row> : <div></div>}
-            
+            </div> : <div></div> }
         </div>
     )
 }

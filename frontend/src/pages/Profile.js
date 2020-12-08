@@ -65,11 +65,25 @@ const Profile = () => {
                         <Link to="/artist"><Button>Portfolio</Button></Link>
                         <br/><br/>
                         <Link to="/mystreamings"><Button>Mis streamings</Button></Link>
+                        <br/><br/>
+                        <Link to="/mycourses"><Button>Dashboard</Button></Link>
                     </Col>
                 </Row>
             </div> 
             : <div>
-                
+                {user.role === "student" ? 
+                    <div>
+                        <Row>
+                            <Col offset={2} span={20}>
+                                <Link to="/mystreamings"><Button>Mis streamings</Button></Link>
+                                <br/><br/>
+                                <Link to="/mycourses"><Button>Dashboard</Button></Link>
+                            </Col>
+                        </Row>
+                    </div> 
+                    : <div>
+                        
+                    </div>}
             </div>}
         </div> )
      : (<Redirect to='/' />)

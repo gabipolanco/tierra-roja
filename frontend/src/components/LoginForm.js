@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import {useHistory} from 'react-router-dom'
-import FacebookLogin from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
-import { Modal, Form, Input, Typography, Checkbox, message } from 'antd';
+import { Modal, Form, Input, Typography, Checkbox } from 'antd';
 import { loginFn } from '../services/auth'
 import { useContextInfo } from '../hooks/context'
 
 const LoginForm = () => {
   const { login } = useContextInfo()
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [error, setError] = useState(null)
   const [form] = Form.useForm();
   let history = useHistory();
 
@@ -25,14 +22,6 @@ const LoginForm = () => {
     setIsModalVisible(false);
   };
 
-  const responseFacebook = (response) => {
-    console.log(response);
-  }
-
-  const responseGoogle = (response) => {
-    console.log(response);
-  }
-
   const layout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 16 },
@@ -42,10 +31,10 @@ const LoginForm = () => {
   };
   
   const Formul = () => {
-    const onFinish = async ({email, password}) => {
+    const onFinish = async (values) => {
         try {
-      const {data} = await loginFn({email, password})
-      login(data.user)
+      const {data} = await loginFn(values)
+      login(data)
       setIsModalVisible(false);
       history.push("/")
     } catch(err) {
@@ -66,7 +55,7 @@ const LoginForm = () => {
         onFinishFailed={onFinishFailed}
         form={form}
         layout="vertical"
-        style={{margin: "0 80px"}}
+        style={{margin: "0 80px", fontFamily: "Roboto"}}
       >
         <Form.Item
           label="Email"
@@ -85,8 +74,6 @@ const LoginForm = () => {
         >
           <Input style={{width: "300px"}}/>
         </Form.Item>
-
-        {error && <Typography.text type="secondary">{error}</Typography.text>}
   
         <Form.Item
           name="password"
@@ -116,9 +103,9 @@ const LoginForm = () => {
 
   return (
     <>
-      <a style={{cursor: "pointer"}} type="primary" onClick={showModal}>
+      <p style={{cursor: "pointer"}} type="primary" onClick={showModal}>
         Login
-      </a>
+      </p>
       <Modal
         title="Login"
         visible={isModalVisible}
@@ -143,18 +130,10 @@ const LoginForm = () => {
           size="small"
         />
         <br />
-        <br />
+        <br /> */}
 
-
-        <GoogleLogin
-          clientId="779423123737-7pe82dh5tvckbo7nm0svivitsqj3f72m.apps.googleusercontent.com"
-          buttonText="LOGIN WITH GOOGLE"
-          // onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          render={renderProps => (
-            <img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
-          )}
-        /> */}
+            <img alt="/" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
+        
         </div>
       </Modal>
     </>

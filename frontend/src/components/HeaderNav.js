@@ -81,19 +81,11 @@ const HeaderNavStyled = styled.div`
 
 const HeaderNav = () => {
     const { user, logout } = useContextInfo()
-    const [userInsession, setUserInsession] = useState(null)
     let history = useHistory();
 
-    useEffect(() => {
-        const newUser = {...user}
-        setUserInsession(newUser)
-    }, [user])
-
-    async function handleLogout(e) {
-        e.preventDefault()
+    async function handleLogout() {
         await logoutFn()
         logout()
-        setUserInsession(null)
         history.push("/")
       }
 
@@ -104,15 +96,15 @@ const HeaderNav = () => {
             </div>
             <div>
                 <Dropdown className="menu-movil" overlay={menu}>
-                    <a href="#" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <a href="/" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         <MenuHamburguesa/>
                     </a>
                 </Dropdown>
                 <ul className="menuLarge">
-                    {!userInsession ? <><li><SignupForm /></li>
+                    {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
                     <><li><Link to="/profile">Perfil</Link></li>
-                    <li><a onClick={handleLogout}>Logout</a></li>
+                    <li><p onClick={handleLogout} style={{cursor: "pointer"}}>Logout</p></li>
                     </>}
                 </ul>
             </div>

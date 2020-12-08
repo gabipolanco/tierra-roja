@@ -23,7 +23,7 @@ const MyWorks = () => {
             setWorkToBeEdited(data)
         }
         setWorkToEdit()
-    }, [isModal2Visible, isModal3Visible])
+    }, [isModal2Visible, isModal3Visible, editWork])
 
     const layout = {
         labelCol: { span: 24 },
@@ -34,7 +34,7 @@ const MyWorks = () => {
       };
 
         const onFinish = async (values) => {
-            const {data: { newWork } } = await createWorkFn({...values, media: img})
+            await createWorkFn({...values, media: img})
             setUserWorksFn()
             setIsModalVisible(false)
             setImg(null)
@@ -45,7 +45,7 @@ const MyWorks = () => {
             let media
             img ? media = img : media = workToBeEdited.media
             const workId = workToBeEdited._id
-            const {data: { editedWork }} = await editWorkFn(workId, {...values, media})
+            await editWorkFn(workId, {...values, media})
             setUserWorksFn()
             setIsModal2Visible(false)
             setWorkToBeEdited(null)

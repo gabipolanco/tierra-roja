@@ -45,6 +45,7 @@ ul {
   .page {
     padding: 50px;
     font-family: 'Quicksand', sans-serif;
+    overflow-y: scroll;
   }
 
 #brand{

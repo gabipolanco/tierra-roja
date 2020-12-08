@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Row, Col, Form, Input, Typography } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { createArtistFn } from '../services/artist'
-import { useHistory} from "react-router-dom";
+import { useHistory, Link} from "react-router-dom";
 import Portfolio from '../components/Portfolio'
 import axios from 'axios'
 
@@ -20,7 +20,8 @@ const MyAlterEgo = () => {
       };
 
         const onFinish = async ({bio, email, instagram, facebook, name, other, profession}) => {
-            const {data: { newArtist } } = await createArtistFn( {bio, socialMedia: {email, instagram, facebook, other}, name, profession,  coverImage: img})
+            // console.log({bio, email, instagram, facebook, name, other, profession})
+            const {data: { newArtist } } = await createArtistFn( {bio, email, instagram, facebook, other, name, profession,  coverImage: img})
             setUserArtistFn(newArtist)
             history.push("/artist")
         };
@@ -45,6 +46,8 @@ const MyAlterEgo = () => {
                 <Portfolio />
             </Row> : <div>
             <Row style={{marginTop: "70px"}}>
+            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i>Perfil</Link>
+
                 <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
                 <Form
                     {...layout}
@@ -86,6 +89,7 @@ const MyAlterEgo = () => {
                     <Form.Item
                         label="Instagram"
                         name="instagram"
+                        initialValue=""
                     >
                         <Input addonBefore="https://www.instagram.com/" />
                     </Form.Item>
@@ -93,6 +97,7 @@ const MyAlterEgo = () => {
                     <Form.Item
                         label="Facebook"
                         name="facebook"
+                        initialValue=""
                     >
                         <Input addonBefore="https://www.facebook.com/" />
                     </Form.Item>
@@ -101,6 +106,7 @@ const MyAlterEgo = () => {
                         label="Email"
                         name="email"
                         type="email"
+                        initialValue=""
                     >
                         <Input />
                     </Form.Item>
@@ -108,6 +114,7 @@ const MyAlterEgo = () => {
                     <Form.Item
                         label="Otra"
                         name="other"
+                        initialValue=""
                     >
                         <Input />
                     </Form.Item>
