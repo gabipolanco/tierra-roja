@@ -4,6 +4,9 @@ import { Modal, Form, Input, Typography, Checkbox } from 'antd';
 import { loginFn } from '../services/auth'
 import { useContextInfo } from '../hooks/context'
 
+const googleUrl = process.env.NODE_ENV === 'development' ?
+  "http://localhost:3000/auth/google" : '/auth/google'
+
 const LoginForm = () => {
   const { login } = useContextInfo()
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -132,7 +135,8 @@ const LoginForm = () => {
         <br />
         <br /> */}
 
-            <img alt="/" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
+        <a href={googleUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a>
+
         
         </div>
       </Modal>

@@ -39,25 +39,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // default value for title local
 app.locals.title = 'Tierra Roja';
 
+require("./config/session")(app)
+
 app.use(cors({
   origin: ["http://localhost:3001", "https://tierra-roja.herokuapp.com/"],
   credentials: true
 }))
-
-// Enable authentication using session + passport
-const session = require("express-session");
-const MongoStore = require('connect-mongo')(session);
-
-app.use(session({
-  secret: 'iuhlkjhiucyt',
-  cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 },
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}))
-
-app.use(passport.initialize());
-app.use(passport.session());
     
 const index = require('./routes/index');
 app.use('/', index);
