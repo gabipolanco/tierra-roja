@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
@@ -81,12 +81,19 @@ const HeaderNavStyled = styled.div`
 
 const HeaderNav = () => {
     const { user, logout } = useContextInfo()
+    const [userInsession, setUserInsession] = useState(null)
     let history = useHistory();
+
+    useEffect(() => {
+        const newUser = {...user}
+        setUserInsession(newUser)
+    }, [user])
 
     async function handleLogout(e) {
         e.preventDefault()
         await logoutFn()
         logout()
+        setUserInsession(null)
         history.push("/")
       }
 
@@ -102,7 +109,7 @@ const HeaderNav = () => {
                     </a>
                 </Dropdown>
                 <ul className="menuLarge">
-                    {!user ? <><li><SignupForm /></li>
+                    {!userInsession ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
                     <><li><Link to="/profile">Perfil</Link></li>
                     <li><a onClick={handleLogout}>Logout</a></li>

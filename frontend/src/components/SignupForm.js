@@ -4,6 +4,8 @@ import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox, Alert } from 'antd';
 import { signupFn } from '../services/auth'
 
+const googleUrl = process.env.NODE_ENV === 'development' ?
+  "http://localhost:3000/auth/google" : '/auth/google'
 
 const layout = {
   labelCol: { span: 24 },
@@ -172,15 +174,9 @@ const SignupForm = () => {
         <br />
 
 
-        <GoogleLogin
-          clientId="779423123737-7pe82dh5tvckbo7nm0svivitsqj3f72m.apps.googleusercontent.com"
-          buttonText="LOGIN WITH GOOGLE"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          render={renderProps => (
-            <img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/>
-          )}
-        />
+          <div>
+              <a href={googleUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a>
+            </div>
         </div>
       </Modal>
     </>
