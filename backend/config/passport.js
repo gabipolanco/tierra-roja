@@ -43,7 +43,7 @@ passport.serializeUser((user, cb) => {
   passport.use(new googleStrategy({
     clientID: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: '/auth/google/callback'
+    callbackURL: process.env.GOOGLE_CALLBACK
   },
     async (_, __, { id, emails, photos }, done) => {
       const user = await User.findOne({ googleID: id })

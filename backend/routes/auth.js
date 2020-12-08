@@ -23,7 +23,7 @@ router.post('/upload-photo/:id',isAuth, catchErrs(uploadProcess))
 router.get('/logout', logoutProcess)
 router.get('/loggedin', loggedinProcess)
 
-router.get("/google", googleProcess)
-router.get("/google/callback", googleRedirect)
+router.get('/google', googleProcess)
+router.get('/google/callback', googleRedirect)
 
 module.exports = router;
