@@ -19,8 +19,8 @@ const MyAlterEgo = () => {
         wrapperCol: { offset: 0, span: 24 },
       };
 
-        const onFinish = async (values) => {
-            const {data: { newArtist } } = await createArtistFn( {...values, coverImage: img})
+        const onFinish = async ({bio, email, instagram, facebook, name, other, profession}) => {
+            const {data: { newArtist } } = await createArtistFn( {bio, socialMedia: {email, instagram, facebook, other}, name, profession,  coverImage: img})
             setUserArtistFn(newArtist)
             history.push("/artist")
         };

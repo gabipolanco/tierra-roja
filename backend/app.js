@@ -72,6 +72,9 @@ app.use('/streaming', streamingRoutes);
 
 const artistRoutes = require('./routes/artist');
 app.use('/artist', artistRoutes);
+
+const courseRoutes = require('./routes/course');
+app.use('/course', courseRoutes);
       
 
 module.exports = app;

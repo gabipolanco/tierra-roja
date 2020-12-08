@@ -30,6 +30,10 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Streaming"
   }],
+  courses: [{
+    type: Schema.Types.ObjectId,
+    ref: "Course"
+  }],
   googleId: String,
   facebookId: String
 }, {

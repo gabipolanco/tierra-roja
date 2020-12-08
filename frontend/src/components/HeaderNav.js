@@ -93,7 +93,7 @@ const HeaderNav = () => {
     return (
         <HeaderNavStyled>
             <div>
-                <h2><Link to="/">Tierra Roja</Link></h2>
+                <h2><a href="/#cover">Tierra Roja</a></h2>
             </div>
             <div>
                 <Dropdown className="menu-movil" overlay={menu}>

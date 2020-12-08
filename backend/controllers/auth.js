@@ -53,7 +53,7 @@ exports.confirmSignup = async (req, res, next) => {
   if(!user) return res.status(404).json({message: "user not found"})
   if(id !== user._id.toString()) return res.status(400).json({message: "Confirm your email"})
   await User.findByIdAndUpdate(user._id, {confirmed: true}, {new: true})
-  res.redirect("http://localhost:3001")
+  res.redirect("http://localhost:3001/confirmed")
 }
 
 exports.editProcess = async (req, res) => {
@@ -80,7 +80,7 @@ exports.logoutProcess = (req, res) => {
 }
 
 exports.loggedinProcess = (req, res) => {
-    return res.status(200).json(req.session.user || null)
+    return res.status(200).json(req.user || null)
 }
 
 exports.googleInit = passport.authenticate('google', {
