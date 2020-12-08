@@ -6,8 +6,8 @@ let transporter = nodemailer.createTransport({
         pass: process.env.GMAIL_PASS
     }
 })
-exports.emailConfirmacion = (email, hashId) => {
-    const url = process.env.NODE_ENV === 'development' ? `http://localhost:3000/auth/${email}/${hashId}` : `https://tierra-roja.herokuapp.com//auth/${email}/${hashId}`
+exports.emailConfirmacion = (email, id) => {
+    const url = process.env.NODE_ENV === 'development' ? `http://localhost:3000/auth/${email}/${id}` : `https://tierra-roja.herokuapp.com//auth/${email}/${id}`
 
     return transporter.sendMail({
         from: 'mujeresdelbarro@gmail.com',

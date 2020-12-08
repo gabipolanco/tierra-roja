@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom'
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { Modal, Form, Input, Typography, Checkbox, message } from 'antd';
@@ -10,6 +11,7 @@ const LoginForm = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [error, setError] = useState(null)
   const [form] = Form.useForm();
+  let history = useHistory();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -40,11 +42,12 @@ const LoginForm = () => {
   };
   
   const Formul = () => {
-    const onFinish = async (values) => {
-      try {
-      const {data} = await loginFn(values)
+    const onFinish = async ({email, password}) => {
+        try {
+      const {data} = await loginFn({email, password})
       login(data.user)
       setIsModalVisible(false);
+      history.push("/")
     } catch(err) {
       console.log(err)
     }
@@ -113,9 +116,9 @@ const LoginForm = () => {
 
   return (
     <>
-      <p style={{cursor: "pointer"}} type="primary" onClick={showModal}>
+      <a style={{cursor: "pointer"}} type="primary" onClick={showModal}>
         Login
-      </p>
+      </a>
       <Modal
         title="Login"
         visible={isModalVisible}

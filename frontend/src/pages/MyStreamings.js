@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import { Card, Col, Row, Button, Modal, Form, Input, Select, InputNumber, Typography } from 'antd';
+import { Card, Col, Row, Button, Modal, Form, Input, Select, DatePicker, InputNumber, Typography } from 'antd';
 import { useContextInfo } from '../hooks/context'
 import { createWorkFn, getOneWorkFn, editWorkFn, deleteWorkFn } from '../services/works'
 import { createStreamingFn, getMyStreamingsFn, getOneStreamingFn, editStreamingFn, deleteStreamingFn } from '../services/streaming'
@@ -34,14 +34,15 @@ const MyStreamings = () => {
       };
 
         const onFinish = async (values) => {
-            let h = null
-            if(values.hours && values.minutes){
-                h = values.hours.toString() + ":" + values.minutes.toString() + "hs"
-            }
-            const {data: { newStreaming } } = await createStreamingFn({...values, hour: h})
-            setMyStreamingsFn()
-            setIsModalVisible(false)
-            form.resetFields()
+            console.log(values)
+            // let h = null
+            // if(values.hours && values.minutes){
+            //     h = values.hours.toString() + ":" + values.minutes.toString() + "hs"
+            // }
+            // const {data: { newStreaming } } = await createStreamingFn({...values, hour: h})
+            // setMyStreamingsFn()
+            // setIsModalVisible(false)
+            // form.resetFields()
         };
 
         const onFinish2 = async (values) => {
@@ -123,36 +124,12 @@ const MyStreamings = () => {
                         <Input.TextArea rows={6} />
                     </Form.Item>
 
-                    <Input.Group>
-                        <Row>
-                            <Col offset={8} span={8}>
-                                <Typography.Text>Hora de inicio:</Typography.Text>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col offset={2} span={9}>
-                            <Form.Item
-                                name="hours"
-                            >
-                                <InputNumber 
-                                min={0}
-                                max={23} />
-                            </Form.Item>
-                            </Col>
-                            <Col span={1}>
-                            <Typography.Text> : </Typography.Text>
-                            </Col>
-                            <Col span={9}>
-                            <Form.Item
-                                name="minutes"
-                                >
-                                <InputNumber 
-                                min={0}
-                                max={59} />
-                            </Form.Item>
-                            </Col>
-                        </Row>
-                    </Input.Group>
+                    <Form.Item
+                        label="Fecha y hora"
+                        name="date"
+                    >
+                    <DatePicker showTime />
+                    </Form.Item>
 
                     <Form.Item
                         label="Tipo de stream"

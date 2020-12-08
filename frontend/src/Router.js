@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import NotFound from './components/404/NotFound'
 import Home from './pages/Home'
+import Confirmed from './pages/Confirmed'
 import MyAlterEgo from './pages/MyAlterEgo'
 import EditPortfolio from './components/EditPortfolio'
 import Profile from './pages/Profile'
 import MyWorks from './pages/MyWorks'
+import Portfolios from './pages/Portfolios'
 import MyStreamings from './pages/MyStreamings'
 import Streaming from './pages/Streaming'
 import GlobalStyle from './components/GlobalStyle'
@@ -23,9 +25,11 @@ const RouterApp = () => {
             <NavBar />
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route path="/confirmed" component={Confirmed} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/edit-user" component={EditUser} />
                 <Route path="/myworks" component={MyWorks} />
+                <Route path="/portfolios" component={Portfolios} />
                 <Route path="/mystreamings" component={MyStreamings} />
                 <Route path="/streaming/:id" component={Streaming} />
                 <Route path="/artist" component={MyAlterEgo} />
