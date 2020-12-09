@@ -30,7 +30,7 @@ font-family: 'Bebas Neue', sans-serif;
 }
 & .names>div {
   height: 50px;
-  width: 1500px;
+  width: 1000px;
   position: absolute;
   top: 0;
   left: 0;
