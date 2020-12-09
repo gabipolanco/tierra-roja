@@ -26,6 +26,17 @@ exports.getArtist = async (req, res) => {
 
 }
 
+exports.getOneArtist = async (req, res) => {
+    const {id} = req.params
+    const artist = await Artist.findById(id).populate({path:'userId', populate: {path: 'artWork'}})
+    return res.status(200).json(artist)
+ }  
+
+ exports.getAllArtists = async (req, res) => {
+    const artists = await Artist.find()
+    return res.status(200).json(artists)
+ }
+
 exports.delteArtist = async (req, res) => {
     const artistId = req.params.id
     await Artist.findByIdAndDelete(artistId)

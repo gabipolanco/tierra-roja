@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 // Static files
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/build')));
 
 
 // default value for title local

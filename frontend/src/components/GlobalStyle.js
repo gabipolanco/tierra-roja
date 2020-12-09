@@ -299,18 +299,18 @@ ul {
   margin-top: 150px;
 }
 
-#aula {
+#escenario {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding-left: 100px;
 }
 
-#aula .content {
+#escenario .content {
   transform: rotate(180deg);
 }
 
-#aula .content h2 {
+#escenario .content h2 {
   font-size: 3rem;
 }
 
@@ -344,6 +344,7 @@ ul {
   margin: 30px;
   font-family: 'Bebas Neue', sans-serif;
 }
+
 `
  
 export default GlobalStyle;

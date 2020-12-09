@@ -12,4 +12,6 @@ const artistService = axios.create({
 export const createArtistFn = artistInfo => artistService.post('/create', artistInfo)
 export const editArtistFn = (id, artistInfo) => artistService.post(`/edit/${id}`, artistInfo)
 export const getArtistFn = () => artistService.get('/get')
+export const getOneArtistFn = (id) => artistService.get(`/getone/${id}`)
+export const getAllArtistFn = () => artistService.get('/getall')
 export const deleteArtistFn = (id) => artistService.get(`/delete/${id}`)

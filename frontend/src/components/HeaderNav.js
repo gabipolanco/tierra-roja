@@ -8,16 +8,6 @@ import { Menu, Dropdown } from 'antd';
 import { useContextInfo } from '../hooks/context'
 import { logoutFn } from '../services/auth'
 
-const menu = (
-    <Menu>
-      <Menu.Item>
-        <SignupForm />
-      </Menu.Item>
-      <Menu.Item>
-        <LoginForm />
-      </Menu.Item>
-    </Menu>
-  );
 
 
 const HeaderNavStyled = styled.div`
@@ -89,6 +79,30 @@ const HeaderNav = () => {
         history.push("/")
       }
 
+      const menu = (
+        <Menu>
+          {!user ? <> <Menu.Item>
+            <Link to="/store">Tienda</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <SignupForm />
+          </Menu.Item>
+          <Menu.Item>
+            <LoginForm />
+          </Menu.Item></>
+            : <>
+          <Menu.Item>
+            <Link to="/store">Tienda</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/profile">Perfil</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <p onClick={handleLogout} style={{cursor: "pointer"}}>Logout</p>
+          </Menu.Item></>}
+        </Menu>
+      );
+
     return (
         <HeaderNavStyled>
             <div>
@@ -101,6 +115,7 @@ const HeaderNav = () => {
                     </a>
                 </Dropdown>
                 <ul className="menuLarge">
+                    <li><Link to="/store">Tienda</Link></li>
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
                     <><li><Link to="/profile">Perfil</Link></li>

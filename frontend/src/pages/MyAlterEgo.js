@@ -46,7 +46,7 @@ const MyAlterEgo = () => {
                 <Portfolio />
             </Row> : <div>
             <Row style={{marginTop: "70px"}}>
-            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i>Perfil</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Perfil</Link>
 
                 <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
                 <Form

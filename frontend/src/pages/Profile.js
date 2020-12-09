@@ -37,7 +37,7 @@ const Profile = () => {
             <Row gutter={[16, 32]}>
                 <Col xs={{ span: 20, offset: 2 }} lg={{ span: 4, offset: 2 }}>
                     <div style={{width: "100px", height: "100px", margin: "0 auto", borderRadius: "50%", overflow: "hidden"}}>
-                        <img style={{width: "100%"}} src={user.image} alt=""/>
+                        <img style={{height: "100%", objectFit: "cover"}} src={user.image} alt=""/>
                     </div>
                     
                     <form>  
@@ -46,6 +46,26 @@ const Profile = () => {
                     </form>
                     
                 </Col>
+                <Col offset={2} span={20}>
+                {user.role === "artist" ? 
+                    <div>
+                        <Link style={{margin: "0 30px"}} to="/myworks"><Button>Mis trabajos</Button></Link>&nbsp;&nbsp;
+                        <Link style={{margin: "0 30px"}} to="/artist"><Button>Portfolio</Button></Link>&nbsp;&nbsp;
+                        <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>&nbsp;&nbsp;
+                        <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
+          
+                     </div> 
+                     : <div>
+                 {user.role === "student" ? 
+                    <div>
+                        <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>
+                        <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
+                    </div> 
+                    : <div>
+                        
+                    </div>}
+            </div>}
+                             </Col>
                 <Col offset={2} span={20}>    
                     <Link style={{position: "absolute", right: "0", color: "gray"}} to="/edit-user"><i class="far fa-edit"></i></Link>
                     <Descriptions column={{ xs: 1, sm: 2, lg: 4}} title="Información personal" layout="vertical">
@@ -56,35 +76,6 @@ const Profile = () => {
                     </Descriptions>
                 </Col>
             </Row>
-            {user.role === "artist" ? 
-            <div>
-                <Row>
-                    <Col offset={2} span={20}>
-                        <Link to="/myworks"><Button>Mis trabajos</Button></Link>
-                        <br/><br/>
-                        <Link to="/artist"><Button>Portfolio</Button></Link>
-                        <br/><br/>
-                        <Link to="/mystreamings"><Button>Mis streamings</Button></Link>
-                        <br/><br/>
-                        <Link to="/mycourses"><Button>Dashboard</Button></Link>
-                    </Col>
-                </Row>
-            </div> 
-            : <div>
-                {user.role === "student" ? 
-                    <div>
-                        <Row>
-                            <Col offset={2} span={20}>
-                                <Link to="/mystreamings"><Button>Mis streamings</Button></Link>
-                                <br/><br/>
-                                <Link to="/mycourses"><Button>Dashboard</Button></Link>
-                            </Col>
-                        </Row>
-                    </div> 
-                    : <div>
-                        
-                    </div>}
-            </div>}
         </div> )
      : (<Redirect to='/' />)
 }
