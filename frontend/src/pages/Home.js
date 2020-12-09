@@ -85,10 +85,10 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div id="aula" className="slide five">
+                    <div id="escenario" className="slide five">
                         <div className="content">
-                            <h2>Aula</h2>
-                            <Link to="/aula"><button className="cta btn">Acceder</button></Link>
+                            <h2>Escenario</h2>
+                            <Link to="/streamings"><button className="cta btn">Acceder</button></Link>
                         </div>
                     </div>
                     

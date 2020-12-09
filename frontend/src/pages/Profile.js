@@ -52,14 +52,14 @@ const Profile = () => {
                         <Link style={{margin: "0 30px"}} to="/myworks"><Button>Mis trabajos</Button></Link>&nbsp;&nbsp;
                         <Link style={{margin: "0 30px"}} to="/artist"><Button>Portfolio</Button></Link>&nbsp;&nbsp;
                         <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>&nbsp;&nbsp;
-                        <Link style={{margin: "0 30px"}} to="/mycourses"><Button>Dashboard</Button></Link>
+                        <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
           
                      </div> 
                      : <div>
                  {user.role === "student" ? 
                     <div>
                         <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>
-                        <Link style={{margin: "0 30px"}} to="/mycourses"><Button>Dashboard</Button></Link>
+                        <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
                     </div> 
                     : <div>
                         

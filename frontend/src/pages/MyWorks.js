@@ -137,12 +137,12 @@ const MyWorks = () => {
                     <input type="file" style={{margin: "40px auto"}} onChange={handleUploadFile} name="media" />
 
                     <Form.Item
-                        label="Tipo de trabajo"
+                        label="A la venta"
                         name="workType"
                     >
-                        <Select placeholder="Tipo de trabajo" >
-                            <Select.Option value="art">Obra de arte</Select.Option>
-                            <Select.Option value="craft">Artesanía</Select.Option>
+                        <Select placeholder="Elegir" >
+                            <Select.Option value="art">No</Select.Option>
+                            <Select.Option value="craft">Sí</Select.Option>
                         </Select>
                     </Form.Item>
 
@@ -150,7 +150,7 @@ const MyWorks = () => {
                         label="Precio (si está en venta)"
                         name="price"
                     >
-                        <Input />
+                        <Input addonBefore="ARS$"/>
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
@@ -199,13 +199,13 @@ const MyWorks = () => {
                     <input type="file" style={{margin: "40px auto"}} onChange={handleUploadFile} name="media" />
 
                     <Form.Item
-                        label="Tipo de trabajo"
+                        label="A la venta"
                         name="workType"
                         initialValue={workToBeEdited.workType}
                     >
-                        <Select placeholder="Tipo de trabajo" >
-                            <Select.Option value="art">Obra de arte</Select.Option>
-                            <Select.Option value="craft">Artesanía</Select.Option>
+                        <Select placeholder="Elegir" >
+                            <Select.Option value="art">No</Select.Option>
+                            <Select.Option value="craft">Sí</Select.Option>
                         </Select>
                     </Form.Item>
 
@@ -214,7 +214,7 @@ const MyWorks = () => {
                         name="price"
                         initialValue={workToBeEdited.price}
                     >
-                        <Input />
+                        <Input addonBefore="ARS$"/>
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
@@ -254,7 +254,7 @@ const MyWorks = () => {
                     } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "40px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
                     <Card hoverable cover={<img style={{objectFit: "cover", height: "250px"}} src={work.media} alt={work.title} />} title={work.title} bordered={false}>
                     <Typography.Text>{work.description}</Typography.Text><br />
-                    <Typography.Text>{work.price}</Typography.Text><br />
+                    {work.price && <> <Typography.Text>$ {work.price}</Typography.Text><br /></>}
                     {artist && <Typography.Text>{artist.name}</Typography.Text>}
                     </Card>
                 </Col>))}

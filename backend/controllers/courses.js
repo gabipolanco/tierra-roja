@@ -4,18 +4,18 @@ const Streaming = require('../models/Streaming')
 const mongoose = require('mongoose');
 
 exports.createCourse = async (req, res) => {
-    const { name, description, date, hour } = req.body
+    const { name, description, date } = req.body
     const userId = req.user.id
-    const newCourse = await Course.create({name, description, date, hour})
+    const newCourse = await Course.create({name, description, date, userId})
     await User.findByIdAndUpdate(userId, { $push : { courses: newCourse._id } }, {new: true})
     res.status(201).json({message: "Course created", newCourse})
 }
 
 exports.editCourse = async (req, res) => {
     const courseId = req.params.id
-    const { name, description, date, hour } = req.body
+    const { name, description, date } = req.body
     const userId = req.user.id
-    const editedCourse = await Course.findByIdAndUpdate(courseId, { name, description, date, hour}, {new: true})
+    const editedCourse = await Course.findByIdAndUpdate(courseId, { name, description, date}, {new: true})
     res.status(200).json({message: "Course edited", editedCourse})
 }
 

@@ -12,7 +12,7 @@ const {
 router.post('/create', isAuth, checkRole("artist"), catchErrs(createStreaming))
 router.post('/edit/:id', isAuth, catchErrs(editStreaming))
 router.get('/getmystreamings', isAuth, catchErrs(getMyStreamings))
-router.get('/get/:id', isAuth, catchErrs(getOneStreaming))
+router.get('/get/:id', catchErrs(getOneStreaming))
 router.get('/delete/:id', isAuth, catchErrs(delteStreaming))
 
 module.exports = router;

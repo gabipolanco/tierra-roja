@@ -162,7 +162,7 @@ overflow: hidden;
 & .border {
     padding: 60px;
     max-height: 480px;
-    box-shadow: 1px 1px 6px black;
+    box-shadow: 0 0 3px black;
 }
 & .img-container {
     position: relative;
@@ -215,8 +215,7 @@ const Portfolio = () => {
     const [arte, setArte] = useState(null)
     const [streamings, setStreamings] = useState(null)
     const [workToShow, setWorkToShow] = useState(null)
-
-    let i = 0
+    const [i, setI] = useState(0)
 
     useEffect(() => {
         function setWorks() {
@@ -245,16 +244,18 @@ const Portfolio = () => {
 
     function workLeft() {
         if(i > 0) {
-            i -=1
-            setWorkToShow(works[i-1])
+            setI(i-1)
+            setWorkToShow(works[i])
         }
+        console.log(i)
     }
 
     function workRight() {
-        if(i < works.length) {
-            i +=1
-            setWorkToShow(works[i+1])
+        if(i < works.length - 1) {
+            setI(i+1)
+            setWorkToShow(works[i])
         }
+        console.log(i)
     }
 
     return artist && (
@@ -315,7 +316,7 @@ const Portfolio = () => {
                 <div>
                     {workToShow && 
                         <div className="art-container">
-                        <i onclick={workLeft} class="fas fa-chevron-left arrow-left"></i>
+                        <i onClick={workLeft} class="fas fa-chevron-left arrow-left"></i>
                             <div className="border">
                             <div className="img-container">
                                 <img style={{objectFit: "scale-down"}} src={workToShow.media} alt={workToShow.title} />
@@ -326,7 +327,7 @@ const Portfolio = () => {
                                 <Typography.Text>{workToShow.price}</Typography.Text><br />
                                 {artist && <Typography.Text>{artist.name}</Typography.Text>}
                             </div>
-                        <i onclick={workRight} class="fas fa-chevron-right arrow-right"></i>
+                        <i onClick={workRight} class="fas fa-chevron-right arrow-right"></i>
                         </div>} 
                 </div>
             </div>}
