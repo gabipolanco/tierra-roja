@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { useContextInfo } from '../hooks/context'
-import { Card, Col, Row, Typography } from 'antd';
+import { Card, Col, Row, Typography, Carousel } from 'antd';
 import styled from 'styled-components'
 
 const PortfolioStyled = styled.div`
@@ -61,10 +61,12 @@ overflow: hidden;
         space-between: center;
         align-items: center;
         margin-top: 60%;
-        margin-right: 30%;
+        margin-right: 20%;
         transform: rotate(30deg);
     }
     &>div>div.left>div h2, h3 {
+        display: block;
+        max-width: 300px;
         color: white;
         font-weight: bold;
         text-transform: uppercase;
@@ -151,8 +153,53 @@ overflow: hidden;
 &>div.bio>img {
     height: 50%;
     width: 30%;
-    object-fit: cover;
+    object-fit: scale-down;
     margin: 70px 40px 0 0;
+}
+&>div.arte .art-container {
+    width: 100%;
+}
+& .border {
+    padding: 60px;
+    max-height: 480px;
+    box-shadow: 1px 1px 6px black;
+}
+& .img-container {
+    position: relative;
+    max-height: 360px;
+    overflow: hidden;
+}
+& .arrow-left {
+    position: absolute;
+    top: 40vh;
+    left: 30px;
+    font-size: 30px;
+    color: #f0f0f0;
+    cursor: pointer;
+}
+& .arrow-right {
+    position: absolute;
+    top: 40vh;
+    right: 30px;
+    font-size: 30px;
+    color: #f0f0f0;
+    cursor: pointer;
+}
+&>div.arte .art-container>div img {
+    transition: all .6s ease;
+    width: 100%;
+    height: auto;
+}
+&>div.arte .art-container>div img:hover {
+    transform: scale(1.05);
+}
+&>div.arte .art-container .info {
+    text-align: right;
+    padding: 30px;
+    line-height: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
 }
 &>div .close{
     position: fixed;
@@ -167,6 +214,16 @@ const Portfolio = () => {
     const [bio, setBio] = useState(null)
     const [arte, setArte] = useState(null)
     const [streamings, setStreamings] = useState(null)
+    const [workToShow, setWorkToShow] = useState(null)
+
+    let i = 0
+
+    useEffect(() => {
+        function setWorks() {
+            if(works) setWorkToShow(works[i])
+        }
+        setWorks()
+    }, [works, i])
 
     function showBio() {
         setBio(true)
@@ -184,6 +241,20 @@ const Portfolio = () => {
         setBio(null)
         setArte(null)
         setStreamings(null)
+    }
+
+    function workLeft() {
+        if(i > 0) {
+            i -=1
+            setWorkToShow(works[i-1])
+        }
+    }
+
+    function workRight() {
+        if(i < works.length) {
+            i +=1
+            setWorkToShow(works[i+1])
+        }
     }
 
     return artist && (
@@ -242,17 +313,21 @@ const Portfolio = () => {
             {arte && <div className="arte">
                 <div onClick={close} className="close">X</div>
                 <div>
-                    <h2>Arte</h2>
-                    {works ? 
-                        <Row gutter={[16, 16]}>
-                        {works.map(work => (<Link to="/myworks"><Col xs={{offset: 6,span: 12}}>
-                            <Card hoverable cover={<img style={{objectFit: "cover", height: "250px", width: "100%"}} src={work.media} alt={work.title} />} title={work.title} bordered={false}>
-                            <Typography.Text>{work.description}</Typography.Text><br />
-                            <Typography.Text>{work.price}</Typography.Text><br />
-                            {artist && <Typography.Text>{artist.name}</Typography.Text>}
-                            </Card>
-                        </Col></Link>))}
-                    </Row> : <div></div>}
+                    {workToShow && 
+                        <div className="art-container">
+                        <i onclick={workLeft} class="fas fa-chevron-left arrow-left"></i>
+                            <div className="border">
+                            <div className="img-container">
+                                <img style={{objectFit: "scale-down"}} src={workToShow.media} alt={workToShow.title} />
+                            </div>
+                            </div>
+                            <div className="info">
+                                <Typography.Text>{workToShow.description}</Typography.Text><br />
+                                <Typography.Text>{workToShow.price}</Typography.Text><br />
+                                {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                            </div>
+                        <i onclick={workRight} class="fas fa-chevron-right arrow-right"></i>
+                        </div>} 
                 </div>
             </div>}
 
@@ -265,9 +340,9 @@ const Portfolio = () => {
                         {myStreamings.map(stream => (
                             <Link to="/mystreamings"><Col xs={{offset: 2,span: 20}}>
                             <Card hoverable cover={<video controls></video>} title={stream.title} bordered={false}>
-                            <Typography.Text>{stream.description}</Typography.Text><br />
-                            <Typography.Text>{stream.hour}</Typography.Text><br />
-                            {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                            <p>{stream.description}</p><br />
+                            <p>{stream.hour}</p><br />
+                            {artist && <p>{artist.name}</p>}
                             </Card>
                         </Col></Link>))}
                     </Row> : <div></div>}

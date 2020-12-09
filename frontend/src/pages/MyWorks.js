@@ -117,7 +117,7 @@ const MyWorks = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px"}}
+                    style={{margin: "0 80px", fontFamily: "Roboto"}}
                     >
                      <Form.Item
                         label="Título de la obra/producto"
@@ -177,7 +177,7 @@ const MyWorks = () => {
                     onFinish={onFinish2}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px"}}
+                    style={{margin: "0 80px", fontFamily: "Roboto"}}
                     >
                      <Form.Item
                         label="Título de la obra/producto"
@@ -237,7 +237,7 @@ const MyWorks = () => {
                 okType="danger primary"
                 
             >
-            <Typography.Title type="danger" level={5}>Estás segura de borrar este trabajo?</Typography.Title>
+            <Typography.Title style={{fontFamily: "Roboto"}} type="danger" level={5}>Estás segura de borrar este trabajo?</Typography.Title>
 
             </Modal>
 

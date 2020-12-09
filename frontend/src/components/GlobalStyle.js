@@ -344,6 +344,7 @@ ul {
   margin: 30px;
   font-family: 'Bebas Neue', sans-serif;
 }
+
 `
  
 export default GlobalStyle;
