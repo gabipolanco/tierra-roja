@@ -57,13 +57,12 @@ exports.confirmSignup = async (req, res, next) => {
 }
 
 exports.editProcess = async (req, res) => {
+    let pass
     const id = req.params.id
     let { password } = await User.findById(id)
     const {username, email, role, confirm } = req.body
-    if (confirm !== "undefined") {
-      password = confirm
-    }
-    const editedUser = await User.findByIdAndUpdate(id, { username, email, password, role }, {new: true})
+    if (!confirm) pass = password
+    const editedUser = await User.findByIdAndUpdate(id, { username, email, password: pass, role }, {new: true})
     return res.status(202).json({message: "User updated", editedUser})
 }
 

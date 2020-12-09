@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { HashLink } from 'react-router-hash-link'
 
 const NavBarSyled = styled.div `
 
@@ -42,11 +43,11 @@ const NavBar = () => {
     return (
         <NavBarSyled className="sidebarmenu-container">
                 <ul className="menu">
-                    <li><a href="/#about">NOSOTRAS</a></li>
-                    <li><a href="/#portfolios">PORTFOLIOS </a></li>
-                    <li><a href="/#galeria">GALERIA</a></li>
-                    <li><a href="/#escenario">ESCENARIO</a></li>
-                    <li><a href="/#contacto">CONTACTO </a></li>
+                    <li><HashLink to="/#about">NOSOTRAS</HashLink></li>
+                    <li><HashLink to="/#portfolios">PORTFOLIOS </HashLink></li>
+                    <li><HashLink to="/#galeria">GALERIA</HashLink></li>
+                    <li><HashLink to="/#escenario">ESCENARIO</HashLink></li>
+                    <li><HashLink to="/#contacto">CONTACTO </HashLink></li>
                 </ul>
             </NavBarSyled>
     )

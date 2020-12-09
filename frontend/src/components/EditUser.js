@@ -18,9 +18,16 @@ const EditUser = () => {
 
         const onFinish = async (values) => {
           const id = user._id
-          const {data: { editedUser } } = await editFn(id, values)
-          login(editedUser)
-          history.push("/profile")
+          let confirm 
+          if (!values.confirm) {
+           const {data: { editedUser } } = await editFn(id, {email: values.email, role: values.role, username: values.username})
+            login(editedUser)
+            history.push("/profile")
+            }
+          console.log("algo")
+        //   const {data: { editedUser } } = await editFn(id, values)
+        //   login(editedUser)
+        //   history.push("/profile")
         };
       
         const onFinishFailed = errorInfo => {

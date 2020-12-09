@@ -27,12 +27,19 @@ import { getMyStreamingsFn } from '../services/streaming'
     useEffect(() => {
       async function getArtist() {
         const { data } = await getArtistFn()
-        const {data : data2} = await getAllArtistFn()
         setUserArtistFn(data);
-        setAllArtists(data2)
       }
   
       getArtist()
+    }, [])
+
+    useEffect(() => {
+      async function getAllArtists() {
+        const {data} = await getAllArtistFn()
+        setAllArtists(data)
+      }
+  
+      getAllArtists()
     }, [])
 
     useEffect(() => {
