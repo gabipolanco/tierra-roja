@@ -33,20 +33,19 @@ const MyStreamings = () => {
       };
 
         const onFinish = async (values) => {
-            console.log(values)
-            // let h = null
-            // if(values.hours && values.minutes){
-            //     h = values.hours.toString() + ":" + values.minutes.toString() + "hs"
-            // }
-            // const {data: { newStreaming } } = await createStreamingFn({...values, hour: h})
-            // setMyStreamingsFn()
-            // setIsModalVisible(false)
-            // form.resetFields()
+            let hour
+            values.date ? hour = values.date.toDate() : hour = new Date()
+            const {data: { newStreaming } } = await createStreamingFn({...values, hour})
+            setMyStreamingsFn()
+            setIsModalVisible(false)
+            form.resetFields()
         };
 
         const onFinish2 = async (values) => {
+            let hour
+            values.date ? hour = values.date.toDate() : hour = streamingToBeEdited.hour
             const id = streamingToBeEdited._id
-            await editStreamingFn(id, {...values})
+            await editStreamingFn(id, {...values, hour})
             setMyStreamingsFn()
             setIsModal2Visible(false)
             setStreamingToBeEdited(null)
@@ -181,6 +180,13 @@ const MyStreamings = () => {
                         initialValue={streamingToBeEdited.description}
                     >
                         <Input.TextArea rows={6} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Fecha y hora"
+                        name="date"
+                    >
+                    <DatePicker showTime />
                     </Form.Item>
 
                     <Form.Item

@@ -1,33 +1,58 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {Link} from 'react-router-dom'
 import { getMyCartFn, removeFromCartFn } from '../services/works'
+import { getCartFn } from '../services/cart'
 import { Row, Col, Button, Typography, Divider } from 'antd'
 
 const Cart = () => {
     const [products, setProducts] = useState(null)
+    const [cart, setCart] = useState(null)
     const [total, setTotal] = useState(0)
+    const [change, setChange] = useState(false)
     let count = 0
+
+    const paymentContainereRef = useRef()
 
     useEffect(() => {
         async function getMyProducts() {
             const { data } = await getMyCartFn()
-            setProducts(data)
+            setProducts([...data])
         }
         getMyProducts()
-    }, [])
+    }, [change])
 
     useEffect(() => {
         function getTotal() {
-           products && products.map(p => count += p.price)
-           setTotal(count)
+            let prices = []
+           if(products) {
+              products.map(p => prices.push(parseInt(p.price)))
+              count = prices.length ? prices.reduce((acc, curr) => acc + curr) : 0  
+            }
+            setTotal(count)
         }
         getTotal()
-        console.log(total)
-    }, [])
+        }, [products])
 
     function removeProduct(id) {
         removeFromCartFn(id)
+        setChange(!change)
     }
+
+    useEffect(() => {
+         async function getCartInfo() {
+          const { data: cart } = await getCartFn({total})
+    
+          const script = document.createElement("script")    
+          script.src =
+          "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+          script.setAttribute("data-preference-id", cart.prefId)
+
+          paymentContainereRef.current.appendChild(script)
+    
+          setCart(cart)
+        }
+        getCartInfo()
+      }, [])
 
     return (
         <div className="page">
@@ -46,12 +71,28 @@ const Cart = () => {
                 <Col span={5}>
                     <Typography.Text>{p.title}</Typography.Text>
                 </Col>
-                <Col span={10}>
+                <Col span={2}>
+                    <img src={p.media} height="40" />
+                </Col>
+                <Col span={8}>
                 </Col>
                 <Col span={5}>
                     <Typography.Text>$ {p.price}</Typography.Text>
                 </Col>
             </Row>))}
+
+            <Divider />
+
+            <Row style={{marginTop: "60px"}}>
+                <Col offset={17} span={4}>
+                    <Typography.Title level={5}>Total: $ {total}</Typography.Title>
+                </Col>
+            </Row>
+            <Row style={{marginTop: "60px"}}>
+                <Col offset={17} span={4}>
+                <div ref={paymentContainereRef}></div>
+                </Col>
+            </Row>
         </div>
     )
 }

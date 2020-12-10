@@ -1,24 +1,46 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 import { getAllWorksFn, addToCartFn } from '../services/works'
+import { getAllCoursesFn } from '../services/courses'
 import {Row, Col, Typography, Divider, Button, Input, Card } from 'antd'
 import { AudioOutlined } from '@ant-design/icons';
 const { Search } = Input;
 
 
 const Store = () => {
-    const [ products, setProducts ] = useState()
+    const [ products, setProducts ] = useState(null)
+    const [ courses, setCourses ] = useState(null)
+    const [ search, setSearch ] = useState('')
 
     useEffect(()=> {
         async function getProducts() {
             const { data } = await getAllWorksFn()
-            setProducts(data)
+            if(search === '') {
+            setProducts([...data])
+        } else {
+            const newArr = [...data].filter(p => p.title.toUpperCase().includes(search.toUpperCase()))
+                    setProducts(newArr)
+        }
         }
         getProducts()
-    }, [])
+    }, [search])
 
-    function onSearch() {
+    useEffect(()=> {
+        async function getCourses() {
+            const { data } = await getAllCoursesFn()
+            if(search === '') {
+            setCourses([...data])
+        } else {
+            const newArr = [...data].filter(c => c.name.toUpperCase().includes(search.toUpperCase()))
+                    setCourses(newArr)
+        }
+        }
+        getCourses()
+    }, [search])
 
+    function onSearch(values) {
+        setSearch(values)
     }
 
     function addToCart(id) {
@@ -31,10 +53,10 @@ const Store = () => {
             <Row style={{height: "calc(100vh - 100px)"}}>
                 <Col style={{marginTop: "10%",height: "150px"}} offset={1} span={3}>
                     <Row style={{height: "100%"}} type="flex" align="middle">
-                        <Col style={{position: "fixed", top: "15vh", left: "70px"}} span={24}><Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} /></Col>
+                        <Col style={{position: "fixed", top: "15vh", left: "70px"}} span={24}><Search placeholder="Buscar" onSearch={onSearch} style={{ width: "13vw" }} /></Col>
                         <Col style={{position: "fixed"}} span={24}><Link to="/cart" style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Carrito</Link></Col>
-                        <Col style={{position: "fixed", top: "45vh"}} span={24}><Link style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Productos</Link></Col>
-                        <Col style={{position: "fixed", top: "55vh"}} span={24}><Link style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Servicios</Link></Col>
+                        <Col style={{position: "fixed", top: "45vh"}} span={24}><HashLink to="/store#productos" style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Productos</HashLink></Col>
+                        <Col style={{position: "fixed", top: "55vh"}} span={24}><HashLink to="/store#cursos" style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Servicios</HashLink></Col>
                     </Row>
                 </Col>
                 <Col span={20}>
@@ -46,7 +68,7 @@ const Store = () => {
                     
                     <Row style={{backgroundColor: "#e8eaed", minHeight: "100vh", zIndex: "10"}}>
                         <Col span={24}>
-                            <Row style={{paddingTop: "30px"}}>
+                            <Row id="productos" style={{paddingTop: "30px"}}>
                                 <Col span={24}>
                                     <Typography.Title level={4}>Piezas artisticas</Typography.Title>
                                 </Col>
@@ -68,16 +90,29 @@ const Store = () => {
                                 </Col>))}
                             </Row>
 
-                            <Row>
+                            <Row id="cursos">
                                 <Col span={24}>
                                     <Typography.Title level={4}>Cursos y talleres</Typography.Title>
                                 </Col>
                             </Row>
                             <Divider />
-                            <Row>
-                                <Col>
-
+                            <Row style={{marginBottom: "40px"}}>
+                                {courses && courses.map(c => (
+                                <Col offset={1} span={22} style={{backgroundColor: "white", marginTop: "40px", padding: "20px"}}>
+                                    <Row>
+                                        <Col span={6}>
+                                            <Typography.Title level={4}>{c.name}</Typography.Title><br />
+                                            <Typography.Text>{c.userId && c.userId.username}</Typography.Text><br />
+                                        </Col>
+                                        <Col span={6}></Col>
+                                        <Col span={12}>
+                                            <Typography.Text>{c.description}</Typography.Text><br/>
+                                            <Typography.Text>Fecha de inicio: {c.date && c.date[0]}</Typography.Text><br/>
+                                            <Typography.Text>{c.price && c.price}</Typography.Text><Button style={{marginLeft: "30px"}}>Inscribirse</Button>
+                                        </Col>
+                                    </Row>
                                 </Col>
+                                ))}
                             </Row>
                         </Col>
                     </Row>

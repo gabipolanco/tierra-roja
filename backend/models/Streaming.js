@@ -4,7 +4,7 @@ const Schema   = mongoose.Schema;
 const streamingSchema = new Schema({
   title: String,
   description: String,
-  hour: String,
+  hour: Date,
   streamKey: String,
   streamId: String,
   playbackId: String,

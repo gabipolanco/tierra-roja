@@ -4,7 +4,7 @@ import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
 import LoginForm from './LoginForm'
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Badge } from 'antd';
 import { useContextInfo } from '../hooks/context'
 import { logoutFn } from '../services/auth'
 
@@ -95,6 +95,9 @@ const HeaderNav = () => {
             <Link to="/store">Tienda</Link>
           </Menu.Item>
           <Menu.Item>
+            <Link to="/cart">Carrito</Link>
+          </Menu.Item>
+          <Menu.Item>
             <Link to="/profile">Perfil</Link>
           </Menu.Item>
           <Menu.Item>
@@ -102,6 +105,14 @@ const HeaderNav = () => {
           </Menu.Item></>}
         </Menu>
       );
+
+      const menu2 = (
+          <Menu style={{width: "100px", textAlign: "center"}}>
+              <Menu.Item>
+                <p onClick={handleLogout} style={{cursor: "pointer"}}>Logout</p>
+              </Menu.Item>
+          </Menu>
+      )
 
     return (
         <HeaderNavStyled>
@@ -118,8 +129,12 @@ const HeaderNav = () => {
                     <li><Link to="/store">Tienda</Link></li>
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
-                    <><li><Link to="/profile">Perfil</Link></li>
-                    <li><p onClick={handleLogout} style={{cursor: "pointer"}}>Logout</p></li>
+                    <><li>
+                        <Dropdown overlay={menu2}>
+                            <Link to="/profile">Perfil</Link>
+                        </Dropdown>
+                    </li>
+                    <li><Link to="/cart"><i class="fas fa-shopping-cart"></i></Link></li>
                     </>}
                 </ul>
             </div>

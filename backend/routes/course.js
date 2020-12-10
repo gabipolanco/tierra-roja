@@ -16,7 +16,7 @@ const {
 router.post('/create', isAuth, checkRole("artist"), catchErrs(createCourse))
 router.post('/edit/:id', isAuth, catchErrs(editCourse))
 router.get('/getmycourses', isAuth, catchErrs(getMyCourses))
-router.get('/getallcourses', isAuth, catchErrs(getAllCourses))
+router.get('/getallcourses', catchErrs(getAllCourses))
 router.get('/get/:id', isAuth, catchErrs(getOneCourse))
 router.get('/delete/:id', isAuth, catchErrs(deleteCourse))
 

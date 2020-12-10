@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import { getOneStreamingFn } from '../services/streaming'
 import { Row, Col, Skeleton, Typography } from 'antd'
+import ReactHlsPlayer from 'react-hls-player'
 
 const Streaming = ({match: {params: {id}}}) => {
     const [streaming, setStreaming] = useState(null)
@@ -25,7 +26,13 @@ const Streaming = ({match: {params: {id}}}) => {
             <Row>
                     
                 <Col offset={2} span={20}>
-                    <video width="1000" height="600" controls></video>
+                <ReactHlsPlayer
+                    url={`https://stream.mux.com/${streaming.playbackId}.m3u8`}
+                    autoplay={true}
+                    controls={true}
+                    width="100%"
+                    height="auto"
+                />
                 </Col>
             </Row>
         </div>

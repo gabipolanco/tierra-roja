@@ -6,6 +6,10 @@ const courseSchema = new Schema({
   description: String,
   date: [Date],
   hour: String,
+  price: {
+    type: String,
+    default: 'gratuito'
+  },
   classes: [{
     _id: Schema.Types.ObjectId,
     name: String,
