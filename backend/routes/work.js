@@ -15,7 +15,7 @@ const {
 
 router.post('/create', isAuth, checkRole("artist"), catchErrs(createWork))
 router.post('/edit/:id', isAuth, checkRole("artist"), catchErrs(editWork))
-router.get('/get', catchErrs(getAllMyWorks))
+router.get('/getmine', catchErrs(getAllMyWorks))
 router.get('/getall', catchErrs(getAllWorks))
 router.get('/get/:workId', catchErrs(getOneWork))
 router.get('/delete/:id', isAuth, checkRole("artist"), catchErrs(delteWork))

@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import {Link} from 'react-router-dom'
 import { getMyCartFn, removeFromCartFn } from '../services/works'
 import { getCartFn } from '../services/cart'
+import { useContextInfo } from '../hooks/context'
 import { Row, Col, Button, Typography, Divider } from 'antd'
 
 const Cart = () => {
     const [products, setProducts] = useState(null)
-    const [cart, setCart] = useState(null)
+    const [cartToPay, setCartToPay] = useState(null)
+    const { cart, setCartFn } = useContextInfo()
     const [total, setTotal] = useState(0)
     const [change, setChange] = useState(false)
     let count = 0
@@ -14,12 +16,11 @@ const Cart = () => {
     const paymentContainereRef = useRef()
 
     useEffect(() => {
-        async function getMyProducts() {
-            const { data } = await getMyCartFn()
-            setProducts([...data])
+        function getMyProducts() {
+            setProducts(cart)
         }
         getMyProducts()
-    }, [change])
+    }, [cart])
 
     useEffect(() => {
         function getTotal() {
@@ -36,20 +37,21 @@ const Cart = () => {
     function removeProduct(id) {
         removeFromCartFn(id)
         setChange(!change)
+        setCartFn(null)
     }
 
     useEffect(() => {
          async function getCartInfo() {
-          const { data: cart } = await getCartFn({total})
+          const { data } = await getCartFn({total})
     
           const script = document.createElement("script")    
           script.src =
           "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-          script.setAttribute("data-preference-id", cart.prefId)
+          script.setAttribute("data-preference-id", data.prefId)
 
           paymentContainereRef.current.appendChild(script)
     
-          setCart(cart)
+          setCartToPay(data)
         }
         getCartInfo()
       }, [])

@@ -92,7 +92,7 @@ const MyStreamings = () => {
             <Button onClick={showModal}>Agregar un streaming</Button>
 
             <Modal
-                style={{ top: 20 }}
+                style={{ top: 20, fontFamily: "'Roboto', sans-serif" }}
                 title="Agregar streaming"
                 visible={isModalVisible}
                 onCancel={handleCancel}
@@ -150,7 +150,7 @@ const MyStreamings = () => {
             </Modal>
 
             <Modal
-                style={{ top: 20 }}
+                style={{ top: 20, fontFamily: "'Roboto', sans-serif" }}
                 title="Editar streaming"
                 visible={isModal2Visible}
                 onCancel={handleCancel}
@@ -210,7 +210,7 @@ const MyStreamings = () => {
             </Modal>
 
             <Modal
-                style={{ top: 20 }}
+                style={{ top: 20, fontFamily: "'Roboto', sans-serif" }}
                 title="Borrar streaming"
                 visible={isModal3Visible}
                 onCancel={handleCancel}

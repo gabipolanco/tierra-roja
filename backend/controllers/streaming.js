@@ -38,6 +38,11 @@ exports.getOneStreaming = async (req, res) => {
     res.status(200).json(oneStreaming)
 }
 
+exports.getAllStreamings = async (req, res) => {
+    const streamings = await Streaming.find()
+    res.status(200).json(streamings)
+}
+
 exports.delteStreaming = async (req, res) => {
     const userId = req.user.id
     const streamingId = req.params.id

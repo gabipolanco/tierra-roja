@@ -11,7 +11,7 @@ const workService = axios.create({
 
 export const createWorkFn = workInfo => workService.post('/create', workInfo)
 export const editWorkFn = (id, workInfo) => workService.post(`/edit/${id}`, workInfo)
-export const getWorksFn = () => workService.get('/get')
+export const getWorksFn = () => workService.get('/getmine')
 export const getAllWorksFn = () => workService.get('/getall')
 export const getOneWorkFn = (workId) => workService.get(`/get/${workId}`)
 export const deleteWorkFn = (id) => workService.get(`/delete/${id}`)

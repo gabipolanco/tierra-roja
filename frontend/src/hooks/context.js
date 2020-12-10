@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext, useEffect} from 'react'
   
 import { loggedFn } from '../services/auth'
 import { getArtistFn, getAllArtistFn } from '../services/artist'
-import { getWorksFn } from '../services/works'
+import { getWorksFn, getMyCartFn } from '../services/works'
 import { getMyStreamingsFn } from '../services/streaming'
   
   export const AppContext = createContext()
@@ -12,6 +12,7 @@ import { getMyStreamingsFn } from '../services/streaming'
     const [artist, setArtist] = useState(null)
     const [allArtists, setAllArtists] = useState(null)
     const [works, setWorks] = useState(null)
+    const [cart, setCart] = useState(null)
     const [myStreamings, setMyStreamings] = useState(null)
     const [publicStreamings, setPublicStreamings] = useState(null)
   
@@ -50,6 +51,17 @@ import { getMyStreamingsFn } from '../services/streaming'
   
       getWorks()
     }, [])
+
+    useEffect(() => {
+
+      if(cart === null) {
+      async function getCart() {
+        const { data } = await getMyCartFn()
+        setCartFn([...data]);
+      }
+      getCart()
+    }
+    }, [cart])
     
     useEffect(() => {
       async function getMyStreamings() {
@@ -70,6 +82,10 @@ import { getMyStreamingsFn } from '../services/streaming'
       setWorks(data)
     }
 
+    const setCartFn = (cartArr) => {
+      setCart(cartArr)
+    }
+
     const setMyStreamingsFn = async () => {
       const { data } = await getMyStreamingsFn()
       if(!data) return setMyStreamings(null)
@@ -87,6 +103,7 @@ import { getMyStreamingsFn } from '../services/streaming'
   
     const value = { user, login, logout, artist, 
       setUserArtistFn, allArtists,
+      setCartFn, cart,
       works, setUserWorksFn, myStreamings, 
       publicStreamings, setMyStreamingsFn }
   

@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { getAllWorksFn, addToCartFn } from '../services/works'
 import { getAllCoursesFn } from '../services/courses'
+import { useContextInfo } from '../hooks/context'
 import {Row, Col, Typography, Divider, Button, Input, Card } from 'antd'
-import { AudioOutlined } from '@ant-design/icons';
 const { Search } = Input;
 
 
@@ -12,6 +12,7 @@ const Store = () => {
     const [ products, setProducts ] = useState(null)
     const [ courses, setCourses ] = useState(null)
     const [ search, setSearch ] = useState('')
+    const { setCartFn } = useContextInfo()
 
     useEffect(()=> {
         async function getProducts() {
@@ -45,6 +46,7 @@ const Store = () => {
 
     function addToCart(id) {
         addToCartFn(id)
+        setCartFn(null)
     }
 
     return (

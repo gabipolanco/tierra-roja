@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useHistory, Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 import SignupForm from '../components/SignupForm'
 import MenuHamburguesa from '../components/MenuHamburguesa'
 import styled from 'styled-components'
@@ -70,8 +71,18 @@ const HeaderNavStyled = styled.div`
     `
 
 const HeaderNav = () => {
-    const { user, logout } = useContextInfo()
+    const { user, logout, cart } = useContextInfo()
     let history = useHistory();
+    const [count, setCount] = useState(null)
+
+    useEffect(() => {
+        async function getCart() {
+            let n = null
+            if (cart) n = cart.length
+            setCount(n)
+        }
+        getCart()
+    }, [cart])
 
     async function handleLogout() {
         await logoutFn()
@@ -117,7 +128,7 @@ const HeaderNav = () => {
     return (
         <HeaderNavStyled>
             <div>
-                <h2><a href="/#cover">Tierra Roja</a></h2>
+                <h2><HashLink to="/#cover">Tierra Roja</HashLink></h2>
             </div>
             <div>
                 <Dropdown className="menu-movil" overlay={menu}>
@@ -134,7 +145,11 @@ const HeaderNav = () => {
                             <Link to="/profile">Perfil</Link>
                         </Dropdown>
                     </li>
-                    <li><Link to="/cart"><i class="fas fa-shopping-cart"></i></Link></li>
+                    <li>
+                    <Badge count={count} >
+                        <Link to="/cart"><i class="fas fa-shopping-cart"></i></Link>
+                    </Badge>
+                    </li>
                     </>}
                 </ul>
             </div>
