@@ -142,7 +142,7 @@ overflow: hidden;
     position: absolute;
     display: flex;
     right: 0;
-    width: 65vw;
+    width: 70vw;
     height: 100%;
     padding: 80px;
     background-color: rgba(255,255,255);
@@ -176,6 +176,10 @@ overflow: hidden;
     font-size: 30px;
     color: #f0f0f0;
     cursor: pointer;
+    z-index: 15;
+    display: block;
+    height: 30px;
+    width: 20px;
 }
 & .arrow-right {
     position: absolute;
@@ -184,6 +188,10 @@ overflow: hidden;
     font-size: 30px;
     color: #f0f0f0;
     cursor: pointer;
+    z-index: 15;
+    display: block;
+    height: 30px;
+    width: 20px;
 }
 &>div.arte .art-container>div img {
     transition: all .6s ease;
@@ -260,111 +268,118 @@ const OnePortfolio = ({match: {params: {id}}}) => {
         if(i > 0) {
             setI(i-1)
             setWorkToShow(works[i])
+        } else {
+            let l = works.length - 1
+            setI(l)
+            setWorkToShow(works[i])
         }
-        console.log(i)
     }
 
     function workRight() {
         if(i < works.length - 1) {
             setI(i+1)
             setWorkToShow(works[i])
+        } else {
+            setI(0)
+            setWorkToShow(works[i])
         }
-        console.log(i)
     }
 
     return artist && (
         <div className="page">
-        <PortfolioStyled>
-            <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
-            <Link className="back" to="/portfolios"><i class="fas fa-arrow-left"></i>Portfolios</Link>
-            
-            <div className="wrapper">
-                <div className="left" >
-                    <div>
-                    <h2>{artist.name}</h2>
-                    <h3>{artist.profession}</h3>
-                    {artist.socialMedia && <div className="social">
-                        <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
-                        <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
+            <Row>
+                <PortfolioStyled>
+                    <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
+                    <Link className="back" to="/portfolios"><i class="fas fa-arrow-left"></i>Portfolios</Link>
+                    
+                    <div className="wrapper">
+                        <div className="left" >
+                            <div>
+                            <h2>{artist.name}</h2>
+                            <h3>{artist.profession}</h3>
+                            {artist.socialMedia && <div className="social">
+                                <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
+                                <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
+                            </div>}
+                            </div>
+                        </div>
+
+                        <div className="right" >   
+                            <div className="left-left">
+                                <div className="inner-rest"></div>
+                                <div onClick={showBio} className="inner-btn">
+                                    <h3>Sobre mi</h3>
+                                </div>
+                                <div onClick={showArte} className="inner-btn">
+                                    <h3>Mi arte</h3>
+                                </div>
+                                <div onClick={showStreamings} className="inner-btn">
+                                    <h3>Clases</h3>
+                                </div>
+                                <div className="inner-rest"></div>
+                            </div>
+                            <div className="left-right">
+                                <div className="inner-rest"></div>
+                                <div className="inner-btn">
+                                    <h3>Tienda</h3>
+                                </div>
+                                <div className="inner-rest2"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    {bio && <div className="bio">
+                        <div onClick={close} className="close">X</div>
+                        {user && <img src={user.image} alt={artist.name}/>}
+                        <div>
+                            <h2>Bio</h2>
+                            <p>{artist.bio}</p>
+                        </div>
                     </div>}
-                    </div>
-                </div>
 
-                <div className="right" >   
-                    <div className="left-left">
-                        <div className="inner-rest"></div>
-                        <div onClick={showBio} className="inner-btn">
-                            <h3>Sobre mi</h3>
+                    {arte && <div className="arte">
+                        <div onClick={close} className="close">X</div>
+                        <div>
+                            {workToShow && 
+                                <div className="art-container">
+                                <i onClick={workLeft} class="fas fa-chevron-left arrow-left"></i>
+                                    <div className="border">
+                                    <div className="img-container">
+                                        <img style={{objectFit: "scale-down"}} src={workToShow.media} alt={workToShow.title} />
+                                    </div>
+                                    </div>
+                                    <div className="info">
+                                        <Typography.Text>{workToShow.description}</Typography.Text><br />
+                                        <Typography.Text>{workToShow.price}</Typography.Text><br />
+                                        {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                                    </div>
+                                <i onClick={workRight} class="fas fa-chevron-right arrow-right"></i>
+                                </div>} 
                         </div>
-                        <div onClick={showArte} className="inner-btn">
-                            <h3>Mi arte</h3>
-                        </div>
-                        <div onClick={showStreamings} className="inner-btn">
-                            <h3>Clases</h3>
-                        </div>
-                        <div className="inner-rest"></div>
-                    </div>
-                    <div className="left-right">
-                        <div className="inner-rest"></div>
-                        <div className="inner-btn">
-                            <h3>Tienda</h3>
-                        </div>
-                        <div className="inner-rest2"></div>
-                    </div>
-                </div>
-            </div> 
-            
-            {bio && <div className="bio">
-                <div onClick={close} className="close">X</div>
-                {user && <img src={user.image} alt={artist.name}/>}
-                <div>
-                    <h2>Bio</h2>
-                    <p>{artist.bio}</p>
-                </div>
-            </div>}
+                    </div>}
 
-            {arte && <div className="arte">
-                <div onClick={close} className="close">X</div>
-                <div>
-                    {workToShow && 
-                        <div className="art-container">
-                        <i onClick={workLeft} class="fas fa-chevron-left arrow-left"></i>
-                            <div className="border">
-                            <div className="img-container">
-                                <img style={{objectFit: "scale-down"}} src={workToShow.media} alt={workToShow.title} />
-                            </div>
-                            </div>
-                            <div className="info">
-                                <Typography.Text>{workToShow.description}</Typography.Text><br />
-                                <Typography.Text>{workToShow.price}</Typography.Text><br />
-                                {artist && <Typography.Text>{artist.name}</Typography.Text>}
-                            </div>
-                        <i onClick={workRight} class="fas fa-chevron-right arrow-right"></i>
-                        </div>} 
-                </div>
-            </div>}
-
-            {streamings && <div className="streamings">
-                <div onClick={close} className="close">X</div>
-                <div>
-                    <Link to="/mystreamings"><h2>Clases</h2></Link>
-                    {myStreamings ? 
-                        <Row gutter={[16, 16]}>
-                        {myStreamings.map(stream => (
-                            <Link to="/mystreamings"><Col xs={{offset: 2,span: 20}}>
-                            <Card hoverable cover={<video controls></video>} title={stream.title} bordered={false}>
-                            <p>{stream.description}</p><br />
-                            <p>{stream.hour}</p><br />
-                            {artist && <p>{artist.name}</p>}
-                            </Card>
-                        </Col></Link>))}
-                    </Row> : <div></div>}
-                </div>
-            </div>}
-            
-        </PortfolioStyled>
+                    {streamings && <div className="streamings">
+                        <div onClick={close} className="close">X</div>
+                        <div>
+                            <Link to="/mystreamings"><h2>Clases</h2></Link>
+                            {myStreamings ? 
+                                <Row gutter={[16, 16]}>
+                                {myStreamings.map(stream => (
+                                    <Link to="/mystreamings"><Col xs={{offset: 2,span: 20}}>
+                                    <Card hoverable cover={<video controls></video>} title={stream.title} bordered={false}>
+                                    <p>{stream.description}</p><br />
+                                    <p>{stream.hour}</p><br />
+                                    {artist && <p>{artist.name}</p>}
+                                    </Card>
+                                </Col></Link>))}
+                            </Row> : <div></div>}
+                        </div>
+                    </div>}
+                    
+                </PortfolioStyled>
+            </Row>
         </div>
     )
 }

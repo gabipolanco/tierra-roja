@@ -8,7 +8,7 @@ const courseSchema = new Schema({
   hour: String,
   price: {
     type: String,
-    default: 'gratuito'
+    default: 'Consultá el valor'
   },
   classes: [{
     _id: Schema.Types.ObjectId,

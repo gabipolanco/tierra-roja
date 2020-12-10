@@ -246,16 +246,21 @@ const Portfolio = () => {
         if(i > 0) {
             setI(i-1)
             setWorkToShow(works[i])
+        } else {
+            let l = works.length - 1
+            setI(l)
+            setWorkToShow(works[i])
         }
-        console.log(i)
     }
 
     function workRight() {
         if(i < works.length - 1) {
             setI(i+1)
             setWorkToShow(works[i])
+        } else {
+            setI(0)
+            setWorkToShow(works[i])
         }
-        console.log(i)
     }
 
     return artist && (

@@ -20,7 +20,7 @@ exports.editCourse = async (req, res) => {
 }
 
 exports.getAllCourses = async(req, res) => {
-    const courses = await Course.find().populate('userId')
+    const courses = await Course.find().populate({path: 'userId', populate: 'artistId'})
     res.status(200).json(courses)
 }
 
