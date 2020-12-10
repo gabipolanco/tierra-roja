@@ -21,10 +21,35 @@ exports.editWork = async (req, res) => {
     res.status(200).json({message: "Work edited", editedWork})
 }
 
-exports.getAllWorks = async (req, res) => {
+exports.getAllMyWorks = async (req, res) => {
     const userId = req.user.id
     const { artWork } = await User.findById(userId).populate("artWork")
     res.status(200).json(artWork)
+}
+
+exports.getAllWorks = async (req, res) => {
+    const works = await Work.find().populate('artistId')
+    res.status(200).json(works)
+}
+
+exports.addWorkToCart = async (req, res) => {
+    const userId = req.user.id
+    const { id } = req.params
+    await User.findByIdAndUpdate(userId, { $push : { cart: id } }, {new: true})
+    res.status(201).json({message: "Product added"})
+}
+
+exports.removeWorkFromCart = async (req, res) => {
+    const userId = req.user.id
+    const { id } = req.params
+    await User.findByIdAndUpdate(userId, { $pull : { cart: id } }, {new: true})
+    res.status(201).json({message: "Product removed"})
+}
+
+exports.getMyCart = async (req, res) => {
+    const userId = req.user.id
+    const {cart} = await User.findById(userId).populate('cart')
+    res.status(200).json(cart)
 }
 
 exports.getOneWork = async (req, res) => {

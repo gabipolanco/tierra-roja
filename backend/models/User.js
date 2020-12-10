@@ -34,6 +34,10 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Course"
   }],
+  cart: [{
+    type: Schema.Types.ObjectId,
+    ref: "Work"
+  }],
   googleID: String,
   facebookId: String
 }, {

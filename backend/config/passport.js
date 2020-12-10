@@ -29,7 +29,6 @@ passport.use(
   )
 )
 
-<<<<<<< HEAD
 ///////////////// Google /////////////////
 passport.use(
   new GoogleStrategy(
@@ -45,21 +44,6 @@ passport.use(
           username: profile.displayName,
           email: profile.emails[0].value,
           googleId: profile.id,
-=======
-  passport.use(new googleStrategy({
-    clientID: process.env.GOOGLE_KEY,
-    clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
-  },
-    async (_, __, profile, done) => {
-      const user = await User.findOne({ googleID: profile.id })
-  
-      if (!user) {
-        const newUser = await User.create({
-          googleID: profile.id,
-          username: profile.emails[0].value,
-          email: profile.emails[0].value,
->>>>>>> optimizacion
           image: profile.photos[0].value,
           confirmed: true
       })
