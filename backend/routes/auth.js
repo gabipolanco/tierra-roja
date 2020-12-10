@@ -18,7 +18,7 @@ const {
 } = require('../controllers/auth')
 
 router.post('/login', loginProcess)
-router.post('/signup', catchErrs(signupProcess))
+router.post('/signup', signupProcess)
 router.get('/confirm/:email/:id', catchErrs(confirmSignup))
 router.post('/edit/:id',isAuth, catchErrs(editProcess))
 router.post('/upload-photo/:id',isAuth, catchErrs(uploadProcess))

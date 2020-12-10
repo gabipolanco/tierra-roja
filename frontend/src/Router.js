@@ -11,6 +11,7 @@ import EditPortfolio from './components/EditPortfolio'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 import MyWorks from './pages/MyWorks'
 import Portfolios from './pages/Portfolios'
 import OnePortfolio from './pages/OnePortfolio'
@@ -38,6 +39,7 @@ const RouterApp = () => {
                 <Route path="/profile" component={Profile} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/cart" component={Cart} />
+                <Route path="/checkout/:total" component={Checkout} />
                 <Route path="/edit-user" component={EditUser} />
                 <Route path="/myworks" component={MyWorks} />
                 <Route path="/portfolios" component={Portfolios} />

@@ -38,7 +38,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Work"
   }],
-  googleID: String,
+  googleId: String,
   facebookId: String
 }, {
   timestamps: {

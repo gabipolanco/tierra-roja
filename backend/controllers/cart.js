@@ -1,10 +1,10 @@
 const mp = require('../config/mercadopago')
 
 exports.cartDetail = async (req, res) => {
-   console.log( req.body)
+  const total = parseInt(req.body.total)
   const cart = {
     title: 'Mi carrito',
-    unit_price: 100,
+    unit_price: total,
     quantity: 1,
   }
   let preference = {

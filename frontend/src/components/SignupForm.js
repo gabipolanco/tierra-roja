@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, Typography, Checkbox, Alert } from 'antd';
+import { Modal, Form, Input, Typography, Checkbox, Alert, message } from 'antd';
 import { signupFn } from '../services/auth'
 
 const googleUrl = process.env.NODE_ENV === 'development' ?
@@ -44,13 +44,14 @@ const SignupForm = () => {
   
   const Formul = () => {
     const onFinish = async ({email, password}) => {
-      await signupFn({email, password})
-      setIsModalVisible(false);
-      setRegistered(true)
-    };
-  
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo);
+      try {
+        await signupFn({email, password})
+        setIsModalVisible(false);
+        setRegistered(true)
+      } catch(err) {
+        console.log(err.response.data.err)
+        // message.error(err.res.data.err.message)
+      }
     };
   
     return (
@@ -59,7 +60,6 @@ const SignupForm = () => {
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         layout="vertical"
         style={{margin: "0 80px", fontFamily: "Roboto"}}
       >
