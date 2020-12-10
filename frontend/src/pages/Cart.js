@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {Link} from 'react-router-dom'
 import { getMyCartFn, removeFromCartFn } from '../services/works'
-import { getCartFn } from '../services/cart'
 import { useContextInfo } from '../hooks/context'
 import { Row, Col, Button, Typography, Divider } from 'antd'
 
@@ -12,8 +11,6 @@ const Cart = () => {
     const [total, setTotal] = useState(0)
     const [change, setChange] = useState(false)
     let count = 0
-
-    const paymentContainereRef = useRef()
 
     useEffect(() => {
         function getMyProducts() {
@@ -39,22 +36,6 @@ const Cart = () => {
         setChange(!change)
         setCartFn(null)
     }
-
-    useEffect(() => {
-         async function getCartInfo() {
-          const { data } = await getCartFn({total})
-    
-          const script = document.createElement("script")    
-          script.src =
-          "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-          script.setAttribute("data-preference-id", data.prefId)
-
-          paymentContainereRef.current.appendChild(script)
-    
-          setCartToPay(data)
-        }
-        getCartInfo()
-      }, [])
 
     return (
         <div className="page">
@@ -92,7 +73,7 @@ const Cart = () => {
             </Row>
             <Row style={{marginTop: "60px"}}>
                 <Col offset={17} span={4}>
-                <div ref={paymentContainereRef}></div>
+                    <Link to={`/checkout/${total}`}><Button>Pagar</Button></Link>
                 </Col>
             </Row>
         </div>

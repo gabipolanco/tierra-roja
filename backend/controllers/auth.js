@@ -26,13 +26,13 @@ exports.signupProcess = async (req, res) => {
         const {email, password } = req.body
         if (!email || !password) {
             return res.status(406).json({
-                errorMessage: "Indicate email and password"
+               message: "Indicate email and password"
             })
         }
         const user = await User.findOne({ email })
         if (user) {
             return res.status(406).json({
-                errorMessage: "Error"
+                message: "Error"
             })
         }
         const salt = bcrypt.genSaltSync(12)
@@ -50,10 +50,10 @@ exports.signupProcess = async (req, res) => {
 exports.confirmSignup = async (req, res, next) => {
   const {email, id} = req.params
   const user = await User.findOne({email})
-  if(!user) return res.status(404).json({message: "tu vieja"})
+  if(!user) return res.status(404).json({message: "user not found"})
   if(id !== user._id.toString()) return res.status(400).json({message: "Confirm your email"})
   await User.findByIdAndUpdate(user._id, {confirmed: true}, {new: true})
-  res.redirect("http://localhost:3001/confirmed")
+  res.redirect(process.env.FRONTENDPOINT + "/confirmed")
 }
 
 exports.editProcess = async (req, res) => {
@@ -90,7 +90,7 @@ exports.googleRedirect = (req, res, next) => {
         if (!user) return res.status(401).json({ err, info })
         req.login(user, error => {
             if (error) return res.status(401).json({ error })
-            return res.redirect(process.env.FRONTENDPOINT + "/profile")
+            return res.redirect(process.env.FRONTENDPOINT)
         })
     })(req, res, next)
 }
