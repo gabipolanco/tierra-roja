@@ -26,6 +26,7 @@ import GlobalStyle from './components/GlobalStyle'
 import NavBar from './components/NavBar'
 import HeaderNav from './components/HeaderNav'
 import EditUser from './components/EditUser'
+import GorraVirtual from './pages/GorraVirtual'
 
 
 const RouterApp = () => {
@@ -45,6 +46,7 @@ const RouterApp = () => {
                 <Route path="/streamings" component={StreamingList} />
                 <Route path="/streaming/:id" component={Streaming} />
                 <Route path="/galeria" component={Gallery} />
+                <Route path="/gorravirtual/:total" component={GorraVirtual} />
                 <Route path="/notlogged" component={NotLogged} />
 
                 {user ? <><Route path="/profile" component={Profile} />

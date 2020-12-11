@@ -138,11 +138,11 @@ overflow: hidden;
     margin: 2px 4px;
     background-color: rgba(0,0,0, .4);
 }
-&>div.bio, .arte, .streamings {
+&>div.bio, .arte, .courses, .store {
     position: absolute;
     display: flex;
     right: 0;
-    width: 65vw;
+    width: 70vw;
     height: 100%;
     padding: 80px;
     background-color: rgba(255,255,255);
@@ -164,9 +164,19 @@ overflow: hidden;
     max-height: 480px;
     box-shadow: 0 0 3px black;
 }
+& .store .border {
+    padding: 20px;
+    max-height: 480px;
+    box-shadow: 0 0 3px black;
+}
 & .img-container {
     position: relative;
     max-height: 360px;
+    overflow: hidden;
+}
+& .img-container2 {
+    position: relative;
+    ${'' /* max-height: 360px; */}
     overflow: hidden;
 }
 & .arrow-left {
@@ -176,6 +186,10 @@ overflow: hidden;
     font-size: 30px;
     color: #f0f0f0;
     cursor: pointer;
+    z-index: 15;
+    display: block;
+    height: 30px;
+    width: 20px;
 }
 & .arrow-right {
     position: absolute;
@@ -184,6 +198,10 @@ overflow: hidden;
     font-size: 30px;
     color: #f0f0f0;
     cursor: pointer;
+    z-index: 15;
+    display: block;
+    height: 30px;
+    width: 20px;
 }
 &>div.arte .art-container>div img {
     transition: all .6s ease;
@@ -210,12 +228,24 @@ overflow: hidden;
 `
 
 const Portfolio = () => {
-    const { user, artist, works, myStreamings } = useContextInfo()
+    const { user, artist } = useContextInfo()
     const [bio, setBio] = useState(null)
     const [arte, setArte] = useState(null)
-    const [streamings, setStreamings] = useState(null)
+    const [works, setWorks] = useState(null)
+    const [courses, setCourses] = useState(null)
+    const [coursesDiv, setCoursesDiv] = useState(null)
+    const [products, setProducts] = useState(null)
+    const [storeDiv, setStoreDiv] = useState(null)
     const [workToShow, setWorkToShow] = useState(null)
     const [i, setI] = useState(0)
+
+    useEffect(() => {
+        const artWork = user.artWork.filter(a => !a.price)
+        const prod =  user.artWork.filter(a => a.price)
+        setWorks(artWork)
+        setProducts(prod)
+        setCourses(user.courses)
+    }, [])
 
     useEffect(() => {
         function setWorks() {
@@ -232,14 +262,19 @@ const Portfolio = () => {
         setArte(true)
     }
 
-    function showStreamings() {
-        setStreamings(true)
+    function showCourses() {
+        setCoursesDiv(true)
+    }
+
+    function showStore() {
+        setStoreDiv(true)
     }
 
     function close() {
         setBio(null)
         setArte(null)
-        setStreamings(null)
+        setCoursesDiv(null)
+        setStoreDiv(null)
     }
 
     function workLeft() {
@@ -292,14 +327,14 @@ const Portfolio = () => {
                         <div onClick={showArte} className="inner-btn">
                             <h3>Mi arte</h3>
                         </div>
-                        <div onClick={showStreamings} className="inner-btn">
+                        <div onClick={showCourses} className="inner-btn">
                             <h3>Clases</h3>
                         </div>
                         <div className="inner-rest"></div>
                     </div>
                     <div className="left-right">
                         <div className="inner-rest"></div>
-                        <div className="inner-btn">
+                        <div onClick={showStore} className="inner-btn">
                             <h3>Tienda</h3>
                         </div>
                         <div className="inner-rest2"></div>
@@ -337,23 +372,45 @@ const Portfolio = () => {
                 </div>
             </div>}
 
-            {streamings && <div className="streamings">
-                <div onClick={close} className="close">X</div>
-                <div>
-                    <Link to="/mystreamings"><h2>Clases</h2></Link>
-                    {myStreamings ? 
-                        <Row gutter={[16, 16]}>
-                        {myStreamings.map(stream => (
-                            <Link to="/mystreamings"><Col xs={{offset: 2,span: 20}}>
-                            <Card hoverable cover={<video controls></video>} title={stream.title} bordered={false}>
-                            <p>{stream.description}</p><br />
-                            <p>{stream.hour}</p><br />
-                            {artist && <p>{artist.name}</p>}
-                            </Card>
-                        </Col></Link>))}
-                    </Row> : <div></div>}
-                </div>
-            </div>}
+            {coursesDiv && <div className="courses">
+                        <div onClick={close} className="close">X</div>
+                        <div>
+                            <h2>Clases</h2>
+                             
+                                <Row gutter={[16, 16]}>
+                                {courses.map(course => (
+                                    <Col xs={{offset: 2,span: 20}}>
+                                    <Card hoverable title={course.name} bordered={false}>
+                                    <p>{course.description}</p><br />
+                                    {course.date && <p>Desde {course.date[0]} al {course.date[1]}</p>}<br />
+                                    {artist && <p>{artist.name}</p>}
+                                    </Card>
+                                </Col>))}
+                            </Row>
+                        </div>
+                    </div>}
+                    
+                    {storeDiv && <div className="store">
+                        <div onClick={close} className="close">X</div>
+                        <Row style={{width: "100%"}}>
+                            <Col span={24}>
+                                <h2>Tienda</h2>
+                            </Col>
+                            {products && products.map(p => ( 
+                                <Col offset={1} span={11} className="art-container">
+                                    <div className="border">
+                                    <div className="img-container2">
+                                        <img style={{objectFit: "scale-down", height: "300px"}} src={p.media} alt={p.title} />
+                                    </div>
+                                    </div>
+                                    <div className="info">
+                                        <Typography.Text>{p.description}</Typography.Text><br />
+                                        <Typography.Text>${p.price}</Typography.Text><br />
+                                        {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                                    </div>
+                                </Col>))} 
+                        </Row>
+                    </div>}
             
         </PortfolioStyled>
     )

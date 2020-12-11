@@ -28,7 +28,7 @@ exports.getArtist = async (req, res) => {
 
 exports.getOneArtist = async (req, res) => {
     const {id} = req.params
-    const artist = await Artist.findById(id).populate({path:'userId', populate: {path: 'artWork'}})
+    const artist = await Artist.findById(id).populate({path:'userId', populate: {path: 'artWork courses'}})
     return res.status(200).json(artist)
  }  
 
