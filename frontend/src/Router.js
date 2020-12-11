@@ -1,8 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { useContextInfo } from './hooks/context'
 import 'antd/dist/antd.css'
 
 import NotFound from './components/404/NotFound'
+import NotLogged from './pages/NotLogged'
 import Home from './pages/Home'
 import Confirmed from './pages/Confirmed'
 import Store from './pages/Store'
@@ -24,9 +26,12 @@ import GlobalStyle from './components/GlobalStyle'
 import NavBar from './components/NavBar'
 import HeaderNav from './components/HeaderNav'
 import EditUser from './components/EditUser'
+import GorraVirtual from './pages/GorraVirtual'
 
 
 const RouterApp = () => {
+    const { user } = useContextInfo()
+
     return (
         <Router>
             <GlobalStyle />
@@ -36,20 +41,25 @@ const RouterApp = () => {
                 <Route exact path="/" component={Home} />
                 <Route path="/confirmed" component={Confirmed} />
                 <Route path="/store" component={Store} />
-                <Route path="/profile" component={Profile} />
+                <Route path="/portfolios" component={Portfolios} />
+                <Route path="/portfolio/:id" component={OnePortfolio} />
+                <Route path="/streamings" component={StreamingList} />
+                <Route path="/streaming/:id" component={Streaming} />
+                <Route path="/galeria" component={Gallery} />
+                <Route path="/gorravirtual/:total" component={GorraVirtual} />
+                <Route path="/notlogged" component={NotLogged} />
+
+                {user ? <><Route path="/profile" component={Profile} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/checkout/:total" component={Checkout} />
                 <Route path="/edit-user" component={EditUser} />
                 <Route path="/myworks" component={MyWorks} />
-                <Route path="/portfolios" component={Portfolios} />
-                <Route path="/portfolio/:id" component={OnePortfolio} />
                 <Route path="/mystreamings" component={MyStreamings} />
-                <Route path="/streamings" component={StreamingList} />
-                <Route path="/streaming/:id" component={Streaming} />
                 <Route path="/artist" component={MyAlterEgo} />
-                <Route path="/edit-portfolio" component={EditPortfolio} />
-                <Route path="/galeria" component={Gallery} />
+                <Route path="/edit-portfolio" component={EditPortfolio} /></> :
+                <Redirect to="/notlogged" />}
+                
                 <Route component={NotFound} />
             </Switch>
         </Router>

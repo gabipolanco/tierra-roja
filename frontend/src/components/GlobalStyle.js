@@ -42,6 +42,13 @@ ul {
   cursor: pointer;
 }
 
+.btn-reverse {
+  font-family: 'Bebas Neue', sans-serif;
+  background:transparent;
+  color:#202020;
+  border: 2px solid #202020;
+}
+
   .page {
     padding: 50px;
     font-family: 'Quicksand', sans-serif;

@@ -39,7 +39,7 @@ exports.getOneStreaming = async (req, res) => {
 }
 
 exports.getAllStreamings = async (req, res) => {
-    const streamings = await Streaming.find()
+    const streamings = await Streaming.find({type: 'public'})
     res.status(200).json(streamings)
 }
 

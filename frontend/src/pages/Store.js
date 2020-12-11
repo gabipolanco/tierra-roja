@@ -104,7 +104,7 @@ const Store = () => {
                                     <Row>
                                         <Col span={6}>
                                             <Typography.Title level={4}>{c.name}</Typography.Title><br />
-                                            <Typography.Text>{c.userId && c.userId.username}</Typography.Text><br />
+                                            {c.userId && <Typography.Text>{c.userId.artistId ? <Link to={`/portfolio/${c.userId.artistId._id}`}>{c.userId.artistId.name}</Link> : c.userId.username}</Typography.Text>}<br />
                                         </Col>
                                         <Col span={6}></Col>
                                         <Col span={12}>
