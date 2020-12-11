@@ -60,9 +60,16 @@ const Home = () => {
                     <div id="about" className="slide two">
                         <div onClick={animationOne} className={sideDivStyles}>
                             <div className="about-info" style={aboutStyles}>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique saepe ea perspiciatis molestias distinctio sed ipsum! Obcaecati voluptates dignissimos temporibus maiores doloremque, explicabo placeat praesentium vero velit delectus atque deleniti.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique saepe ea perspiciatis molestias distinctio sed ipsum! Obcaecati voluptates dignissimos temporibus maiores doloremque, explicabo placeat praesentium vero velit delectus atque deleniti.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique saepe ea perspiciatis molestias distinctio sed ipsum! Obcaecati voluptates dignissimos temporibus maiores doloremque, explicabo placeat praesentium vero velit delectus atque deleniti.</p>
+                                <p>El arte fue golpeado por esta  pandemia mundial que dejó al mundo en 
+                                pausa, pero también fue medicina para nuestra humanidad, asustada y 
+                                desesperada de recuperar su ritmo, su “normalidad”.</p>
+                                <p>El arte es bálsamo que cura, que hace bien. Siempre fue así.</p>
+                                <p>TIERRA ROJA nace de la necesidad de seguir reivindicando y revalorizando 
+                                un oficio y legado ancestral, pero también del deseo colectivo de co-crear 
+                                y posibilitar un espacio virtual donde compartir lo que las mujeres del 
+                                barro realizamos desde tiempos inmemoriales.</p>
+                                <p>Bienvenidxs a la tierra roja, donde los ritos del barro nos enseñan a 
+                                transitar la vida en conexión con nuestro entorno.</p>
                             </div>
                         </div>
                         <div className="content">

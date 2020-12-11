@@ -76,7 +76,7 @@ const EditUser = () => {
                         label="Contraseña actual"
                         hasFeedback
                     >
-                        <Input.Password/>
+                        <Input.Password disabled/>
                     </Form.Item>
                 
                     <Form.Item
@@ -84,7 +84,7 @@ const EditUser = () => {
                         label="Nueva contraseña"
                         hasFeedback
                     >
-                        <Input.Password/>
+                        <Input.Password disabled/>
                     </Form.Item>
 
                     <Form.Item

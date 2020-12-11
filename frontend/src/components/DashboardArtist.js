@@ -117,7 +117,7 @@ const DashboardArtist = () => {
                     } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "-80px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
                    
                     <Typography.Title level={5}>{course.name}</Typography.Title>
-                    <Typography.Text>Del: {course.date[0]} al {course.date[1]}</Typography.Text><br/>
+                    {course.date && <Typography.Text>Del: {course.date[0]} al {course.date[1]}</Typography.Text>}<br/>
                     <Typography.Text>{course.description}</Typography.Text>
                 </Col>
 
