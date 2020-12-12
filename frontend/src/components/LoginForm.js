@@ -125,20 +125,9 @@ const LoginForm = () => {
         <br />
 
         <div>
-          {/* <FacebookLogin
-          appId="198741351868254"
-          fields="name,email,picture"
-          data-size="medium" 
-          // callback={responseFacebook}
-          size="small"
-        />
-        <br />
-        <br /> */}
-
-        <a href={googleUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a>
-
-        
+          <a href={googleUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a>
         </div>
+
       </Modal>
     </>
   );

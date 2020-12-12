@@ -1,22 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, Typography, Checkbox, Alert, message } from 'antd';
+import { Modal, Form, Input, Typography, Checkbox, Alert } from 'antd';
 import { signupFn } from '../services/auth'
 
 const googleUrl = process.env.NODE_ENV === 'development' ?
   "http://localhost:3000/auth/google" : '/auth/google'
-
-// const facebookUrl = process.env.NODE_ENV === 'development' ?
-//   "http://localhost:3000/auth/facebook" : '/auth/facebook'
-
-const layout = {
-  labelCol: { span: 24 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 0, span: 24 },
-};
-
-
 
 const SignupForm = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -157,7 +144,6 @@ const SignupForm = () => {
 
         <div>
           <div>
-              {/* <a href={facebookUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a> */}
               <a href={googleUrl}><img alt="" src="./images/btn_google_signin_light_pressed_web@2x.png" style={{width: "50%", height: "auto"}}/></a>
             </div>
         </div>

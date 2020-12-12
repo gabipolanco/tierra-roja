@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { useContextInfo } from '../hooks/context'
-import { Card, Col, Row, Typography, Carousel } from 'antd';
+import { Card, Col, Row, Typography } from 'antd';
 import styled from 'styled-components'
 
 const PortfolioStyled = styled.div`
@@ -242,10 +242,10 @@ const Portfolio = () => {
     useEffect(() => {
         const artWork = user.artWork.filter(a => !a.price)
         const prod =  user.artWork.filter(a => a.price)
-        setWorks(artWork)
-        setProducts(prod)
-        setCourses(user.courses)
-    }, [])
+        setWorks([...artWork])
+        setProducts([...prod])
+        setCourses([...user.courses])
+    }, [bio, arte, coursesDiv, storeDiv, user.artWork, user.courses])
 
     useEffect(() => {
         function setWorks() {
@@ -378,14 +378,21 @@ const Portfolio = () => {
                             <h2>Clases</h2>
                              
                                 <Row gutter={[16, 16]}>
-                                {courses.map(course => (
-                                    <Col xs={{offset: 2,span: 20}}>
+                                {courses.map(course => {
+                                let desde
+                                let hasta
+                                if (course.date.length !== 0) {
+                                    desde = new Date(course.date[0]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                                    hasta = new Date(course.date[1]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                                }
+
+                                return (<Col xs={{offset: 2,span: 20}}>
                                     <Card hoverable title={course.name} bordered={false}>
                                     <p>{course.description}</p><br />
-                                    {course.date && <p>Desde {course.date[0]} al {course.date[1]}</p>}<br />
+                                    {course.date.length !== 0 && <p>Desde {desde} al {hasta}</p>}<br />
                                     {artist && <p>{artist.name}</p>}
                                     </Card>
-                                </Col>))}
+                                </Col>)})}
                             </Row>
                         </div>
                     </div>}

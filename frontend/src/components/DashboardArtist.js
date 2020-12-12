@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { createCourseFn, editCourseFn, deleteCourseFn, getMyCoursesFn, getOneCourseFn, addClassFn, editClassFn, deleteClassFn } from '../services/courses'
+import { createCourseFn, editCourseFn, deleteCourseFn, getMyCoursesFn, getOneCourseFn, 
+    // addClassFn, editClassFn, deleteClassFn 
+} from '../services/courses'
 import {Row, Col, Typography, Divider, Button, Modal, Form, Input, DatePicker } from 'antd'
 import { useContextInfo } from '../hooks/context'
 const { RangePicker } = DatePicker;
@@ -17,15 +19,15 @@ const DashboardArtist = () => {
     useEffect(() => {
         async function setMyCourses() {
             const {data} = await getMyCoursesFn()
-            setCourses(data)
+            setCourses([...data])
         }
         setMyCourses()
     }, [user, isModalVisible, isModal2Visible, isModal3Visible])
 
     useEffect(() => {
         async function setCourseToEdit() {
-            const {data} = await getOneCourseFn(editCourse)
-            setCourseToBeEdited(data)
+            if (editCourse) {const {data} = await getOneCourseFn(editCourse)
+            setCourseToBeEdited(data)}
         }
         setCourseToEdit()
     }, [isModal2Visible, isModal3Visible, editCourse])
@@ -39,15 +41,16 @@ const DashboardArtist = () => {
       };
 
     const onFinish = async (values) => {
-        const date = [values.date[0].toDate(), values.date[1].toDate()]
+        let date = values.date
+        if (date) {date = [date[0].toDate(), date[1].toDate()]}
         await createCourseFn({name: values.name, description: values.description, date})
         setIsModalVisible(false)
     }
 
     const onFinish2 = async (values) => {
         const courseId = courseToBeEdited._id
-        let date
-        values.date ? date = [values.date[0].toDate(), values.date[1].toDate()] : date = courseToBeEdited.date
+        let date = values.date
+        if (date) {date = [date[0].toDate(), date[1].toDate()]} else {date = courseToBeEdited.date} 
         await editCourseFn(courseId, {name: values.name, description: values.description, date})
         setIsModal2Visible(false)
         setCourseToBeEdited(null)
@@ -104,7 +107,15 @@ const DashboardArtist = () => {
 
             <Divider><Typography.Title level={3}>Cursos</Typography.Title></Divider>
              
-            {courses && courses.map((course) => <Row gutter={[16, 16]}>
+            {courses && courses.map((course) => {
+                let desde
+                let hasta
+                if (course.date.length !== 0) {
+                    desde = new Date(course.date[0]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                    hasta = new Date(course.date[1]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                }
+                
+                return <Row gutter={[16, 16]}>
 
                 <Col offset={2} span={4}>
                     <i onClick={() => {
@@ -117,7 +128,7 @@ const DashboardArtist = () => {
                     } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "-80px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
                    
                     <Typography.Title level={5}>{course.name}</Typography.Title>
-                    {course.date && <Typography.Text>Del: {course.date[0]} al {course.date[1]}</Typography.Text>}<br/>
+                    {course.date.length !== 0 && <Typography.Text>Del: {desde} al {hasta}</Typography.Text>}<br/>
                     <Typography.Text>{course.description}</Typography.Text>
                 </Col>
 
@@ -135,7 +146,7 @@ const DashboardArtist = () => {
                                 </Col>
                                 
                                 <Col span={4}>
-                                    <a target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button>Diapositivas</Button></a>
+                                    <a rel="noopener noreferrer" target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button>Diapositivas</Button></a>
                                 </Col>
 
                                 <Col span={4}>
@@ -149,7 +160,7 @@ const DashboardArtist = () => {
                 </Col>
 
                 <Divider />
-                </Row>)}
+                </Row>})}
 
 
                 <Modal

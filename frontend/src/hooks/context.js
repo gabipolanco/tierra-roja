@@ -14,7 +14,6 @@ import { getMyStreamingsFn } from '../services/streaming'
     const [works, setWorks] = useState(null)
     const [cart, setCart] = useState(null)
     const [myStreamings, setMyStreamings] = useState(null)
-    const [publicStreamings, setPublicStreamings] = useState(null)
   
     useEffect(() => {
       async function getSessionData() {
@@ -105,7 +104,7 @@ import { getMyStreamingsFn } from '../services/streaming'
       setUserArtistFn, allArtists,
       setCartFn, cart,
       works, setUserWorksFn, myStreamings, 
-      publicStreamings, setMyStreamingsFn }
+      setMyStreamingsFn }
   
     return (
       <AppContext.Provider {...props} value={value} />

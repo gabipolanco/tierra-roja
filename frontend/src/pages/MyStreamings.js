@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import { Card, Col, Row, Button, Modal, Form, Input, Select, DatePicker, InputNumber, Typography } from 'antd';
+import { Card, Col, Row, Button, Modal, Form, Input, Select, DatePicker, Typography } from 'antd';
 import { useContextInfo } from '../hooks/context'
-import { createStreamingFn, getMyStreamingsFn, getOneStreamingFn, editStreamingFn, deleteStreamingFn } from '../services/streaming'
-import axios from 'axios'
+import { createStreamingFn, getOneStreamingFn, editStreamingFn, deleteStreamingFn } from '../services/streaming'
 
 const MyStreamings = () => {
     const { user, artist, myStreamings, setMyStreamingsFn } = useContextInfo()
@@ -13,8 +12,6 @@ const MyStreamings = () => {
     const [editStreaming, setEditStreaming] = useState(null)
     const [streamingToBeEdited, setStreamingToBeEdited] = useState(null)
     const [form] = Form.useForm();
-    let userStreamings
-    if(myStreamings) userStreamings = [...myStreamings]
     
     useEffect(() => {
         async function setStreamingToEdit() {
@@ -34,8 +31,8 @@ const MyStreamings = () => {
 
         const onFinish = async (values) => {
             let hour
-            values.date ? hour = values.date.toDate() : hour = new Date()
-            const {data: { newStreaming } } = await createStreamingFn({...values, hour})
+            if(values.date) hour = values.date.toDate()
+            await createStreamingFn({...values, hour})
             setMyStreamingsFn()
             setIsModalVisible(false)
             form.resetFields()
@@ -226,7 +223,12 @@ const MyStreamings = () => {
 
             {myStreamings ?
                 <Row style={{padding: "40px"}} gutter={16}>
-                {myStreamings.map(stream => (<Col lg={{span:8}} md={{span:12}} xs={{span: 24}}>
+                {myStreamings.map(stream => {
+                    let fecha
+                    if(stream.hour) {
+                        fecha = new Date(stream.hour).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'}).toString()
+                    }
+                    return (<Col lg={{span:8}} md={{span:12}} xs={{span: 24}}>
                     <i onClick={() => {
                         setEditStreaming(stream._id)
                         showModal2()
@@ -237,7 +239,7 @@ const MyStreamings = () => {
                     } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "40px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
                     <Card cover={<video controls></video>} bordered={false}>
                     <Typography.Title level={3}>{stream.title}</Typography.Title>
-                    <Typography.Text>{stream.hour}</Typography.Text><br />
+                    {stream.hour && <Typography.Text>{fecha}</Typography.Text>}<br />
                     <Typography.Text>{stream.description}</Typography.Text><br />
                     <Typography.Text>Copiá el siguiente código para empezar a stremear:</Typography.Text><br />
                     <Typography.Text>{stream.streamKey}</Typography.Text><br />
@@ -246,7 +248,7 @@ const MyStreamings = () => {
                     {artist && <Typography.Text>{artist.name}</Typography.Text>}
                     </Card>
                     
-                </Col>))}
+                </Col>)})}
             </Row> : <div></div>}
             </div> : <div></div> }
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Row, Col, Form, Input, Select } from 'antd'
 import { useContextInfo } from '../hooks/context'   
 import { editFn } from '../services/auth'
@@ -7,6 +7,7 @@ import { useHistory, Link } from "react-router-dom";
 const EditUser = () => {
     const { user, login } = useContextInfo()
     let history = useHistory();
+    const [enabled, setEnabled] = useState(null)
 
     const layout = {
         labelCol: { span: 24 },
@@ -18,21 +19,24 @@ const EditUser = () => {
 
         const onFinish = async (values) => {
           const id = user._id
-          let confirm 
           if (!values.confirm) {
            const {data: { editedUser } } = await editFn(id, {email: values.email, role: values.role, username: values.username})
             login(editedUser)
-            history.push("/profile")
+            return history.push("/profile")
             }
-          console.log("algo")
-        //   const {data: { editedUser } } = await editFn(id, values)
-        //   login(editedUser)
-        //   history.push("/profile")
+            const {data: { editedUser } } = await editFn(id, {email: values.email, role: values.role, username: values.username, oldPassword: values.oldPassword, confirm: values.confirm})
+            login(editedUser)
+            history.push("/profile")
         };
       
         const onFinishFailed = errorInfo => {
           console.log('Failed:', errorInfo);
         };
+
+        function enable({target: {value}}) {
+            if (value === '') return setEnabled(null)
+            setEnabled(true)
+        }
 
     return user && (
         <div className="page">
@@ -72,11 +76,11 @@ const EditUser = () => {
                     </Form.Item>
 
                     <Form.Item
-                        name="password"
+                        name="oldPassword"
                         label="Contraseña actual"
                         hasFeedback
                     >
-                        <Input.Password disabled/>
+                        <Input.Password onChange={enable}/>
                     </Form.Item>
                 
                     <Form.Item
@@ -84,7 +88,7 @@ const EditUser = () => {
                         label="Nueva contraseña"
                         hasFeedback
                     >
-                        <Input.Password disabled/>
+                        <Input.Password disabled={!enabled} />
                     </Form.Item>
 
                     <Form.Item
@@ -102,7 +106,7 @@ const EditUser = () => {
                             },
                         }),
                         ]}>
-                        <Input.Password/>
+                        <Input.Password disabled={!enabled} />
                     </Form.Item>
 
                     <Form.Item

@@ -254,7 +254,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
             }
         }
         getArtist()
-    }, [])
+    })
 
 
     useEffect(() => {
@@ -389,14 +389,21 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                             <h2>Clases</h2>
                              
                                 <Row gutter={[16, 16]}>
-                                {courses.map(course => (
-                                    <Col xs={{offset: 2,span: 20}}>
+                                {courses.map(course => {
+                                let desde
+                                let hasta
+                                if (course.date.length !== 0) {
+                                    desde = new Date(course.date[0]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                                    hasta = new Date(course.date[1]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                                }
+
+                                return (<Col xs={{offset: 2,span: 20}}>
                                     <Card hoverable title={course.name} bordered={false}>
                                     <p>{course.description}</p><br />
-                                    <p>Desde {course.date[0]} al {course.date[1]}</p><br />
+                                    {course.date.length !== 0 && <p>Desde {desde} al {hasta}</p>}<br />
                                     {artist && <p>{artist.name}</p>}
                                     </Card>
-                                </Col>))}
+                                </Col>)})}
                             </Row>
                         </div>
                     </div>}

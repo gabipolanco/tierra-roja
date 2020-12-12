@@ -19,8 +19,10 @@ const MyWorks = () => {
     
     useEffect(() => {
         async function setWorkToEdit() {
+            if (editWork) {
             const {data} = await getOneWorkFn(editWork)
             setWorkToBeEdited(data)
+        }
         }
         setWorkToEdit()
     }, [isModal2Visible, isModal3Visible, editWork])
@@ -35,10 +37,10 @@ const MyWorks = () => {
 
         const onFinish = async (values) => {
             await createWorkFn({...values, media: img})
-            setUserWorksFn()
             setIsModalVisible(false)
             setImg(null)
             form.resetFields()
+            setUserWorksFn()
         };
 
         const onFinish2 = async (values) => {
@@ -154,7 +156,7 @@ const MyWorks = () => {
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
-                        <button className="btn" htmlType="submit" style={{width: "230px"}}>
+                        <button className="btn" type="submit" style={{width: "230px"}}>
                         Agregar
                         </button>
                     </Form.Item>
@@ -218,7 +220,7 @@ const MyWorks = () => {
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
-                        <button className="btn" htmlType="submit" style={{width: "230px"}}>
+                        <button className="btn" type="submit" style={{width: "230px"}}>
                         Guardar cambios
                         </button>
                     </Form.Item>

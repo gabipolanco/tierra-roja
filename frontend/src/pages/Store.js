@@ -99,8 +99,11 @@ const Store = () => {
                             </Row>
                             <Divider />
                             <Row style={{marginBottom: "40px"}}>
-                                {courses && courses.map(c => (
-                                <Col offset={1} span={22} style={{backgroundColor: "white", marginTop: "40px", padding: "20px"}}>
+                                {courses && courses.map(c => {
+                                let desde
+                                if(c.date.length !== 0) desde = new Date(c.date[0]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                                
+                                return (<Col offset={1} span={22} style={{backgroundColor: "white", marginTop: "40px", padding: "20px"}}>
                                     <Row>
                                         <Col span={6}>
                                             <Typography.Title level={4}>{c.name}</Typography.Title><br />
@@ -109,12 +112,12 @@ const Store = () => {
                                         <Col span={6}></Col>
                                         <Col span={12}>
                                             <Typography.Text>{c.description}</Typography.Text><br/>
-                                            <Typography.Text>Fecha de inicio: {c.date && c.date[0]}</Typography.Text><br/>
+                                            <Typography.Text>Fecha de inicio: {c.date && desde}</Typography.Text><br/>
                                             <Typography.Text>{c.price && c.price}</Typography.Text><Button style={{marginLeft: "30px"}}>Inscribirse</Button>
                                         </Col>
                                     </Row>
                                 </Col>
-                                ))}
+                                )})}
                             </Row>
                         </Col>
                     </Row>

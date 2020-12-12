@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { createCourseFn, editCourseFn, deleteCourseFn, getMyCoursesFn, getOneCourseFn, addClassFn, editClassFn, deleteClassFn } from '../services/courses'
-import {Row, Col, Typography, Divider, Button, Modal, Form, Input, DatePicker } from 'antd'
+import { getMyCoursesFn } from '../services/courses'
+import {Row, Col, Typography, Divider, Button } from 'antd'
 import { useContextInfo } from '../hooks/context'
-const { RangePicker } = DatePicker;
 
 const DashboardStudent = () => {
     const { user } = useContextInfo()
     const [courses, setCourses] = useState(null)
-    const [form] = Form.useForm();
 
     useEffect(() => {
         async function setMyCourses() {
@@ -32,11 +30,19 @@ const DashboardStudent = () => {
 
             <Divider><Typography.Title level={3}>Cursos</Typography.Title></Divider>
              
-            {courses && courses.map((course) => <Row gutter={[16, 16]}>
+            {courses && courses.map((course) => {
+                let desde
+                let hasta
+                if (course.date.length !== 0) {
+                    desde = new Date(course.date[0]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                    hasta = new Date(course.date[1]).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}).toString()
+                }
+                
+                return <Row gutter={[16, 16]}>
 
                 <Col offset={2} span={4}>
                     <Typography.Title level={5}>{course.name}</Typography.Title>
-                    <Typography.Text>Del: {course.date[0]} al {course.date[1]}</Typography.Text><br/>
+                    <Typography.Text>Del: {desde} al {hasta}</Typography.Text><br/>
                     <Typography.Text>{course.description}</Typography.Text>
                 </Col>
 
@@ -54,7 +60,7 @@ const DashboardStudent = () => {
                                 </Col>
                                 
                                 <Col span={4}>
-                                    <a target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button><i class="fas fa-photo-video"></i></Button></a>
+                                    <a  rel="noopener noreferrer" target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button><i class="fas fa-photo-video"></i></Button></a>
                                 </Col>
 
                                 <Col span={4}>
@@ -68,7 +74,7 @@ const DashboardStudent = () => {
                 </Col>
 
                 <Divider />
-                </Row>)}
+                </Row>})}
             
         </div>
     )

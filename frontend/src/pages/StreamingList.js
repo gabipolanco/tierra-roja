@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import ReactHlsPlayer from 'react-hls-player'
-import {Row, Col, Typography, Input, InputNumber} from 'antd'
+import {Row, Col, Typography, InputNumber} from 'antd'
 import {Link} from 'react-router-dom'
 import { getAllStreamingsFn } from '../services/streaming'
-const { Search } = Input
 
 const StreamingList = () => {
     const [ total, setTotal ] = useState(200)
@@ -51,9 +50,9 @@ const StreamingList = () => {
         setTotal(e)
     }
 
-    function onSearch() {
+    // function onSearch() {
 
-    }
+    // }
 
     return (
         <div className="page" style={{height: "100vh", width: "100vw", overflow: "hidden"}}>
