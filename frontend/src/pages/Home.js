@@ -104,7 +104,7 @@ const Home = () => {
                             <div>
                                 <p><a rel="noopener noreferrer" target="_blank" href="mailto:mujeresdelbarro@gmail.com">mujeresdelbarro@gmail.com</a></p>
                                 <p><a rel="noopener noreferrer" target="_blank" href="http://www.tuvieja.com">+54 9 3764 444 444</a></p>
-                                <p><a rel="noopener noreferrer" target="_blank" href="https://www.google.com/maps/place/Profundidad,+Misiones,+Argentina/@-27.5616078,-55.7090774,16z/data=!3m1!4b1!4m5!3m4!1s0x9457cc35acf8b513:0xaa0b41517665e37f!8m2!3d-27.5616877!4d-55.7046304"><i style={{margin: "0 10px"}} class="fas fa-map-marker-alt"></i>Profundidad, Misiones</a></p>
+                                <p><a rel="noopener noreferrer" target="_blank" href="https://www.google.com/maps/place/Profundidad,+Misiones,+Argentina/@-27.5616078,-55.7090774,16z/data=!3m1!4b1!4m5!3m4!1s0x9457cc35acf8b513:0xaa0b41517665e37f!8m2!3d-27.5616877!4d-55.7046304"><i style={{margin: "0 10px"}} className="fas fa-map-marker-alt"></i>Profundidad, Misiones</a></p>
                             </div>
                             <div className="redes-sociales">
                                 <a rel="noopener noreferrer" target="_blank" href="https://instagram.com"><p>Instagram</p></a>

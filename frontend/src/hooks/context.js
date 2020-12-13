@@ -4,6 +4,7 @@ import { loggedFn } from '../services/auth'
 import { getArtistFn, getAllArtistFn } from '../services/artist'
 import { getWorksFn, getMyCartFn } from '../services/works'
 import { getMyStreamingsFn } from '../services/streaming'
+import { getMyCoursesFn } from '../services/courses'
   
   export const AppContext = createContext()
   
@@ -14,7 +15,7 @@ import { getMyStreamingsFn } from '../services/streaming'
     const [works, setWorks] = useState(null)
     const [cart, setCart] = useState(null)
     const [myStreamings, setMyStreamings] = useState(null)
-    const [publicStreamings, setPublicStreamings] = useState(null)
+    const [userCourses, setUserCourses] = useState(null)
   
     useEffect(() => {
       async function getSessionData() {
@@ -71,6 +72,13 @@ import { getMyStreamingsFn } from '../services/streaming'
   
       getMyStreamings()
     }, [])
+    
+    useEffect(() => {
+      function getMyCourses() {
+        setUserCoursesFn()
+      }
+      getMyCourses()
+    }, [])
 
     const setUserArtistFn = artistInfo => {
       setArtist(artistInfo)
@@ -92,6 +100,10 @@ import { getMyStreamingsFn } from '../services/streaming'
       setMyStreamings(data)
     }
 
+    const setUserCoursesFn = async () => {
+      const { data } = await getMyCoursesFn()
+      setUserCourses(data);
+    }
   
     const login = userInfo => {
       setUser(userInfo)
@@ -105,7 +117,8 @@ import { getMyStreamingsFn } from '../services/streaming'
       setUserArtistFn, allArtists,
       setCartFn, cart,
       works, setUserWorksFn, myStreamings, 
-      publicStreamings, setMyStreamingsFn }
+      setMyStreamingsFn, userCourses,
+      setUserCoursesFn }
   
     return (
       <AppContext.Provider {...props} value={value} />

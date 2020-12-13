@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { getCartFn } from '../services/cart'
 
@@ -38,7 +38,7 @@ const GorraVirtual = ({match: {params: {total}}}) => {
    
        }
        getCartInfo()
-     }, [])
+     })
 
 
     return (

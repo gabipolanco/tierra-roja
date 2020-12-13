@@ -11,7 +11,7 @@ const Dashboard = () => {
 
     return user && (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Perfil</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Perfil</Link>
             <h1>Dashboard</h1>
 
             <Divider />
