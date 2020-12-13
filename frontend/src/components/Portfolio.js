@@ -219,6 +219,9 @@ overflow: hidden;
     font-weight: bold;
     color: black;
 }
+&>div .course-container {
+    width: 100%;
+}
 &>div .close{
     position: fixed;
     right: 100px;
@@ -228,10 +231,10 @@ overflow: hidden;
 `
 
 const Portfolio = () => {
-    const { user, artist } = useContextInfo()
+    const { user, artist, works, userCourses } = useContextInfo()
     const [bio, setBio] = useState(null)
     const [arte, setArte] = useState(null)
-    const [works, setWorks] = useState(null)
+    const [userWorks, setUserWorks] = useState(null)
     const [courses, setCourses] = useState(null)
     const [coursesDiv, setCoursesDiv] = useState(null)
     const [products, setProducts] = useState(null)
@@ -240,19 +243,19 @@ const Portfolio = () => {
     const [i, setI] = useState(0)
 
     useEffect(() => {
-        const artWork = user.artWork.filter(a => !a.price)
-        const prod =  user.artWork.filter(a => a.price)
-        setWorks([...artWork])
+        const artWork = works.filter(a => !a.price)
+        const prod =  works.filter(a => a.price)
+        setUserWorks([...artWork])
         setProducts([...prod])
-        setCourses([...user.courses])
-    }, [bio, arte, coursesDiv, storeDiv, user.artWork, user.courses])
+        setCourses([...userCourses])
+    }, [works, userCourses])
 
     useEffect(() => {
         function setWorks() {
-            if(works) setWorkToShow(works[i])
+            if(userWorks) setWorkToShow(userWorks[i])
         }
         setWorks()
-    }, [works, i])
+    }, [userWorks, i])
 
     function showBio() {
         setBio(true)
@@ -301,8 +304,8 @@ const Portfolio = () => {
     return artist && (
         <PortfolioStyled>
             <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
-            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i>Perfil</Link>
-            <Link className="edit" to="/edit-portfolio"><i class="far fa-edit"></i></Link>
+            <Link className="back" to="/profile"><i className="fas fa-arrow-left"></i>Perfil</Link>
+            <Link className="edit" to="/edit-portfolio"><i className="far fa-edit"></i></Link>
             
             <div className="wrapper">
                 <div className="left" >
@@ -310,10 +313,10 @@ const Portfolio = () => {
                     <h2>{artist.name}</h2>
                     <h3>{artist.profession}</h3>
                     {artist.socialMedia && <div className="social">
-                        <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
-                        <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
+                        <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>
+                        <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i className="fab fa-facebook-f"></i></a>
+                        <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i className="far fa-envelope"></i></a>
+                        <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i className="fas fa-globe"></i></a>
                     </div>}
                     </div>
                 </div>
@@ -356,7 +359,7 @@ const Portfolio = () => {
                 <div>
                     {workToShow && 
                         <div className="art-container">
-                        <i onClick={workLeft} class="fas fa-chevron-left arrow-left"></i>
+                        <i onClick={workLeft} className="fas fa-chevron-left arrow-left"></i>
                             <div className="border">
                             <div className="img-container">
                                 <img style={{objectFit: "scale-down"}} src={workToShow.media} alt={workToShow.title} />
@@ -367,14 +370,14 @@ const Portfolio = () => {
                                 <Typography.Text>{workToShow.price}</Typography.Text><br />
                                 {artist && <Typography.Text>{artist.name}</Typography.Text>}
                             </div>
-                        <i onClick={workRight} class="fas fa-chevron-right arrow-right"></i>
+                        <i onClick={workRight} className="fas fa-chevron-right arrow-right"></i>
                         </div>} 
                 </div>
             </div>}
 
             {coursesDiv && <div className="courses">
                         <div onClick={close} className="close">X</div>
-                        <div>
+                        <div className="course-container">
                             <h2>Clases</h2>
                              
                                 <Row gutter={[16, 16]}>

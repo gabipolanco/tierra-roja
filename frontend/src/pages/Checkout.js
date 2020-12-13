@@ -33,7 +33,7 @@ const Checkout = ({match: {params: {total}}}) => {
 
     return (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/cart"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Carrito</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/cart"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Carrito</Link>
             <Typography.Title level={2}>Checkout</Typography.Title>
 
             {products && products.map((p) => (

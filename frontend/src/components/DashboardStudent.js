@@ -56,15 +56,15 @@ const DashboardStudent = () => {
                                 </Col>
 
                                 <Col span={4}>
-                                <Button><i class="fas fa-video"></i></Button>
+                                <Button><i className="fas fa-video"></i></Button>
                                 </Col>
                                 
                                 <Col span={4}>
-                                    <a  rel="noopener noreferrer" target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button><i class="fas fa-photo-video"></i></Button></a>
+                                    <a  rel="noopener noreferrer" target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button><i className="fas fa-photo-video"></i></Button></a>
                                 </Col>
 
                                 <Col span={4}>
-                                    <Button><i class="fas fa-folder-open"></i></Button>
+                                    <Button><i className="fas fa-folder-open"></i></Button>
                                 </Col>
                             </Row>
                             <Divider />

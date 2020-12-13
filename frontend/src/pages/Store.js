@@ -51,7 +51,7 @@ const Store = () => {
 
     return (
         <div style={{paddingRight: "0", paddingBottom: "0", overflowY: "scroll", height: "calc(100vh)"}} className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Inicio</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Inicio</Link>
             <Row style={{height: "calc(100vh - 100px)"}}>
                 <Col style={{marginTop: "10%",height: "150px"}} offset={1} span={3}>
                     <Row style={{height: "100%"}} type="flex" align="middle">

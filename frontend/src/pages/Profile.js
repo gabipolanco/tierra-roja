@@ -67,7 +67,7 @@ const Profile = () => {
             </div>}
                              </Col>
                 <Col offset={2} span={20}>    
-                    <Link style={{position: "absolute", right: "0", color: "gray"}} to="/edit-user"><i class="far fa-edit"></i></Link>
+                    <Link style={{position: "absolute", right: "0", color: "gray"}} to="/edit-user"><i className="far fa-edit"></i></Link>
                     <Descriptions column={{ xs: 1, sm: 2, lg: 4}} title="Información personal" layout="vertical">
                         <Descriptions.Item label="Nombre de usuario">{user.username}</Descriptions.Item>
                         <Descriptions.Item label="Contraseña">*********************</Descriptions.Item>

@@ -147,7 +147,7 @@ const HeaderNav = () => {
                     </li>
                     <li>
                     <Badge count={count} >
-                        <Link to="/cart"><i class="fas fa-shopping-cart"></i></Link>
+                        <Link to="/cart"><i className="fas fa-shopping-cart"></i></Link>
                     </Badge>
                     </li>
                     </>}

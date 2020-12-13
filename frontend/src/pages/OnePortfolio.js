@@ -219,6 +219,9 @@ overflow: hidden;
     font-weight: bold;
     color: black;
 }
+&>div .course-container {
+    width: 100%;
+}
 &>div .close{
     position: fixed;
     right: 100px;
@@ -254,7 +257,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
             }
         }
         getArtist()
-    })
+    }, [id])
 
 
     useEffect(() => {
@@ -313,7 +316,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
             <Row>
                 <PortfolioStyled>
                     <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
-                    <Link className="back" to="/portfolios"><i class="fas fa-arrow-left"></i>Portfolios</Link>
+                    <Link className="back" to="/portfolios"><i className="fas fa-arrow-left"></i>Portfolios</Link>
                     
                     <div className="wrapper">
                         <div className="left" >
@@ -321,10 +324,10 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                             <h2>{artist.name}</h2>
                             <h3>{artist.profession}</h3>
                             {artist.socialMedia && <div className="social">
-                                <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i class="fab fa-instagram"></i></a>
-                                <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i class="far fa-envelope"></i></a>
-                                <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i class="fas fa-globe"></i></a>
+                                <a rel="noopener noreferrer" href={`http://www.instagram.com/${artist.socialMedia.instagram}`} target="_blank"><i className="fab fa-instagram"></i></a>
+                                <a rel="noopener noreferrer" href={`http://www.facebook.com/${artist.socialMedia.facebook}`} target="_blank"><i className="fab fa-facebook-f"></i></a>
+                                <a rel="noopener noreferrer" href={`mailto:${artist.socialMedia.email}`} target="_blank"><i className="far fa-envelope"></i></a>
+                                <a rel="noopener noreferrer" href={`http://${artist.socialMedia.other}`} target="_blank"><i className="fas fa-globe"></i></a>
                             </div>}
                             </div>
                         </div>
@@ -367,7 +370,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                         <div>
                             {workToShow && 
                                 <div className="art-container">
-                                <i onClick={workLeft} class="fas fa-chevron-left arrow-left"></i>
+                                <i onClick={workLeft} className="fas fa-chevron-left arrow-left"></i>
                                     <div className="border">
                                     <div className="img-container">
                                         <img style={{objectFit: "scale-down"}} src={workToShow.media} alt={workToShow.title} />
@@ -378,14 +381,14 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                                         <Typography.Text>{workToShow.price}</Typography.Text><br />
                                         {artist && <Typography.Text>{artist.name}</Typography.Text>}
                                     </div>
-                                <i onClick={workRight} class="fas fa-chevron-right arrow-right"></i>
+                                <i onClick={workRight} className="fas fa-chevron-right arrow-right"></i>
                                 </div>} 
                         </div>
                     </div>}
 
                     {coursesDiv && <div className="courses">
                         <div onClick={close} className="close">X</div>
-                        <div>
+                        <div className="course-container">
                             <h2>Clases</h2>
                              
                                 <Row gutter={[16, 16]}>

@@ -38,7 +38,7 @@ const Cart = () => {
 
     return (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/store"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Tienda</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/store"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Tienda</Link>
             <Typography.Title level={2}>Carrito</Typography.Title>
 
             {products && products.map((p) => (
@@ -47,7 +47,7 @@ const Cart = () => {
                 <Col offset={1} span={1}>
                     <i onClick={() => {
                         removeProduct(p._id)
-                    } } style={{cursor: "pointer", position: "absolute", top: "0", left: "40px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
+                    } } style={{cursor: "pointer", position: "absolute", top: "0", left: "40px", color: "red", zIndex: "5"}} className="far fa-trash-alt"></i>
                    
                 </Col>
                 <Col span={5}>

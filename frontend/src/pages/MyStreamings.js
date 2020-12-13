@@ -83,7 +83,7 @@ const MyStreamings = () => {
 
     return user && (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Perfil</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Perfil</Link>
             <h1>Mis streamings</h1>
             {user.role === "artist" ? <div>
             <Button onClick={showModal}>Agregar un streaming</Button>
@@ -232,11 +232,11 @@ const MyStreamings = () => {
                     <i onClick={() => {
                         setEditStreaming(stream._id)
                         showModal2()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "40px", zIndex: "5", color: "white"}} class="far fa-edit"></i>
+                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "40px", zIndex: "5", color: "white"}} className="far fa-edit"></i>
                     <i onClick={() => {
                         setEditStreaming(stream._id)
                         showModal3()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "40px", color: "red", zIndex: "5"}} class="far fa-trash-alt"></i>
+                    } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "40px", color: "red", zIndex: "5"}} className="far fa-trash-alt"></i>
                     <Card cover={<video controls></video>} bordered={false}>
                     <Typography.Title level={3}>{stream.title}</Typography.Title>
                     {stream.hour && <Typography.Text>{fecha}</Typography.Text>}<br />

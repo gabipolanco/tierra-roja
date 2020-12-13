@@ -59,7 +59,7 @@ const StreamingList = () => {
 
             <Row>
                 <Col offset={1} span={1}>
-                    <i style={{fontSize: "4vh", marginTop: "36vh", cursor: "pointer"}} onClick={streamingLeft} class="fas fa-chevron-left arrow-left"></i>
+                    <i style={{fontSize: "4vh", marginTop: "36vh", cursor: "pointer"}} onClick={streamingLeft} className="fas fa-chevron-left arrow-left"></i>
                 </Col>
 
                 <Col span={20}>
@@ -79,7 +79,7 @@ const StreamingList = () => {
                 </Col>
 
                 <Col span={1}>
-                    <i style={{fontSize: "4vh", marginTop: "36vh", cursor: "pointer"}} onClick={streamingRight} class="fas fa-chevron-right arrow-right"></i>
+                    <i style={{fontSize: "4vh", marginTop: "36vh", cursor: "pointer"}} onClick={streamingRight} className="fas fa-chevron-right arrow-right"></i>
                 </Col>
             </Row>
 
