@@ -80,7 +80,7 @@ ul {
 
 .one {
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607558046/tierra-roja/Imagenes%20pagina/clayhands_oyavyk.jpg?fbclid=IwAR128FysTZNY8Z9Un8NYJ2mnmnn9pEnDjLvtI21YSZyRJcJd51SgBPCydck");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/clayhands_xnpy4d.jpg");
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
@@ -96,7 +96,7 @@ ul {
 
 .two{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607558046/tierra-roja/Imagenes%20pagina/sprout_fjbbz4.jpg?fbclid=IwAR3Njnf2zf2W4rirQw2O_aJYRxstBiYyrjRsR0l90CzdVk1ljM4EMxhDLRA");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/AdobeStock_300369356_f4qx8w.jpg");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: 25vw -13vh;
@@ -112,7 +112,7 @@ ul {
 
 .three{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607558047/tierra-roja/Imagenes%20pagina/roots_kumgox.jpg?fbclid=IwAR3Ua-h0hXg162rgCM3drmWVNYbCRL4nIy1R325H3_k3Hlu0UCduPq8jGHI");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867180/tierra-roja/Imagenes%20pagina/roots_nqavbb.jpg");
     background-size: 65%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -127,7 +127,7 @@ ul {
 
 .four{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607558046/tierra-roja/Imagenes%20pagina/branch_jwaras.jpg?fbclid=IwAR1t4qJ4Sercx7FFXsJ8rdgwyjNcxmAtJAkVOO8hwZLyBpcoFPBWvVJYXK0");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/branch_prlkbd.jpg");
     background-size: 78%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -142,7 +142,7 @@ ul {
 
 .five{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607558047/tierra-roja/Imagenes%20pagina/tierra_x0qr5f.jpg?fbclid=IwAR3RDDOelMFr6KGuU9WjrqfBJrRlp_VN8dXk5lgS4hECX14JlniJgpoi3Os");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/tierra_tffxwi.jpg");
     transform: rotate(180deg);
     background-size: 70%;
     background-repeat: no-repeat;

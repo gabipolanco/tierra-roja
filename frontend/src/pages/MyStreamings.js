@@ -15,8 +15,10 @@ const MyStreamings = () => {
     
     useEffect(() => {
         async function setStreamingToEdit() {
-            const {data} = await getOneStreamingFn(editStreaming)
-            setStreamingToBeEdited(data)
+            if (editStreaming) {
+                const {data} = await getOneStreamingFn(editStreaming)
+                setStreamingToBeEdited(data)
+            }
         }
         setStreamingToEdit()
     }, [isModal2Visible, isModal3Visible, editStreaming])
