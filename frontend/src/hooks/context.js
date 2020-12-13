@@ -28,57 +28,61 @@ import { getMyCoursesFn } from '../services/courses'
 
     useEffect(() => {
       async function getArtist() {
-        const { data } = await getArtistFn()
-        setUserArtistFn(data);
+        if (user) {
+          const { data } = await getArtistFn()
+          setUserArtistFn(data);
+        }
       }
   
       getArtist()
-    }, [])
+    }, [user])
 
     useEffect(() => {
       async function getAllArtists() {
-        const {data} = await getAllArtistFn()
-        setAllArtists(data)
-      }
+          const {data} = await getAllArtistFn()
+          setAllArtists(data)}
   
       getAllArtists()
     }, [])
 
     useEffect(() => {
       async function getWorks() {
-        const { data } = await getWorksFn()
-        if (data.length !== 0) setUserWorksFn(data);
+        if (user) {
+          const { data } = await getWorksFn()
+          if (data.length !== 0) setUserWorksFn(data);
       }
+    }
   
       getWorks()
-    }, [])
+    }, [user])
 
     useEffect(() => {
-
-      if(cart === null) {
       async function getCart() {
-        const { data } = await getMyCartFn()
-        setCartFn([...data]);
+        if (user && !cart) {
+          const { data } = await getMyCartFn()
+          setCartFn([...data]);
+        }
       }
       getCart()
-    }
-    }, [cart])
+    }, [cart, user])
     
     useEffect(() => {
       async function getMyStreamings() {
-        const { data } = await getMyStreamingsFn()
-        if (data.length !== 0) setMyStreamingsFn(data);
+        if (user) {
+          const { data } = await getMyStreamingsFn()
+          if (data.length !== 0) setMyStreamingsFn(data);
+        }
       }
   
       getMyStreamings()
-    }, [])
+    }, [user])
     
     useEffect(() => {
       function getMyCourses() {
-        setUserCoursesFn()
+        if (user) setUserCoursesFn()
       }
       getMyCourses()
-    }, [])
+    }, [user])
 
     const setUserArtistFn = artistInfo => {
       setArtist(artistInfo)

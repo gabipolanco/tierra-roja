@@ -44,7 +44,7 @@ const DashboardArtist = () => {
             }
         }
         setClassToEdit()
-    }, [isModal5Visible, isModal6Visible, editClass])
+    }, [editClass])
 
     const layout = {
         labelCol: { span: 24 },
@@ -87,11 +87,16 @@ const DashboardArtist = () => {
         await addClassFn(courseId, { name, description, contentLink, slideShowLink, video, hour })
         setIsModal4Visible(false)
         setUserCoursesFn()
-
+        form.resetFields()
     }
 
-    const onFinishEditClass = async () => {
-
+    const onFinishEditClass = async ({name, description, contentLink, slideShowLink, video, hour}) => {
+        const id = classToBeEdited._id
+        if (hour) hour = hour.toDate()
+        await editClassFn(id, { name, description, contentLink, slideShowLink, video, hour })
+        setIsModal5Visible(false)
+        setUserCoursesFn()
+        form.resetFields()
     }
 
     const deleteClass = async () => {
@@ -142,6 +147,7 @@ const DashboardArtist = () => {
         setCourseToBeEdited(null)
         setClassToBeEdited(null)
         setEditCourse(null)
+        setEditClass(null)
     };
 
     return user && (
@@ -196,9 +202,17 @@ const DashboardArtist = () => {
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
                             <Row>
-                                <Col span={11}>
+                                <Col span={10}>
                                     <Typography.Title level={5}>{c.name}</Typography.Title>
                                     <Typography.Text>{c.description}</Typography.Text>
+                                </Col>
+
+                                <Col span={1}>
+                                <i onClick={() => {
+                                    setEditCourse(course._id)
+                                    setEditClass(c._id)
+                                    showModal5()
+                                } } style={{cursor: "pointer", zIndex: "5"}} className="far fa-edit"></i>
                                 </Col>
 
                                 <Col span={1}>
@@ -412,6 +426,85 @@ const DashboardArtist = () => {
                         </button>
                     </Form.Item>
                     </Form>
+
+                </Modal>
+
+                <Modal
+                style={{ top: 20 }}
+                title="Editar una clase"
+                visible={isModal5Visible}
+                onCancel={handleCancel}
+                footer={null}
+                >
+
+                {classToBeEdited && <Form
+                    {...layout}
+                    form={form}
+                    name="editClass"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinishEditClass}
+                    onFinishFailed={onFinishFailed}
+                    layout="vertical"
+                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    >
+                    <Form.Item
+                        label="Nombre de la clase"
+                        name="name"
+                        initialValue={classToBeEdited.name}
+                    >
+                        <Input/>
+                    </Form.Item>
+                    
+                    <Form.Item
+                        label="Descripción"
+                        name="description"
+                        initialValue={classToBeEdited.description}
+                    >
+                        <Input.TextArea rows={6} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Fecha y hora de la clase (opcional)"
+                        name="hour"
+                        initialValue={classToBeEdited.hour}
+                    >
+                        <DatePicker showTime />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Material de la clase (Link externo)"
+                        name="contentLink"
+                        initialValue={classToBeEdited.contentLink}
+                    >
+                        <Input/>
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Diapositicas (Link externo)"
+                        name="slideShowLink"
+                        initialValue={classToBeEdited.slideShowLink}
+                    >
+                        <Input/>
+                    </Form.Item>                    
+
+                    <Form.Item
+                    name="video"
+                    label="Video de la clase"
+                    initialValue={classToBeEdited.video}
+                    >
+                        <Select placeholder="Elegi el video" >
+                            {myStreamings && myStreamings.map((stream => 
+                            <Select.Option value={stream._id}>{stream.title}</Select.Option>
+                            ))}
+                        </Select>
+                    </Form.Item>                   
+
+                    <Form.Item {...tailLayout}>
+                        <button className="btn" type="submit" style={{width: "230px"}}>
+                        Guardar cambios
+                        </button>
+                    </Form.Item>
+                    </Form>}
 
                 </Modal>
 

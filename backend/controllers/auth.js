@@ -88,9 +88,13 @@ exports.logoutProcess = (req, res) => {
 }
 
 exports.loggedinProcess = async(req, res) => {
-    const id = req.user.id
+    if (req.user) {
+    const {id} = req.user
     const user = await User.findById(id).populate({path:'artWork courses streamings cart artistId'})
-    return res.status(200).json(user || null)
+    return res.status(200).json(user)
+  } else {
+    return res.status(200).json(null)
+  }
 }
 
 exports.googleProcess =  passport.authenticate("google", { scope: ["profile", "email"] })
