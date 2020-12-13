@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Course = require('../models/Course')
+const ClassModel = require('../models/ClassModel')
 const Streaming = require('../models/Streaming')
 const mongoose = require('mongoose');
 
@@ -26,13 +27,13 @@ exports.getAllCourses = async(req, res) => {
 
 exports.getMyCourses = async (req, res) => {
     const userId = req.user.id
-    const { courses } = await User.findById(userId).populate("courses")
+    const { courses } = await User.findById(userId).populate({path: "courses", populate: "classes"})
     res.status(200).json(courses)
 }
 
 exports.getOneCourse = async (req, res) => {
     const courseId = req.params.id
-    const oneCourse = await Course.findById(courseId)
+    const oneCourse = await Course.findById(courseId).populate('classes')
     res.status(200).json(oneCourse)
 }
 
@@ -45,27 +46,31 @@ exports.deleteCourse = async (req, res) => {
 }
 
 exports.addClass = async (req, res) => {
-    const courseId = req.params.id
-    const { name, description, contentLink } = req.body
-    const _id = mongoose.Types.ObjectId();
-    const newClass = { _id, name, description, contentLink }
-    console.log(newClass)
-    // await Course.findByIdAndUpdate(courseId, { $push : { classes: { newClass }}}, {new: true})
-    res.status(200).json({message: "Class added"})
+    const id = req.params.courseId
+    const { name, description, contentLink, slideShowLink, video, hour } = req.body
+    const newClass = await ClassModel.create({ name, description, contentLink, slideShowLink, video, hour })
+    await Course.findByIdAndUpdate( id, { $push : { classes: newClass._id }}, {new: true})
+    res.status(200).json({message: "Class added", newClass})
 } 
 
+exports.getOneClass = async (req, res) => {
+    const {id} = req.params
+    const oneClass = await ClassModel.findById(id)
+    res.status(200).json(oneClass)
+}
+
 exports.editClass = async (req, res) => {
-    // const classId = req.params.id
-    // const courseId = req.params.courseId
-    // const { name, description, contentLink } = req.body
-    // await Course.findByIdAndUpdate(courseId, { $push : { classes: {name, description, contentLink }}}, {new: true})
-    // res.status(200).json({message: "Class edited"})
+    const id = req.params.id
+    const { name, description, contentLink, slideShowLink, video, hour } = req.body
+    const editedClass = await ClassModel.findByIdAndUpdate(id, { name, description, contentLink, slideShowLink, video, hour }, {new: true})
+    res.status(200).json({message: "Class edited", editedClass})
 } 
 
 exports.deleteClass = async (req, res) => {
     const classId = req.params.id
     const courseId = req.params.courseId
-    await Course.findByIdAndUpdate(courseId, {classes: {$unset : { classId }}})
+    await ClassModel.findByIdAndDelete(classId)
+    await Course.findByIdAndUpdate(courseId, { $pull: {classes : classId }})
     res.status(200).json({message: "Class deleted"})
 }
 

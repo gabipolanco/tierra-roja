@@ -4,6 +4,7 @@ import { loggedFn } from '../services/auth'
 import { getArtistFn, getAllArtistFn } from '../services/artist'
 import { getWorksFn, getMyCartFn } from '../services/works'
 import { getMyStreamingsFn } from '../services/streaming'
+import { getMyCoursesFn } from '../services/courses'
   
   export const AppContext = createContext()
   
@@ -14,7 +15,7 @@ import { getMyStreamingsFn } from '../services/streaming'
     const [works, setWorks] = useState(null)
     const [cart, setCart] = useState(null)
     const [myStreamings, setMyStreamings] = useState(null)
-    const [publicStreamings, setPublicStreamings] = useState(null)
+    const [userCourses, setUserCourses] = useState(null)
   
     useEffect(() => {
       async function getSessionData() {
@@ -27,50 +28,61 @@ import { getMyStreamingsFn } from '../services/streaming'
 
     useEffect(() => {
       async function getArtist() {
-        const { data } = await getArtistFn()
-        setUserArtistFn(data);
+        if (user) {
+          const { data } = await getArtistFn()
+          setUserArtistFn(data);
+        }
       }
   
       getArtist()
-    }, [])
+    }, [user])
 
     useEffect(() => {
       async function getAllArtists() {
-        const {data} = await getAllArtistFn()
-        setAllArtists(data)
-      }
+          const {data} = await getAllArtistFn()
+          setAllArtists(data)}
   
       getAllArtists()
     }, [])
 
     useEffect(() => {
       async function getWorks() {
-        const { data } = await getWorksFn()
-        if (data.length !== 0) setUserWorksFn(data);
+        if (user) {
+          const { data } = await getWorksFn()
+          if (data.length !== 0) setUserWorksFn(data);
       }
+    }
   
       getWorks()
-    }, [])
+    }, [user])
 
     useEffect(() => {
-
-      if(cart === null) {
       async function getCart() {
-        const { data } = await getMyCartFn()
-        setCartFn([...data]);
+        if (user && !cart) {
+          const { data } = await getMyCartFn()
+          setCartFn([...data]);
+        }
       }
       getCart()
-    }
-    }, [cart])
+    }, [cart, user])
     
     useEffect(() => {
       async function getMyStreamings() {
-        const { data } = await getMyStreamingsFn()
-        if (data.length !== 0) setMyStreamingsFn(data);
+        if (user) {
+          const { data } = await getMyStreamingsFn()
+          if (data.length !== 0) setMyStreamingsFn(data);
+        }
       }
   
       getMyStreamings()
-    }, [])
+    }, [user])
+    
+    useEffect(() => {
+      function getMyCourses() {
+        if (user) setUserCoursesFn()
+      }
+      getMyCourses()
+    }, [user])
 
     const setUserArtistFn = artistInfo => {
       setArtist(artistInfo)
@@ -92,6 +104,10 @@ import { getMyStreamingsFn } from '../services/streaming'
       setMyStreamings(data)
     }
 
+    const setUserCoursesFn = async () => {
+      const { data } = await getMyCoursesFn()
+      setUserCourses(data);
+    }
   
     const login = userInfo => {
       setUser(userInfo)
@@ -105,7 +121,8 @@ import { getMyStreamingsFn } from '../services/streaming'
       setUserArtistFn, allArtists,
       setCartFn, cart,
       works, setUserWorksFn, myStreamings, 
-      publicStreamings, setMyStreamingsFn }
+      setMyStreamingsFn, userCourses,
+      setUserCoursesFn }
   
     return (
       <AppContext.Provider {...props} value={value} />

@@ -46,7 +46,7 @@ const EditPortfolio = () => {
     return artist && (
         <div className="page">
             <Row>
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/artist"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Portfolio</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/artist"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Portfolio</Link>
                 <Col style={{marginTop: "100px"}} xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
                 <Form
                     {...layout}

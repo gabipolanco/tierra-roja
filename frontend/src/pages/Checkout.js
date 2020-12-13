@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {Link} from 'react-router-dom'
-import { getMyCartFn, removeFromCartFn } from '../services/works'
 import { getCartFn } from '../services/cart'
 import { useContextInfo } from '../hooks/context'
-import { Row, Col, Button, Typography, Divider } from 'antd'
+import { Row, Col, Typography, Divider } from 'antd'
 
 const Checkout = ({match: {params: {total}}}) => {
     const [products, setProducts] = useState(null)
-    const [cartToPay, setCartToPay] = useState(null)
-    const { cart, setCartFn } = useContextInfo()
-    const [change, setChange] = useState(false)
-    let count = 0
+    const { cart } = useContextInfo()
 
     const paymentContainereRef = useRef()
 
@@ -31,15 +27,13 @@ const Checkout = ({match: {params: {total}}}) => {
           script.setAttribute("data-preference-id", data.prefId)
 
           paymentContainereRef.current.appendChild(script)
-    
-          setCartToPay(data)
         }
         getCartInfo()
-      }, [])
+      }, [total])
 
     return (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/cart"><i style={{marginRight: "10px"}} class="fas fa-arrow-left"></i>Carrito</Link>
+            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/cart"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Carrito</Link>
             <Typography.Title level={2}>Checkout</Typography.Title>
 
             {products && products.map((p) => (
@@ -49,7 +43,7 @@ const Checkout = ({match: {params: {total}}}) => {
                     <Typography.Text>{p.title}</Typography.Text>
                 </Col>
                 <Col span={2}>
-                    <img src={p.media} height="40" />
+                    <img src={p.media} height="40" alt="Producto" />
                 </Col>
                 <Col span={8}>
                 </Col>

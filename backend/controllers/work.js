@@ -5,8 +5,12 @@ const Artist = require('../models/Artist')
 exports.createWork = async (req, res) => {
     const { workType, title, media, description, price } = req.body
     const userId = req.user.id
-    const {artistId} = await User.findById(userId)
-    if (!artistId) return
+    let {artistId} = await User.findById(userId)
+    if (!artistId) {
+        const newWork = await Work.create({workType, title, media, description, price})
+        await User.findByIdAndUpdate(userId, { $push : { artWork: newWork._id } }, {new: true})
+        return res.status(201).json({message: "Work created", newWork})
+    }
     const newWork = await Work.create({workType, title, media, artistId, description, price})
     await User.findByIdAndUpdate(userId, { $push : { artWork: newWork._id } }, {new: true})
     res.status(201).json({message: "Work created", newWork})

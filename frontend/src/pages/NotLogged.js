@@ -6,7 +6,7 @@ height: 100vh;
 width: 100vw;
 overflow: hidden;
 position: absolute;
-background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607637154/tierra-roja/Imagenes%20pagina/lapacho_ncvt5q.jpg");
+background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/lapacho_ib7zuu.jpg");
 background-position: center center;
 background-size: 80%;
 background-repeat: no-repeat;

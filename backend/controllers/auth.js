@@ -60,10 +60,19 @@ exports.editProcess = async (req, res) => {
     let pass
     const id = req.params.id
     let { password } = await User.findById(id)
-    const {username, email, role, confirm } = req.body
-    if (!confirm) pass = password
-    const editedUser = await User.findByIdAndUpdate(id, { username, email, password: pass, role }, {new: true})
-    return res.status(202).json({message: "User updated", editedUser})
+    const {username, email, role, confirm, oldPassword } = req.body
+    if (!confirm) {
+      pass = password
+      const editedUser = await User.findByIdAndUpdate(id, { username, email, password: pass, role }, {new: true})
+      return res.status(202).json({message: "User updated", editedUser})
+    } else if (!bcrypt.compareSync(oldPassword, password)){
+      return res.status(400).json({message: "Wrong password"})
+    } else {
+      const salt = bcrypt.genSaltSync(12)
+      const hashPass = bcrypt.hashSync(confirm, salt)
+      const editedUser = await User.findByIdAndUpdate(id, { username, email, password: hashPass, role }, {new: true})
+      return res.status(202).json({message: "User updated", editedUser})
+    }
 }
 
 exports.uploadProcess = async (req, res) => {
@@ -79,9 +88,13 @@ exports.logoutProcess = (req, res) => {
 }
 
 exports.loggedinProcess = async(req, res) => {
-    const id = req.user.id
+    if (req.user) {
+    const {id} = req.user
     const user = await User.findById(id).populate({path:'artWork courses streamings cart artistId'})
-    return res.status(200).json(user || null)
+    return res.status(200).json(user)
+  } else {
+    return res.status(200).json(null)
+  }
 }
 
 exports.googleProcess =  passport.authenticate("google", { scope: ["profile", "email"] })

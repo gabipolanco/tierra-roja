@@ -11,10 +11,8 @@ const courseSchema = new Schema({
     default: 'Consultá el valor'
   },
   classes: [{
-    _id: Schema.Types.ObjectId,
-    name: String,
-    description: String,
-    contentLink: String 
+    type: Schema.Types.ObjectId,
+    ref: 'ClassModel'
   }],
   streamingId: [{
       type: Schema.Types.ObjectId,

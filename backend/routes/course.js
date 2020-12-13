@@ -9,6 +9,7 @@ const {
    getOneCourse,
    deleteCourse,
    addClass,
+   getOneClass,
    editClass,
    deleteClass
 } = require('../controllers/courses')
@@ -21,7 +22,8 @@ router.get('/get/:id', isAuth, catchErrs(getOneCourse))
 router.get('/delete/:id', isAuth, catchErrs(deleteCourse))
 
 router.post('/addclass/:courseId', isAuth, checkRole("artist"), catchErrs(addClass))
-router.post('/editclass/:courseId/:id', isAuth, catchErrs(editClass))
-router.post('/deleteclass/:courseId/:id', isAuth, catchErrs(deleteClass))
+router.get('/getclass/:id', isAuth, catchErrs(getOneClass))
+router.post('/editclass/:id', isAuth, catchErrs(editClass))
+router.get('/deleteclass/:courseId/:id', isAuth, catchErrs(deleteClass))
 
 module.exports = router;
