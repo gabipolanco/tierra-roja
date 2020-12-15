@@ -8,6 +8,7 @@ import axios from 'axios'
 
 const MyAlterEgo = () => {
     const [img, setImg] = useState("https://res.cloudinary.com/gabipf/image/upload/v1607097840/bannerportfolio_psi9u4.jpg")
+    const [ uploadImg, setUploadImg ] = useState(null)
     const { artist, setUserArtistFn } = useContextInfo()
     let history = useHistory();
 
@@ -38,6 +39,7 @@ const MyAlterEgo = () => {
             
             const {data: {secure_url}}= await axios.post(cloudinaryAPI, data)
             setImg(secure_url);
+            setUploadImg(secure_url);
           }
 
     return (
@@ -120,7 +122,7 @@ const MyAlterEgo = () => {
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
-                        <button className="btn" type="submit" style={{width: "230px"}}>
+                        <button disabled={!uploadImg} className="btn" type="submit" style={{width: "230px"}}>
                         Crear artista
                         </button>
                     </Form.Item>

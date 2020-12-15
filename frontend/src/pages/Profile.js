@@ -30,31 +30,58 @@ const Profile = () => {
         setStatus("Cambiar la foto")
       }
 
-    
+    let rol
+    if (user) {
+        switch (user.role) {
+            case "student":
+                rol = "Estudiante"
+                break
+            case "artist":
+                rol = "Artista"
+                break
+            default:
+                rol = "Usuario"
+                break
+        }
+    }
     return user ?
         (<div className="page">
             <Typography.Title level={2}>Perfil de {user.username}</Typography.Title>
             <Row gutter={[16, 32]}>
-                <Col xs={{ span: 20, offset: 2 }} lg={{ span: 4, offset: 2 }}>
-                    <div style={{width: "100px", height: "100px", margin: "0 auto", borderRadius: "50%", overflow: "hidden"}}>
-                        <img style={{height: "100%", objectFit: "cover"}} src={user.image} alt=""/>
-                    </div>
-                    
-                    <form>  
-                        <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px 0", width: "250px"}} />
-                        <Button style={{display: "block", margin: "0 auto"}} onClick={handleSubmit} disabled={!img}>{status}</Button>
-                    </form>
-                    
+                <Col xs={{ span: 20, offset: 2 }} md={{ span: 4, offset: 2 }}>
+                    <Row>
+                        <Col span={24}>
+                            <div style={{width: "100px", height: "100px", margin: "0 auto", borderRadius: "50%", overflow: "hidden"}}>
+                                <img style={{height: "100%", objectFit: "cover"}} src={user.image} alt=""/>
+                            </div>
+                        </Col>
+                        <form>  
+                        <Col offset={2} span={20}>
+                            <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px 0", width: "250px"}} />
+                        </Col>
+                        <Col span={24}>
+                            <Button style={{display: "block", margin: "0 auto"}} onClick={handleSubmit} disabled={!img}>{status}</Button>
+                        </Col>
+                        </form>
+                    </Row> 
                 </Col>
-                <Col offset={2} span={20}>
+                    
+                <Col xs={{offset: 2, span: 20}} md={{span: 16}}>
                 {user.role === "artist" ? 
-                    <div>
-                        <Link style={{margin: "0 30px"}} to="/myworks"><Button>Mis trabajos</Button></Link>&nbsp;&nbsp;
-                        <Link style={{margin: "0 30px"}} to="/artist"><Button>Portfolio</Button></Link>&nbsp;&nbsp;
-                        <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>&nbsp;&nbsp;
-                        <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
-          
-                     </div> 
+                    <Row style={{height: "100%"}} align="bottom">
+                        <Col xs={{span: 24}} md={{span: 5, offset: 1}}>
+                            <Link to="/myworks"><Button>Mis trabajos</Button></Link>
+                        </Col>
+                        <Col xs={{span: 24}} md={{span: 5, offset: 1}}>                            
+                            <Link to="/artist"><Button>Portfolio</Button></Link>
+                        </Col>
+                        <Col xs={{span: 24}} md={{span: 5, offset: 1}}>                            
+                            <Link to="/mystreamings"><Button>Mis streamings</Button></Link>
+                        </Col>
+                        <Col xs={{span: 24}} md={{span: 5, offset: 1}}>                            
+                            <Link to="/dashboard"><Button>Dashboard</Button></Link>
+                        </Col>
+                    </Row> 
                      : <div>
                  {user.role === "student" ? 
                     <div>
@@ -65,14 +92,15 @@ const Profile = () => {
                         
                     </div>}
             </div>}
-                             </Col>
+                </Col>
+                
                 <Col offset={2} span={20}>    
                     <Link style={{position: "absolute", right: "0", color: "gray"}} to="/edit-user"><i className="far fa-edit"></i></Link>
                     <Descriptions column={{ xs: 1, sm: 2, lg: 4}} title="Información personal" layout="vertical">
                         <Descriptions.Item label="Nombre de usuario">{user.username}</Descriptions.Item>
                         <Descriptions.Item label="Contraseña">*********************</Descriptions.Item>
                         <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
-                        <Descriptions.Item label="Rol">{user.role}</Descriptions.Item>
+                        <Descriptions.Item label="Rol">{rol}</Descriptions.Item>
                     </Descriptions>
                 </Col>
             </Row>
