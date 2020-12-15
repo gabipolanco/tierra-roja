@@ -243,10 +243,12 @@ const Portfolio = () => {
     const [i, setI] = useState(0)
 
     useEffect(() => {
-        const artWork = works.filter(a => !a.price)
-        const prod =  works.filter(a => a.price)
-        setUserWorks([...artWork])
-        setProducts([...prod])
+        if (works) {
+            const artWork = works.filter(a => !a.price)
+            const prod =  works.filter(a => a.price)
+            setUserWorks([...artWork])
+            setProducts([...prod])
+        }
         setCourses([...userCourses])
     }, [works, userCourses])
 

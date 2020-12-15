@@ -20,6 +20,7 @@ const DashboardArtist = () => {
     const [courseToBeEdited, setCourseToBeEdited] = useState(null)
     const [classToBeEdited, setClassToBeEdited] = useState(null)
     const [form] = Form.useForm();
+    const [form2] = Form.useForm();
 
     useEffect(() => {
         function setMyCourses() {
@@ -44,7 +45,7 @@ const DashboardArtist = () => {
             }
         }
         setClassToEdit()
-    }, [editClass])
+    }, [isModal5Visible, isModal6Visible, editClass])
 
     const layout = {
         labelCol: { span: 24 },
@@ -87,7 +88,7 @@ const DashboardArtist = () => {
         await addClassFn(courseId, { name, description, contentLink, slideShowLink, video, hour })
         setIsModal4Visible(false)
         setUserCoursesFn()
-        form.resetFields()
+        form2.resetFields()
     }
 
     const onFinishEditClass = async ({name, description, contentLink, slideShowLink, video, hour}) => {
@@ -96,7 +97,7 @@ const DashboardArtist = () => {
         await editClassFn(id, { name, description, contentLink, slideShowLink, video, hour })
         setIsModal5Visible(false)
         setUserCoursesFn()
-        form.resetFields()
+        form2.resetFields()
     }
 
     const deleteClass = async () => {
@@ -367,7 +368,7 @@ const DashboardArtist = () => {
 
                 <Form
                     {...layout}
-                    form={form}
+                    form={form2}
                     name="addClass"
                     initialValues={{ remember: true }}
                     onFinish={onFinishAddClass}
@@ -466,7 +467,6 @@ const DashboardArtist = () => {
                     <Form.Item
                         label="Fecha y hora de la clase (opcional)"
                         name="hour"
-                        initialValue={classToBeEdited.hour}
                     >
                         <DatePicker showTime />
                     </Form.Item>

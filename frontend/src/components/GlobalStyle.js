@@ -80,7 +80,7 @@ ul {
 
 .one {
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/clayhands_xnpy4d.jpg");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960585/tierra-roja/Imagenes%20pagina/clayhands_qmduob.jpg");
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
@@ -96,7 +96,7 @@ ul {
 
 .two{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/AdobeStock_300369356_f4qx8w.jpg");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960584/tierra-roja/Imagenes%20pagina/AdobeStock_300369356_ji8bpw.jpg");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: 25vw -13vh;
@@ -112,7 +112,7 @@ ul {
 
 .three{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867180/tierra-roja/Imagenes%20pagina/roots_nqavbb.jpg");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960585/tierra-roja/Imagenes%20pagina/roots_zuuct1.jpg");
     background-size: 65%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -127,7 +127,7 @@ ul {
 
 .four{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/branch_prlkbd.jpg");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960584/tierra-roja/Imagenes%20pagina/branch_dkmbjh.jpg");
     background-size: 78%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -142,7 +142,7 @@ ul {
 
 .five{
     position: relative;
-    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607867179/tierra-roja/Imagenes%20pagina/tierra_tffxwi.jpg");
+    background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960585/tierra-roja/Imagenes%20pagina/tierra_igetub.jpg");
     transform: rotate(180deg);
     background-size: 70%;
     background-repeat: no-repeat;
