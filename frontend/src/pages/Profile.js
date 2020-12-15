@@ -30,7 +30,20 @@ const Profile = () => {
         setStatus("Cambiar la foto")
       }
 
-    
+    let rol
+    if (user) {
+        switch (user.role) {
+            case "student":
+                rol = "Estudiante"
+                break
+            case "artist":
+                rol = "Artista"
+                break
+            default:
+                rol = "Usuario"
+                break
+        }
+    }
     return user ?
         (<div className="page">
             <Typography.Title level={2}>Perfil de {user.username}</Typography.Title>
@@ -87,7 +100,7 @@ const Profile = () => {
                         <Descriptions.Item label="Nombre de usuario">{user.username}</Descriptions.Item>
                         <Descriptions.Item label="Contraseña">*********************</Descriptions.Item>
                         <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
-                        <Descriptions.Item label="Rol">{user.role}</Descriptions.Item>
+                        <Descriptions.Item label="Rol">{rol}</Descriptions.Item>
                     </Descriptions>
                 </Col>
             </Row>
