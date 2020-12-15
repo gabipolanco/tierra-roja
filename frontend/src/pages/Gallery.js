@@ -62,14 +62,14 @@ const Gallery = () => {
 
                 <div id="carousel">
                 <figure ref={spinnerRef} id="spinner">
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/alu5_scczh5.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/alu3_mebxpt.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/alu_pjnuuh.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/alu5_scczh5.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528212/tierra-roja/alu9_ggx2up.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528212/tierra-roja/alu8_kain6h.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528211/tierra-roja/alu6_wwbnuw.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
-                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528211/tierra-roja/alu7_yvq3it.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/Imagenes%20pagina/alu_pjnuuh.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/Imagenes%20pagina/alu2_bmjynf.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/Imagenes%20pagina/alu3_mebxpt.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528122/tierra-roja/Imagenes%20pagina/alu5_scczh5.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528211/tierra-roja/Imagenes%20pagina/alu6_wwbnuw.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528211/tierra-roja/Imagenes%20pagina/alu7_yvq3it.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528212/tierra-roja/Imagenes%20pagina/alu8_kain6h.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
+                    <img src="https://res.cloudinary.com/tomiscattini/image/upload/v1607528212/tierra-roja/Imagenes%20pagina/alu9_ggx2up.jpg" alt="Trabajo de Aluminé Fernández Rodriguez" />
                 </figure>
                 </div>
                 <span style={{color: "black", cursor: "pointer", float: "left"}} className="ss-icon" onClick={() => galleryspin('-')}>&lt;</span>
