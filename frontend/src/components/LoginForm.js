@@ -58,7 +58,7 @@ const LoginForm = () => {
         onFinishFailed={onFinishFailed}
         form={form}
         layout="vertical"
-        style={{margin: "0 80px", fontFamily: "Roboto"}}
+        style={{margin: "0 40px", fontFamily: "Roboto"}}
       >
         <Form.Item
           label="Email"

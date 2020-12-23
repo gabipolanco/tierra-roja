@@ -30,6 +30,7 @@ const HeaderNavStyled = styled.div`
         width: 30%;
         h2 {
         margin: 30px;
+        font-size: 1rem;
         font-weight: bold;
         padding: 0;
         text-align: left;
@@ -46,13 +47,19 @@ const HeaderNavStyled = styled.div`
         justify-content: flex-end;
     }
 
-
-@media ${props => props.theme.device.tablet} {
-    .menu-movil {
-        display: none;
+    @media ${props => props.theme.device.lgPhone} {
+        div h2 {
+            font-size: 1.2rem;
+        }
     }
-}
+
     @media ${props => props.theme.device.tablet} {
+        div h2 {
+            font-size: 1.5rem;
+        }
+        .menu-movil {
+            display: none;
+        }
         .menuLarge {
             display: flex;
             li {
@@ -89,8 +96,8 @@ const HeaderNav = () => {
       }
 
       const menu = (
-        <Menu>
-          {!user ? <> <Menu.Item>
+        <Menu style={{textAlign: "center"}}>
+          {!user ? <> <Menu.Item style={{padding: "20px"}}>
             <Link to="/store">Tienda</Link>
           </Menu.Item>
           <Menu.Item>
@@ -129,7 +136,7 @@ const HeaderNav = () => {
                 <h2><HashLink to="/#cover">Tierra Roja</HashLink></h2>
             </div>
             <div>
-                <Dropdown className="menu-movil" overlay={menu}>
+                <Dropdown overlayStyle={{width: "50vw"}} className="menu-movil" overlay={menu} placement="bottomCenter">
                     <a href="/" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         <MenuHamburguesa/>
                     </a>
@@ -139,7 +146,7 @@ const HeaderNav = () => {
                     {!user ? <><li><SignupForm /></li>
                     <li><LoginForm /></li></> :
                     <><li>
-                        <Dropdown overlay={menu2}>
+                        <Dropdown overlay={menu2} placement="bottomRight">
                             <Link to="/profile">Perfil</Link>
                         </Dropdown>
                     </li>

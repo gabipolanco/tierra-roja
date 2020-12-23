@@ -12,10 +12,10 @@ const Theme = ( { children } ) => {
             secondary: "'Quicksand', sans-serif"
         },
         device: {
-            lgPhone: '(min-width: 425px)',
-            tablet: '(min-width: 768px)',
-            laptop: '(min-width: 1024px)',
-            desktop: '(min-width: 1440px)'
+            lgPhone: '(min-width: 426px)',
+            tablet: '(min-width: 769px)',
+            laptop: '(min-width: 1025px)',
+            desktop: '(min-width: 1200px)'
         }
     }
 

@@ -37,9 +37,20 @@ ul {
   color:#eaeaea;
   letter-spacing: 2px;
   box-sizing:border-box;
-  margin-top:20px;
-  padding:10px 40px;
+  padding: 5px 10px;
   cursor: pointer;
+}
+
+@media ${props => props.theme.device.lgPhone} {
+  .btn {
+    padding: 5px 20px;
+  }
+}
+
+@media ${props => props.theme.device.tablet} {
+  .btn {
+    padding: 10px 40px;
+  }
 }
 
 .btn-reverse {
@@ -83,15 +94,20 @@ ul {
     background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960585/tierra-roja/Imagenes%20pagina/clayhands_qmduob.jpg");
     background-size: 50%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 10vw center;
     background-color:white;
     overflow: hidden;
     transition: background-size 1s linear;
     scroll-snap-align: center;
+    &:hover {
+      background-size: 54%;
+    }
 }
 
-.one:hover {
-  background-size: 54%;
+@media ${props => props.theme.device.tablet} {
+  .one {
+    background-position: center center;
+  }
 }
 
 .two{
@@ -99,30 +115,44 @@ ul {
     background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960584/tierra-roja/Imagenes%20pagina/AdobeStock_300369356_ji8bpw.jpg");
     background-size: 80%;
     background-repeat: no-repeat;
-    background-position: 25vw -13vh;
+    background-position: 30vw 90%;
     background-color:white;
     overflow: hidden;
     transition: background-size 1s linear;
     scroll-snap-align: center;
+    &:hover {
+      background-size: 83%;
+    }
 }
-    
-.two:hover {
-  background-size: 83%;
+
+@media ${props => props.theme.device.laptop} {
+  .two {
+    background-position: 25vw -13vh;
+  }
 }
 
 .three{
     position: relative;
     background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960585/tierra-roja/Imagenes%20pagina/roots_zuuct1.jpg");
-    background-size: 65%;
+    background-size: 85%;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: 10vw 20vh;
     background-color:white;
     transition: background-size 1s linear;
     scroll-snap-align: center;
+    &:hover {
+      background-size: 87%;
+    }
 }
 
-.three:hover {
-  background-size: 68%;
+@media ${props => props.theme.device.laptop} {
+  .three {
+    background-size: 65%;
+    background-position: center center;
+    &:hover {
+      background-size: 67%;
+    }
+  }
 }
 
 .four{
@@ -130,14 +160,28 @@ ul {
     background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v1607960584/tierra-roja/Imagenes%20pagina/branch_dkmbjh.jpg");
     background-size: 78%;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: 20vw 70vh;
     background-color:white;
     transition: background-size 1s linear;
     scroll-snap-align: center;
+    &:hover {
+      background-size: 81%;
+    }
 }
 
-.four:hover {
-  background-size: 81%;
+@media ${props => props.theme.device.lgPhone} {
+    .four {
+      background-position: center 50vh;
+    }
+}
+@media ${props => props.theme.device.laptop} {
+  .four {
+    background-size: 78%;
+    background-position: center center;
+    &:hover {
+      background-size: 81%;
+    }
+  }
 }
 
 .five{
@@ -150,26 +194,16 @@ ul {
     background-color:white;
     transition: background-size 1s linear;
     scroll-snap-align: center;
+    &:hover {
+      background-size: 74%;
+    }
 }
-
-.five:hover {
-  background-size: 74%;
-}
-
 .six {
-  background-color: #FDFAF7;
-}
-
-.six:hover {
-  background-size: 100%;
-}
-
-@media all and (min-width: 1000px) {
-  .one {
-    background-position: center center;
+  background-color: ${props => props.theme.color.main};
+  &:hover {
+    background-size: 100%;
   }
 }
-
 
 .outer-wrapper{
     width: 100vh;
@@ -196,41 +230,48 @@ ul {
     writing-mode:lr-tb;
 }
 
-#about .side-div {
-  display: flex;
-  justify-content: flex-end;
-  position:absolute;
-  height:100%;
-  width: 0;
-  background: ${props => props.theme.color.main + '77'};
-  transform: skewX(-5deg) translateX(-50px);
-  transition: 1s all ease-in-out;
-  -webkit-transition: 1s all ease-in-out;
+#about {
+    .side-div {
+      display: flex;
+      justify-content: flex-end;
+      position:absolute;
+      height:100%;
+      width: 0;
+      background: ${props => props.theme.color.main + '77'};
+      transform: skewX(-5deg) translateX(-50px);
+      transition: 1s all ease-in-out;
+      -webkit-transition: 1s all ease-in-out;
+    }
+    .content {
+      display: flex;
+      position:relative;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      top: calc(50vh - 150px);
+      padding-right: 20vw;
+      box-sizing: border-box;
+      left: 70px;
+      color:#000;
+      z-index:10;
+      height:300px;
+      width: 30%;
+      h2 {
+        font-size: 3rem;
+        text-align: left;
+      }
+    }
 }
 
-#about .content {
-  display: flex;
-  position:relative;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  top: calc(50vh - 150px);
-  padding-right: 20vw;
-  box-sizing: border-box;
-  left: 70px;
-  color:#000;
-  z-index:10;
-  height:300px;
-  width: 30%;
+@media ${props => props.theme.device.lgPhone} {
+  #about .content h2 {
+      font-size: 3.5rem;
+    }
 }
-
-#about .content h2 {
-  font-size: 4rem;
-  text-align: left;
-}
-
-#about .content .btn {
-  height: 50px;
+@media ${props => props.theme.device.tablet} {
+  #about .content h2 {
+      font-size: 4rem;
+    }
 }
 
 .anim-trans {
@@ -243,115 +284,209 @@ ul {
 .transition .about-info {
   transform: skewX(-3deg);
   opacity: 0;
-  width: 30%;
+  width: 100%;
   height: 80vh;
   margin: 100px 50px;
   padding: 50px;
-  background-color: rgba(255, 255, 255, .5);
+  background-color: white;
   text-align: justify;
   transition: all .5s ease;
+}
+
+@media ${props => props.theme.device.lgPhone} {
+  .transition .about-info {
+    width: 70%;
+  }
+}
+
+@media ${props => props.theme.device.tablet} {
+  .transition .about-info {
+    width: 50%;
+    background-color: rgba(255, 255, 255, .5);
+  }
+}
+
+@media ${props => props.theme.device.desktop} {
+  .transition .about-info {
+    width: 30%;
+  }
 }
 
 #portfolios {
   position: relative;
   display: flex;
   justify-content: flex-end;
+  .content {
+    position: relative;
+    height: 100vh;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    color:#000;
+    z-index:10;
+    padding-bottom: 50px;
+    text-align: left;
+    h2 {
+      transform: rotate(-90deg);
+      font-size: 2.5rem;
+    }
+    .btn {
+      margin-top: 100px;
+      margin-right: 70px;
+    }
+  }
 }
 
-#portfolios .content {
-  position: relative;
-  height: 100vh;
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  color:#000;
-  z-index:10;
-  padding: 0;
-  text-align: left;
+@media ${props => props.theme.device.tablet} {
+  #portfolios .content {
+    padding-bottom: 100px;
+    h2 {
+      font-size: 3rem;
+    }
+    .btn {
+      margin-top: 100px;
+      margin-right: 100px;
+    }
+  }
 }
-
-#portfolios .content h2 {
-  transform: rotate(-90deg);
-  font-size: 3rem;
-}
-#portfolios .content .btn {
-  margin-top: 100px;
-  margin-right: 100px;
+@media ${props => props.theme.device.laptop} {
+  #portfolios .content {
+    padding-bottom: 0;
+    justify-content: center;
+    .btn {
+      margin-top: 100px;
+      margin-right: 100px;
+    }
+  }
 }
 
 #galeria {
   position: relative;
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 100px;
+    width: 50%;
+    height: 100vh;
+    z-index: 10;
+    h2 {
+      transform: rotate(90deg);
+      margin-top: 50px; 
+      text-align: left;
+      font-size: 2.5rem; 
+    }
+    .btn {
+      margin-top: 150px;
+    }
+  }
 }
 
-#galeria .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 25%;
-  height: 100vh;
-  z-index: 10;
-}
-
-#galeria .content h2 {
-  transform: rotate(90deg);
-  margin-top: 100px; 
-  text-align: left;
-  font-size: 3rem; 
-}
-
-#galeria .content .btn {
-  margin-top: 150px;
+@media ${props => props.theme.device.laptop} {
+  #galeria .content {
+    width: 25%;
+    margin-left: 0;
+    h2 {
+      margin-top: 100px; 
+      font-size: 3rem;
+    }
+  }
 }
 
 #escenario {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 100px;
+  padding-left: 20px;
+  .content {
+    margin-bottom: 20vh;
+    transform: rotate(180deg);
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
 }
 
-#escenario .content {
-  transform: rotate(180deg);
-}
-
-#escenario .content h2 {
-  font-size: 3rem;
+@media ${props => props.theme.device.tablet} {
+  #escenario {
+    padding-left: 100px;
+    .content {
+      margin-bottom: 0;
+      h2 {
+        font-size: 3rem;
+      }
+    }
+  }
 }
 
 #contacto {
   position: relative;
   display: flex;
-}
-#contacto .content {
-  display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 100px 50px;
-  width: 50vw;
-  box-sizing: border-box;
-  margin: 0;
-  height: 100%;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-#contacto .banner-contacto {
-  width: 50vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-}
-#contacto .banner-contacto h2 {
-  transform: rotate(-90deg);
-  font-size: 10vh;
-  text-align: left;
-  margin: 30px;
-  font-family: ${props => props.theme.font.primary};
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 50px 0;
+    width: 50%;
+    box-sizing: border-box;
+    margin: 30vh 0;
+    height: 100%;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  .banner-contacto {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      h2 {
+        position: absolute;
+        transform: rotate(-90deg);
+        font-size: 2rem;
+        min-width: 200px;
+        text-align: left;
+        font-family: ${props => props.theme.font.primary};
+      }
+    }
 }
 
+@media ${props => props.theme.device.tablet} {
+  #contacto {
+    .content {
+      margin: 0;
+      padding-top: 0;
+    }
+    .banner-contacto {
+      h2 {
+        font-size: 3.5rem;
+      }
+    }
+  }
+}
+
+@media ${props => props.theme.device.laptop} {
+  #contacto {
+    flex-direction: row;
+    .content {
+      margin-top: 0;
+      padding: 100px 50px;
+    }
+    .banner-contacto {
+      h2 {
+        position: relative;
+        font-size: 10vh;
+        margin: 30px;
+      }
+    }
+  }
+}
 `
  
 export default GlobalStyle;

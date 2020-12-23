@@ -13,14 +13,23 @@ font-weight: bold;
     text-transform: uppercase;
     transition: all .4s ease-in-out;   
     h1{
-    font-size: 1rem;
+    font-size: 3rem;
     text-align: right;
     }
 }
 
+@media ${props => props.theme.device.lgPhone} {
+    .title {
+        h1{
+        font-size: 3.5rem;
+        }
+        span {
+        font-size: 3.8rem;
+        }
+    }
+}
 @media ${props => props.theme.device.tablet} {
     .title {
-        margin: 0 20px;
         h1{
         font-size: 4rem;
         }
