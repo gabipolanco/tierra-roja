@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { useContextInfo } from './hooks/context'
 import 'antd/dist/antd.css'
+import Theme from './components/Theme'
 
 import NotFound from './components/404/NotFound'
 import NotLogged from './pages/NotLogged'
@@ -34,34 +35,36 @@ const RouterApp = () => {
 
     return (
         <Router>
-            <GlobalStyle />
-            <HeaderNav />
-            <NavBar />
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/confirmed" component={Confirmed} />
-                <Route path="/store" component={Store} />
-                <Route path="/portfolios" component={Portfolios} />
-                <Route path="/portfolio/:id" component={OnePortfolio} />
-                <Route path="/streamings" component={StreamingList} />
-                <Route path="/streaming/:id" component={Streaming} />
-                <Route path="/galeria" component={Gallery} />
-                <Route path="/gorravirtual/:total" component={GorraVirtual} />
-                <Route path="/notlogged" component={NotLogged} />
+            <Theme>
+                <GlobalStyle />
+                <HeaderNav />
+                <NavBar />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/confirmed" component={Confirmed} />
+                    <Route path="/store" component={Store} />
+                    <Route path="/portfolios" component={Portfolios} />
+                    <Route path="/portfolio/:id" component={OnePortfolio} />
+                    <Route path="/streamings" component={StreamingList} />
+                    <Route path="/streaming/:id" component={Streaming} />
+                    <Route path="/galeria" component={Gallery} />
+                    <Route path="/gorravirtual/:total" component={GorraVirtual} />
+                    <Route path="/notlogged" component={NotLogged} />
 
-                {user ? <><Route path="/profile" component={Profile} />
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/checkout/:total" component={Checkout} />
-                <Route path="/edit-user" component={EditUser} />
-                <Route path="/myworks" component={MyWorks} />
-                <Route path="/mystreamings" component={MyStreamings} />
-                <Route path="/artist" component={MyAlterEgo} />
-                <Route path="/edit-portfolio" component={EditPortfolio} /></> :
-                <Redirect to="/notlogged" />}
-                
-                <Route component={NotFound} />
-            </Switch>
+                    {user ? <><Route path="/profile" component={Profile} />
+                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/cart" component={Cart} />
+                    <Route path="/checkout/:total" component={Checkout} />
+                    <Route path="/edit-user" component={EditUser} />
+                    <Route path="/myworks" component={MyWorks} />
+                    <Route path="/mystreamings" component={MyStreamings} />
+                    <Route path="/artist" component={MyAlterEgo} />
+                    <Route path="/edit-portfolio" component={EditPortfolio} /></> :
+                    <Redirect to="/notlogged" />}
+                    
+                    <Route component={NotFound} />
+                </Switch>
+            </Theme>
         </Router>
     )
 }

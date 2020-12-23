@@ -4,32 +4,31 @@ import {Link} from 'react-router-dom'
 
 const Cover = styled.div `
 display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-weight: bold;
+align-items: center;
+justify-content: flex-end;
+font-weight: bold;
   
-  .title {
-        margin: 0 20px;
-        text-transform: uppercase;
-        transition: all .4s ease-in-out;   
-  }
-  .title h1{
+.title {
+    margin: 0 20px;
+    text-transform: uppercase;
+    transition: all .4s ease-in-out;   
+    h1{
     font-size: 1rem;
     text-align: right;
-  }
+    }
+}
 
-
-  @media all and (min-width: 1000px) {
+@media ${props => props.theme.device.tablet} {
     .title {
         margin: 0 20px;
-    }
-    .title h1{
+        h1{
         font-size: 4rem;
-      }
-      .title span {
-      font-size: 4.6rem;
-  }
-  }
+        }
+        span {
+        font-size: 4.6rem;
+        }
+    }
+}
 `
 
 const Home = () => {

@@ -9,8 +9,6 @@ import { Menu, Dropdown, Badge } from 'antd';
 import { useContextInfo } from '../hooks/context'
 import { logoutFn } from '../services/auth'
 
-
-
 const HeaderNavStyled = styled.div`
     position: fixed;
     display: flex;
@@ -25,50 +23,50 @@ const HeaderNavStyled = styled.div`
     margin: 0 50px;
     letter-spacing: 2px;
 
-&>div:first-child {
-    width: 70%;
-}
-&>div {
-    width: 30%;
-}
-&>div>h2 {
-    margin: 30px;
-    font-weight: bold;
-    padding: 0;
-    text-align: left;
-    letter-spacing: 4px;
-}
-&>div>h2:hover a {
-    color: #996633;
-}
-
-@media all and (min-width: 600px) {
-    &>div .menu-movil {
-        display: none;
+    div:first-child {
+        width: 70%;
     }
-}
-
-    &>div .menuLarge {
+    div {
+        width: 30%;
+        h2 {
+        margin: 30px;
+        font-weight: bold;
+        padding: 0;
+        text-align: left;
+        letter-spacing: 4px;
+        &:hover a {
+            color: ${props => props.theme.color.brown};
+            }
+        }
+    }
+    .menuLarge {
         display: none;
         margin-right: 50px;
         width: 100%;
         justify-content: flex-end;
     }
-    @media all and (min-width: 600px) {
-    &>div .menuLarge {
-        display: flex;
+
+
+@media ${props => props.theme.device.tablet} {
+    .menu-movil {
+        display: none;
     }
 }
-    &>div .menuLarge li {
-        margin: 0 50px;
-        text-transform: uppercase;
-        font-size: 18px;
+    @media ${props => props.theme.device.tablet} {
+        .menuLarge {
+            display: flex;
+            li {
+            margin: 0 50px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            &:hover a {
+                color: black;
+                text-shadow: 0 0 1px black;
+                }
+            }
+        }
     }
-    &>div .menuLarge li:hover a {
-        color: black;
-        text-shadow: 0 0 1px black;
-    }
-    `
+`
 
 const HeaderNav = () => {
     const { user, logout, cart } = useContextInfo()

@@ -14,7 +14,7 @@ font-size: 7vw;
 margin: 0 13vw;
 font-weight: bold;
 text-transform: uppercase;
-font-family: 'Bebas Neue', sans-serif;
+font-family: ${props => props.theme.font.primary};
 }
 & .names-container {
     transform: rotate(-90deg);
@@ -35,7 +35,7 @@ font-family: 'Bebas Neue', sans-serif;
   left: 0;
   height: 100%;
   font-size: 3rem;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: ${props => props.theme.font.primary};
   text-align: right;
   transform: translate3d(0, 0, 0);
 }

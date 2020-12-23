@@ -7,8 +7,7 @@ const GalleryStyled = styled.div`
   background: #FFF; 
   padding-top: 5%; 
   font-size:0; 
-  margin-bottom: 3rem; 
-  ${'' /* overflow: hidden;  */}
+  margin-bottom: 3rem;
 }
 & #spinner { 
   transform-style: preserve-3d; 

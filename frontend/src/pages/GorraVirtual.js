@@ -16,7 +16,7 @@ background-position: center center;
 background-size: cover;
 background-repeat: no-repeat;
 & h2 {
-    font-family: "Bebas Neue", sans-serif;
+    font-family: ${props => props.theme.font.primary};
     font-size: 20vh;
 }
 `

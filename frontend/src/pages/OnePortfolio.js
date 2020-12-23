@@ -176,7 +176,6 @@ overflow: hidden;
 }
 & .img-container2 {
     position: relative;
-    ${'' /* max-height: 360px; */}
     overflow: hidden;
 }
 & .arrow-left {

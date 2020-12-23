@@ -27,7 +27,7 @@ const LoginForm = () => {
 
   const layout = {
     labelCol: { span: 24 },
-    wrapperCol: { span: 16 },
+    wrapperCol: { span: 24 },
   };
   const tailLayout = {
     wrapperCol: { offset: 0, span: 24 },
@@ -75,7 +75,7 @@ const LoginForm = () => {
             },
           ]}
         >
-          <Input style={{width: "300px"}}/>
+          <Input />
         </Form.Item>
   
         <Form.Item
@@ -88,7 +88,7 @@ const LoginForm = () => {
             },
           ]}
         >
-          <Input.Password style={{width: "300px"}}/>
+          <Input.Password />
         </Form.Item>
   
         <Form.Item {...tailLayout} name="remember" valuePropName="checked">
@@ -96,7 +96,7 @@ const LoginForm = () => {
         </Form.Item>
   
         <Form.Item {...tailLayout}>
-          <button className="btn" htmlType="submit" style={{width: "230px"}}>
+          <button className="btn" type="submit" style={{minWidth: "70%"}}>
             Login
           </button>
         </Form.Item>

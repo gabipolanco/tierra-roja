@@ -21,7 +21,6 @@ const MyAlterEgo = () => {
       };
 
         const onFinish = async ({bio, email, instagram, facebook, name, other, profession}) => {
-            // console.log({bio, email, instagram, facebook, name, other, profession})
             const {data: { newArtist } } = await createArtistFn( {bio, email, instagram, facebook, other, name, profession,  coverImage: img})
             setUserArtistFn(newArtist)
             history.push("/artist")

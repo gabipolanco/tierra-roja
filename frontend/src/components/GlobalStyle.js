@@ -9,7 +9,7 @@ html {
   body{
     margin: 0;
     padding: 0;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: ${props => props.theme.font.primary};
     font-weight: lighter;
     font-size: 16px;
   }
@@ -43,7 +43,7 @@ ul {
 }
 
 .btn-reverse {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: ${props => props.theme.font.primary};
   background:transparent;
   color:#202020;
   border: 2px solid #202020;
@@ -51,7 +51,7 @@ ul {
 
   .page {
     padding: 50px;
-    font-family: 'Quicksand', sans-serif;
+    font-family: ${props => props.theme.font.secondary};
     overflow-y: scroll;
   }
 
@@ -202,7 +202,7 @@ ul {
   position:absolute;
   height:100%;
   width: 0;
-  background:rgba(253, 250, 247, 0.445);
+  background: ${props => props.theme.color.main + '77'};
   transform: skewX(-5deg) translateX(-50px);
   transition: 1s all ease-in-out;
   -webkit-transition: 1s all ease-in-out;
@@ -349,7 +349,7 @@ ul {
   font-size: 10vh;
   text-align: left;
   margin: 30px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: ${props => props.theme.font.primary};
 }
 
 `
