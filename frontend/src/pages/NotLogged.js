@@ -18,7 +18,7 @@ background-repeat: no-repeat;
     width: 100%;
 }
 &>div h2 {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: ${props => props.theme.font.primary};
     font-size: 20vh;
 }
 `

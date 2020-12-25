@@ -23,7 +23,7 @@ const SignupForm = () => {
 
   const layout = {
     labelCol: { span: 24 },
-    wrapperCol: { span: 16 },
+    wrapperCol: { span: 24 },
   };
   const tailLayout = {
     wrapperCol: { offset: 0, span: 24 },
@@ -37,7 +37,6 @@ const SignupForm = () => {
         setRegistered(true)
       } catch(err) {
         console.log(err.response.data.err)
-        // message.error(err.res.data.err.message)
       }
     };
   
@@ -48,7 +47,7 @@ const SignupForm = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         layout="vertical"
-        style={{margin: "0 80px", fontFamily: "Roboto"}}
+        style={{margin: "0 40px", fontFamily: "Roboto"}}
       >
         <Form.Item
           label="Email"
@@ -65,7 +64,7 @@ const SignupForm = () => {
             },
           ]}
         >
-          <Input style={{width: "300px"}}/>
+          <Input />
         </Form.Item>
   
         <Form.Item
@@ -79,7 +78,7 @@ const SignupForm = () => {
           ]}
           hasFeedback
         >
-          <Input.Password style={{width: "300px"}}/>
+          <Input.Password />
         </Form.Item>
   
         <Form.Item
@@ -102,7 +101,7 @@ const SignupForm = () => {
             }),
           ]}
         >
-          <Input.Password style={{width: "300px"}}/>
+          <Input.Password />
         </Form.Item>
   
         <Form.Item {...tailLayout} name="remember" valuePropName="checked">
@@ -110,7 +109,7 @@ const SignupForm = () => {
         </Form.Item>
   
         <Form.Item {...tailLayout}>
-          <button className="btn" htmlType="submit" style={{width: "230px"}}>
+          <button className="btn" htmlType="submit" style={{minWidth: "70%"}}>
             Registrarse
           </button>
         </Form.Item>

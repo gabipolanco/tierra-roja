@@ -20,7 +20,7 @@ const Store = () => {
             if(search === '') {
             setProducts([...data])
         } else {
-            const newArr = [...data].filter(p => p.title.toUpperCase().includes(search.toUpperCase()))
+            const newArr = [...data].filter(p => p.title.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(search.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")))
                     setProducts(newArr)
         }
         }
@@ -33,15 +33,15 @@ const Store = () => {
             if(search === '') {
             setCourses([...data])
         } else {
-            const newArr = [...data].filter(c => c.name.toUpperCase().includes(search.toUpperCase()))
+            const newArr = [...data].filter(c => c.name.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(search.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")))
                     setCourses(newArr)
         }
         }
         getCourses()
     }, [search])
 
-    function onSearch(values) {
-        setSearch(values)
+    function onSearch({target}) {
+        setSearch(target.value)
     }
 
     function addToCart(id) {
@@ -55,7 +55,7 @@ const Store = () => {
             <Row style={{height: "calc(100vh - 100px)"}}>
                 <Col style={{marginTop: "10%",height: "150px"}} offset={1} span={3}>
                     <Row style={{height: "100%"}} type="flex" align="middle">
-                        <Col style={{position: "fixed", top: "15vh", left: "70px"}} span={24}><Search placeholder="Buscar" onSearch={onSearch} style={{ width: "13vw" }} /></Col>
+                        <Col style={{position: "fixed", top: "15vh", left: "70px"}} span={24}><Search placeholder="Buscar" onChange={onSearch} style={{ width: "13vw" }} /></Col>
                         <Col style={{position: "fixed"}} span={24}><Link to="/cart" style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Carrito</Link></Col>
                         <Col style={{position: "fixed", top: "45vh"}} span={24}><HashLink to="/store#productos" style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Productos</HashLink></Col>
                         <Col style={{position: "fixed", top: "55vh"}} span={24}><HashLink to="/store#cursos" style={{color: "black", fontFamily: "'Bebas Neue', sans-serif"}}>Servicios</HashLink></Col>
