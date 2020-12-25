@@ -244,7 +244,7 @@ const MyStreamings = () => {
                     {stream.hour && <Typography.Text>{fecha}</Typography.Text>}<br />
                     <Typography.Text>{stream.description}</Typography.Text><br />
                     <Typography.Text>Copiá el siguiente código para empezar a stremear:</Typography.Text><br />
-                    <Typography.Text>{stream.streamKey}</Typography.Text><br />
+                    <Typography.Text copyable>{stream.streamKey}</Typography.Text><br />
                     <Typography.Text>Te recomendamos <a href="https://obsproject.com/es">OBS</a> que es gratis y de código abierto</Typography.Text><br />
                     <Link to={`/streaming/${stream._id}`}><Button>Accion</Button></Link><br />
                     {artist && <Typography.Text>{artist.name}</Typography.Text>}
