@@ -148,13 +148,13 @@ const StreamingList = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className="container-price-currency" xs={{offset: 11, span: 1}} sm={{offset: 16}} md={{offset: 14}}>
+                <Col className="container-price-currency" xs={{offset: 11, span: 1}} sm={{offset: 16}} md={{offset: 12}} xl={{offset: 14}}>
                     <Typography.Text>ARS$</Typography.Text>
                 </Col>
-                <Col className="container-price" xs={{offset: 1, span: 3}} md={{offset: 0, span: 3}}>
+                <Col className="container-price" xs={{offset: 1, span: 3}} md={{offset: 1, span: 3}} xl={{span: 2}} >
                     <InputNumber size="large" min={200} max={1500} defaultValue={200} onChange={onChange} />
                 </Col>
-                <Col xs={{offset: 8, span: 10}} sm={{offset: 15, span: 6}} md={{offset: 0, span: 4}}>
+                <Col xs={{offset: 8, span: 10}} sm={{offset: 15, span: 6}} md={{offset: 0, span: 6}} xl={{span: 4}}>
                     {total && <Link to={`/gorravirtual/${total}`}><div className="btn btn-reverse">Gorra virtual</div></Link>}
                 </Col>
             </Row>

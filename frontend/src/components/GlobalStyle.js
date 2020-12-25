@@ -61,7 +61,7 @@ ul {
 }
 
   .page {
-    padding: 50px;
+    padding: 50px 0 0 50px;
     font-family: ${props => props.theme.font.secondary};
     overflow-y: scroll;
   }
