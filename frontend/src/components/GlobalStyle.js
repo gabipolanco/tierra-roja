@@ -6,14 +6,29 @@ html {
   scroll-behavior: smooth;
 }
 
-  body{
-    margin: 0;
-    padding: 0;
-    font-family: ${props => props.theme.font.primary};
-    font-weight: lighter;
-    font-size: 16px;
-  }
+body{
+  margin: 0;
+  padding: 0;
+  font-family: ${props => props.theme.font.primary};
+  font-weight: lighter;
+  font-size: 16px;
+}
 
+h2 {
+  font-size: 1rem;
+}
+h3 {
+  font-size: .8rem;
+}
+
+@media ${props => props.theme.device.laptop} {
+  h2 {
+    font-size: 1.7rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+}
   
 a {
   text-decoration:none;

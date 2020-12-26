@@ -6,7 +6,7 @@ import { getAllCoursesFn } from '../services/courses'
 import { useContextInfo } from '../hooks/context'
 import {Row, Col, Typography, Divider, Button, Input, Card } from 'antd'
 import styled from 'styled-components'
-import ShowMoreText from 'react-show-more-text';
+import ShowMoreText from 'react-show-more-text'
 const { Search } = Input;
 
 const StoreStyled = styled.div`
