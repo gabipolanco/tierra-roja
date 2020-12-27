@@ -65,8 +65,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
         setStoreDiv(null)
     }
     function closeWindow() {
-        if(bio || arte || coursesDiv || storeDiv) close()
-        
+        if(bio || arte || coursesDiv || storeDiv) close() 
     }
 
     function workLeft() {

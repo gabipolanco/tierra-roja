@@ -10,16 +10,24 @@ background-image: url("https://res.cloudinary.com/tomiscattini/image/upload/v160
 background-position: center center;
 background-size: 80%;
 background-repeat: no-repeat;
-&>div {
+div {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
+    h2 {
+        font-family: ${props => props.theme.font.primary};
+        font-size: 2.5rem;
+    }
 }
-&>div h2 {
-    font-family: ${props => props.theme.font.primary};
-    font-size: 20vh;
+@media ${props => props.theme.device.tablet} {
+    div {
+        align-items: flex-end;
+         h2 {
+            font-size: 20vh;
+        }
+    }
 }
 `
 
