@@ -3,6 +3,34 @@ import {Link} from 'react-router-dom'
 import { removeFromCartFn } from '../services/works'
 import { useContextInfo } from '../hooks/context'
 import { Row, Col, Button, Typography, Divider } from 'antd'
+import styled from 'styled-components'
+
+const CartStyled = styled.div `
+ .back-mobile {
+    position: fixed; 
+    top: 60px; 
+    left: 110px; 
+    z-index: 15;
+}
+.back {
+    display: none;
+}
+@media ${props => props.theme.device.tablet} {
+    .back {
+        display: block;
+        position: fixed; 
+        top: 70px; 
+        left: 70px; 
+        z-index: 15;
+        i {
+            margin-right: 10px;
+        }
+    }
+    .back-mobile {
+        display: none;
+    }
+}
+`
 
 const Cart = () => {
     const [products, setProducts] = useState(null)
@@ -37,8 +65,9 @@ const Cart = () => {
     }
 
     return (
-        <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/store"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Tienda</Link>
+        <CartStyled className="page">
+            <Link className="back-mobile" to="/store"><i className="fas fa-store"></i></Link>
+            <Link className="back" to="/store"><i className="fas fa-arrow-left"></i>Tienda</Link>
             <Typography.Title level={2}>Carrito</Typography.Title>
 
             {products && products.map((p) => (
@@ -75,7 +104,7 @@ const Cart = () => {
                     <Link to={`/checkout/${total}`}><Button>Pagar</Button></Link>
                 </Col>
             </Row>
-        </div>
+        </CartStyled>
     )
 }
 

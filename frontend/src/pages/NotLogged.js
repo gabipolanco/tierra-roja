@@ -18,7 +18,7 @@ div {
     width: 100%;
     h2 {
         font-family: ${props => props.theme.font.primary};
-        font-size: 2.5rem;
+        font-size: 10vw;
     }
 }
 @media ${props => props.theme.device.tablet} {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Typography, Row, Col, Descriptions, Button } from 'antd'
+import { Row, Col, Descriptions, Button } from 'antd'
 import styled from 'styled-components';
 import { useContextInfo } from '../hooks/context'
-import { Redirect, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { uploadPhotoFn } from '../services/auth'
 
@@ -22,7 +22,22 @@ font-family: ${props => props.theme.font.secondary};
 }
  button {
     min-width: 110px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+ }
+ @media ${props => props.theme.device.tablet} {
+     h2 {
+         position: absolute;
+         top: 13vh;
+         left: 30vw;
+     }
+     button {
+        font-weight: normal;
+     }
+ }
+ @media ${props => props.theme.device.laptop} {
+     h2 {
+         left: 37vw;
+     }
  }
 `
 
@@ -67,25 +82,25 @@ const Profile = () => {
     }
     return (<ProfileStyled>
             <Row gutter={[16, 32]}>
-                <Col xs={{ span: 20, offset: 2 }} >
+                <Col xs={{ span: 18, offset: 4 }} >
                     <h2>Perfil de {user.username}</h2>
                 </Col>
                 <Col xs={{ span: 20, offset: 3 }} md={{ span: 4, offset: 2 }}>
-                    <Row>
-                        <Col span={24}>
-                            <div className="image-container">
-                                <img src={user.image} alt=""/>
-                            </div>
-                        </Col>
-                        <form>  
-                        <Col xs={{offset: 4, span: 18}} sm={{offset: 9, span: 5}} md={{offset: 2, span: 20}}>
-                            <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px 0", width: "250px"}} />
-                        </Col>
-                        <Col span={24}>
-                            <Button style={{display: "block", margin: "0 auto"}} onClick={handleSubmit} disabled={!img}>{status}</Button>
-                        </Col>
-                        </form>
-                    </Row> 
+                    <form>  
+                        <Row>
+                            <Col span={24}>
+                                <div className="image-container">
+                                    <img src={user.image} alt=""/>
+                                </div>
+                            </Col>
+                            <Col xs={{offset: 6, span: 15}} sm={{offset: 7}} md={{offset: 2, span: 20}}>
+                                <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px 0", width: "250px"}} />
+                            </Col>
+                            <Col span={22}>
+                                <Button onClick={handleSubmit} disabled={!img}>{status}</Button>
+                            </Col>
+                        </Row> 
+                    </form>
                 </Col>
                     
                 <Col xs={{offset: 2, span: 20}} md={{span: 16}}>
@@ -120,7 +135,7 @@ const Profile = () => {
             </div>}
                 </Col>
                 
-                <Col offset={2} span={20}>    
+                <Col xs={{offset: 4, span: 18}} md={{offset: 2, span: 20}}>    
                     <Link style={{position: "absolute", right: "0", color: "gray"}} to="/edit-user"><i className="far fa-edit"></i></Link>
                     <Descriptions column={{ xs: 1, sm: 2, lg: 4}} title="Información personal" layout="vertical">
                         <Descriptions.Item label="Nombre de usuario">{user.username}</Descriptions.Item>

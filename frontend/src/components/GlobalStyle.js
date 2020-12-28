@@ -21,7 +21,7 @@ h3 {
   font-size: .8rem;
 }
 
-@media ${props => props.theme.device.laptop} {
+@media ${props => props.theme.device.tablet} {
   h2 {
     font-size: 1.7rem;
   }
@@ -78,7 +78,6 @@ ul {
   .page {
     padding: 50px 0 0 50px;
     font-family: ${props => props.theme.font.secondary};
-    overflow-y: scroll;
   }
 
 #brand{

@@ -3,6 +3,34 @@ import {Link} from 'react-router-dom'
 import { getCartFn } from '../services/cart'
 import { useContextInfo } from '../hooks/context'
 import { Row, Col, Typography, Divider } from 'antd'
+import styled from 'styled-components'
+
+const CheckoutStyled = styled.div `
+ .back-mobile {
+    position: fixed; 
+    top: 60px; 
+    left: 110px; 
+    z-index: 15;
+}
+.back {
+    display: none;
+}
+@media ${props => props.theme.device.tablet} {
+    .back {
+        display: block;
+        position: fixed; 
+        top: 70px; 
+        left: 70px; 
+        z-index: 15;
+        i {
+            margin-right: 10px;
+        }
+    }
+    .back-mobile {
+        display: none;
+    }
+}
+`
 
 const Checkout = ({match: {params: {total}}}) => {
     const [products, setProducts] = useState(null)
@@ -32,9 +60,10 @@ const Checkout = ({match: {params: {total}}}) => {
       }, [total])
 
     return (
-        <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/cart"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Carrito</Link>
-            <Typography.Title level={2}>Checkout</Typography.Title>
+        <CheckoutStyled className="page">
+            <Link className="back-mobile" to="/cart"><i className="fas fa-shopping-cart"></i></Link>
+            <Link className="back" to="/cart"><i className="fas fa-arrow-left"></i>Tienda</Link>
+           <Typography.Title level={2}>Checkout</Typography.Title>
 
             {products && products.map((p) => (
             <Row>
@@ -64,7 +93,7 @@ const Checkout = ({match: {params: {total}}}) => {
                 <div ref={paymentContainereRef}></div>
                 </Col>
             </Row>
-        </div>
+        </CheckoutStyled>
     )
 }
 

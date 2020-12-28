@@ -14,10 +14,10 @@ const StoreStyled = styled.div`
     padding-bottom: 0; 
     overflow-y: scroll; 
     height: 100vh;
-    .back-phone {
+    .back-mobile {
         position: fixed; 
         top: 140px; 
-        left: 70px; 
+        left: 110px; 
         z-index: 15;
     }
     .back {
@@ -105,7 +105,7 @@ const StoreStyled = styled.div`
                 margin-right: 10px;
             }
         }
-        .back-phone {
+        .back-mobile {
             display: none;
         }
         .container {
@@ -199,7 +199,7 @@ const Store = () => {
 
     return (
         <StoreStyled className="page">
-            <Link className="back-phone" to="/"><i className="fas fa-home"></i></Link>
+            <Link className="back-mobile" to="/"><i className="fas fa-home"></i></Link>
             <Link className="back" to="/"><i className="fas fa-arrow-left"></i>Inicio</Link>
             <Row className="container">
                 <Col className="nav" xs={{offset: 1, span: 22}} lg={{offset: 1, span: 3}}>
