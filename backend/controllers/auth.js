@@ -109,16 +109,3 @@ exports.googleRedirect = (req, res, next) => {
         })
     })(req, res, next)
 }
-
-// exports.facebookProcess =  passport.authenticate("facebook", { scope: [ "email"] })
-
-// exports.facebookRedirect = (req, res, next) => {
-//     passport.authenticate("facebook", { scope: ["email"] }, (err, user, info) => {
-//         if (err) return res.status(500).json({ err, info })
-//         if (!user) return res.status(401).json({ err, info })
-//         req.login(user, error => {
-//             if (error) return res.status(401).json({ error })
-//             return res.redirect(process.env.FRONTENDPOINT + "/profile")
-//         })
-//     })(req, res, next)
-// }

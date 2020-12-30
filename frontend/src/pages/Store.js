@@ -192,9 +192,9 @@ const Store = () => {
         setSearch(target.value)
     }
 
-    function addToCart(id) {
-        addToCartFn(id)
-        setCartFn(null)
+    async function addToCart(id) {
+        await addToCartFn(id)
+        setCartFn()
     }
 
     return (

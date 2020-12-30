@@ -9,6 +9,7 @@ const {
    getOneWork,
    delteWork,
    addWorkToCart,
+   changeProductQty,
    removeWorkFromCart,
    getMyCart
 } = require('../controllers/work')
@@ -21,6 +22,7 @@ router.get('/get/:workId', catchErrs(getOneWork))
 router.get('/delete/:id', isAuth, checkRole("artist"), catchErrs(delteWork))
 
 router.get('/addtocart/:id', catchErrs(addWorkToCart))
+router.get('/editqty/:id/:qty', catchErrs(changeProductQty))
 router.get('/removefromcart/:id', catchErrs(removeWorkFromCart))
 router.get('/getmycart', catchErrs(getMyCart))
 
