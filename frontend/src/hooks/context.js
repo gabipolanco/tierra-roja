@@ -58,13 +58,10 @@ import { getMyCoursesFn } from '../services/courses'
 
     useEffect(() => {
       async function getCart() {
-        if (user && !cart) {
-          const { data } = await getMyCartFn()
-          setCartFn([...data]);
-        }
+        if (user) setCartFn()
       }
       getCart()
-    }, [cart, user])
+    }, [user])
     
     useEffect(() => {
       async function getMyStreamings() {
@@ -94,8 +91,9 @@ import { getMyCoursesFn } from '../services/courses'
       setWorks(data)
     }
 
-    const setCartFn = (cartArr) => {
-      setCart(cartArr)
+    const setCartFn = async () => {
+      const { data } = await getMyCartFn()
+      setCart([...data])
     }
 
     const setMyStreamingsFn = async () => {

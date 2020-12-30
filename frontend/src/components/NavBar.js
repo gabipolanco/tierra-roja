@@ -13,12 +13,12 @@ const NavBarSyled = styled.div `
     width:30px;
     margin: 10px auto;
     li:first-child {
-    padding-top: 10vh;
+      padding-top: 10vh;
     }
     li {
-      padding-top:110px;
+      padding-top: 15vh;
       margin: 15px 5px;
-      font-size: 18px;
+      font-size: 14px;
       a {
       -webkit-transform:rotate(270deg);
       -moz-transform:rotate(270deg);
@@ -35,9 +35,15 @@ const NavBarSyled = styled.div `
       }
     }
   }
-  @media ${props => props.theme.device.tablet} {
-    .menu li:first-child {
-      padding-top: 20vh;
+  @media (min-height: 680px) {
+    .menu {
+      li {
+        padding-top: 110px;
+        font-size: 18px;
+      }
+      li:first-child {
+        padding-top: 20vh;
+      }
     }
   }
 

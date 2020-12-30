@@ -3,6 +3,34 @@ import { Row, Col, Form, Input, Select } from 'antd'
 import { useContextInfo } from '../hooks/context'   
 import { editFn } from '../services/auth'
 import { useHistory, Link } from "react-router-dom";
+import styled from 'styled-components'
+
+const EditStyled = styled.div`
+ .back-mobile {
+    position: fixed; 
+    top: 100px; 
+    left: 110px; 
+    z-index: 15;
+}
+.back {
+    display: none;
+}
+@media ${props => props.theme.device.tablet} {
+    .back {
+        display: block;
+        position: fixed; 
+        top: 70px; 
+        left: 70px; 
+        z-index: 15;
+        i {
+            margin-right: 10px;
+        }
+    }
+    .back-mobile {
+        display: none;
+    }
+}
+`
 
 const EditUser = () => {
     const { user, login } = useContextInfo()
@@ -39,11 +67,12 @@ const EditUser = () => {
         }
 
     return user && (
-        <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Perfil</Link>
+        <EditStyled className="page">
+            <Link className="back-mobile" to="/profile"><i className="fas fa-user-alt"></i></Link>
+            <Link className="back" to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Perfil</Link>
             <h1>Editá tu perfil</h1>
             <Row style={{marginTop: "70px"}}>
-                <Col xs={{ span: 24 }} lg={{ span: 8, offset: 8 }}>
+                <Col xs={{ offset: 2, span: 20 }} lg={{ span: 8, offset: 8 }}>
                 <Form
                     {...layout}
                     name="basic"
@@ -51,7 +80,6 @@ const EditUser = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px"}}
                     >
                      <Form.Item
                         label="Nombre de usuario"
@@ -128,7 +156,7 @@ const EditUser = () => {
                     </Form>
                 </Col>
             </Row>
-        </div>
+        </EditStyled>
     )
 }
 

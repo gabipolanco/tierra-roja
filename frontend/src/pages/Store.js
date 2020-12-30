@@ -6,7 +6,7 @@ import { getAllCoursesFn } from '../services/courses'
 import { useContextInfo } from '../hooks/context'
 import {Row, Col, Typography, Divider, Button, Input, Card } from 'antd'
 import styled from 'styled-components'
-import ShowMoreText from 'react-show-more-text';
+import ShowMoreText from 'react-show-more-text'
 const { Search } = Input;
 
 const StoreStyled = styled.div`
@@ -14,10 +14,10 @@ const StoreStyled = styled.div`
     padding-bottom: 0; 
     overflow-y: scroll; 
     height: 100vh;
-    .back-phone {
+    .back-mobile {
         position: fixed; 
         top: 140px; 
-        left: 70px; 
+        left: 110px; 
         z-index: 15;
     }
     .back {
@@ -105,7 +105,7 @@ const StoreStyled = styled.div`
                 margin-right: 10px;
             }
         }
-        .back-phone {
+        .back-mobile {
             display: none;
         }
         .container {
@@ -192,14 +192,14 @@ const Store = () => {
         setSearch(target.value)
     }
 
-    function addToCart(id) {
-        addToCartFn(id)
-        setCartFn(null)
+    async function addToCart(id) {
+        await addToCartFn(id)
+        setCartFn()
     }
 
     return (
         <StoreStyled className="page">
-            <Link className="back-phone" to="/"><i className="fas fa-home"></i></Link>
+            <Link className="back-mobile" to="/"><i className="fas fa-home"></i></Link>
             <Link className="back" to="/"><i className="fas fa-arrow-left"></i>Inicio</Link>
             <Row className="container">
                 <Col className="nav" xs={{offset: 1, span: 22}} lg={{offset: 1, span: 3}}>
