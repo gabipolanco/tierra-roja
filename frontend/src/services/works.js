@@ -17,5 +17,6 @@ export const getOneWorkFn = (workId) => workService.get(`/get/${workId}`)
 export const deleteWorkFn = (id) => workService.get(`/delete/${id}`)
 
 export const addToCartFn = (id) => workService.get(`/addtocart/${id}`)
+export const editProductQtyFn = (id, qty) => workService.get(`/editqty/${id}/${qty}`)
 export const removeFromCartFn = (id) => workService.get(`/removefromcart/${id}`)
 export const getMyCartFn = () => workService.get(`/getmycart`)

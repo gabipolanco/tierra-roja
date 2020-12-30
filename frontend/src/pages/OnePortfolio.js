@@ -2,232 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { getOneArtistFn } from '../services/artist'
 import { Link } from "react-router-dom";
 import { Card, Col, Row, Typography } from 'antd';
-import styled from 'styled-components'
-
-const PortfolioStyled = styled.div`
-display: flex;
-position: relative;
-height: 95vh;
-width: 100vw;
-overflow: hidden;
-
-    &>img.cover-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        opacity: .9;
-    }
-    &>.back {
-        position: fixed;
-        top: 70px;
-        left: 70px;
-        color: white;
-        z-index: 10;
-    }
-    &>.back i {
-        margin-right: 10px;
-    }
-    &>.edit {
-        position: fixed;
-        color: white;
-        font-size: 20px;
-        top: 100px;
-        left: 100px;
-        cursor: pointer;
-        z-index: 10;
-    }
-
-    &>div.wrapper {
-        transform: rotate(-30deg);
-        position: absolute;
-        height: 100vw;
-        width: 120vw;
-        top: 12vw;
-        left: -30vw;
-    }
-    &>div>div.left {
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-start;
-        position: relative;
-        height: 100%;
-        width: 40%;
-        background-color: rgba(0,0,0, .4);
-    }
-    &>div>div.left>div {
-        display: flex;
-        flex-direction: column;
-        space-between: center;
-        align-items: center;
-        margin-top: 60%;
-        margin-right: 20%;
-        transform: rotate(30deg);
-    }
-    &>div>div.left>div h2, h3 {
-        display: block;
-        max-width: 300px;
-        color: white;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    &>div .social {
-        width: 150px;
-        display: flex;
-        justify-content: space-evenly;
-        margin-top: 50px;
-    }
-    &>div .social a {
-        color: white;
-        font-size: 24px;
-    }
-&>div>div.right {
-    display: flex;
-    width: 60%;
-    height: 100%;
-}
-
-&>div .left-left {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-}
-&>div .left-right {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding-left: 4px;
-}
-
-& .inner-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40vh;
-    width: 100%;
-    margin: 2px 4px;
-    background-color: rgba(0,0,0, .4);
-    transition: all .4s ease;
-}
-& .inner-btn:hover {
-    transform: scale(.95);
-    cursor: pointer;
-}
-
-& .inner-btn h3{
-    transform: rotate(30deg);
-}
-
-& .inner-rest {
-    height: 40vh;
-    width: 100%;
-    margin: 2px 4px;
-    background-color: rgba(0,0,0, .4);
-}
-& .left-right .inner-rest {
-    margin-top: 20vh;
-    height: 70vh;
-}
-& .inner-rest2 {
-    height: 40vh;
-    width: 100%;
-    margin: 2px 4px;
-    background-color: rgba(0,0,0, .4);
-}
-&>div.bio, .arte, .courses, .store {
-    position: absolute;
-    display: flex;
-    right: 0;
-    width: 70vw;
-    height: 100%;
-    padding: 80px;
-    background-color: rgba(255,255,255);
-    text-align: justify;
-    transition: all .4s ease;
-    overflow-y: scroll;
-}
-&>div.bio>img {
-    height: 50%;
-    width: 30%;
-    object-fit: scale-down;
-    margin: 70px 40px 0 0;
-}
-&>div.arte .art-container {
-    width: 100%;
-}
-& .border {
-    padding: 60px;
-    max-height: 480px;
-    box-shadow: 0 0 3px black;
-}
-& .store .border {
-    padding: 20px;
-    max-height: 480px;
-    box-shadow: 0 0 3px black;
-}
-& .img-container {
-    position: relative;
-    max-height: 360px;
-    overflow: hidden;
-}
-& .img-container2 {
-    position: relative;
-    overflow: hidden;
-}
-& .arrow-left {
-    position: absolute;
-    top: 40vh;
-    left: 30px;
-    font-size: 30px;
-    color: #f0f0f0;
-    cursor: pointer;
-    z-index: 15;
-    display: block;
-    height: 30px;
-    width: 20px;
-}
-& .arrow-right {
-    position: absolute;
-    top: 40vh;
-    right: 30px;
-    font-size: 30px;
-    color: #f0f0f0;
-    cursor: pointer;
-    z-index: 15;
-    display: block;
-    height: 30px;
-    width: 20px;
-}
-&>div.arte .art-container>div img {
-    transition: all .6s ease;
-    width: 100%;
-    height: auto;
-}
-&>div.arte .art-container>div img:hover {
-    transform: scale(1.05);
-}
-&>div.arte .art-container .info {
-    text-align: right;
-    padding: 30px;
-    line-height: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
-}
-&>div .course-container {
-    width: 100%;
-}
-&>div .close{
-    position: fixed;
-    right: 100px;
-    top: 100px;
-    cursor: pointer;
-}
-`
+import PortfolioStyled from '../components/PortfolioStyled'
+import ShowMoreText from 'react-show-more-text'
 
 const OnePortfolio = ({match: {params: {id}}}) => {
     const [artist, setArtist] = useState(null)
@@ -288,6 +64,9 @@ const OnePortfolio = ({match: {params: {id}}}) => {
         setCoursesDiv(null)
         setStoreDiv(null)
     }
+    function closeWindow() {
+        if(bio || arte || coursesDiv || storeDiv) close() 
+    }
 
     function workLeft() {
         if(i > 0) {
@@ -313,7 +92,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
     return artist && (
         <div className="page">
             <Row>
-                <PortfolioStyled>
+                <PortfolioStyled onClick={closeWindow}>
                     <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
                     <Link className="back" to="/portfolios"><i className="fas fa-arrow-left"></i>Portfolios</Link>
                     
@@ -332,7 +111,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                         </div>
 
                         <div className="right" >   
-                            <div className="left-left">
+                            <div className="right-left">
                                 <div className="inner-rest"></div>
                                 <div onClick={showBio} className="inner-btn">
                                     <h3>Sobre mi</h3>
@@ -345,7 +124,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                                 </div>
                                 <div className="inner-rest"></div>
                             </div>
-                            <div className="left-right">
+                            <div className="right-right">
                                 <div className="inner-rest"></div>
                                 <div onClick={showStore} className="inner-btn">
                                     <h3>Tienda</h3>
@@ -401,7 +180,14 @@ const OnePortfolio = ({match: {params: {id}}}) => {
 
                                 return (<Col xs={{offset: 2,span: 20}}>
                                     <Card hoverable title={course.name} bordered={false}>
-                                    <p>{course.description}</p><br />
+                                    <ShowMoreText
+                                                lines={2}
+                                                more='Más info'
+                                                less='Ocultar'
+                                                expanded={false}
+                                                width={280}
+                                            >{course.description}</ShowMoreText>
+                                    <br />
                                     {course.date.length !== 0 && <p>Desde {desde} al {hasta}</p>}<br />
                                     {artist && <p>{artist.name}</p>}
                                     </Card>

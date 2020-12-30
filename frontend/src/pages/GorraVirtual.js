@@ -11,13 +11,14 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 overflow: hidden;
-background-image: "https://img.hutshopping.de/Hornets-Upside-Down-Cap-by-Mitchell-Ness-black.45422_2f4.jpg";
-background-position: center center;
-background-size: cover;
-background-repeat: no-repeat;
-& h2 {
+h2 {
     font-family: ${props => props.theme.font.primary};
-    font-size: 20vh;
+    font-size: 2.5rem;
+}
+@media ${props => props.theme.device.tablet} {
+    h2 {
+        font-size: 20vh;
+    }
 }
 `
 

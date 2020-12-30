@@ -35,8 +35,8 @@ const userSchema = new Schema({
     ref: "Course"
   }],
   cart: [{
-    type: Schema.Types.ObjectId,
-    ref: "Work"
+    product: {type: Schema.Types.ObjectId, ref: "Work"},
+    qty: {type: Number, default: 1}
   }],
   googleId: String,
   facebookId: String

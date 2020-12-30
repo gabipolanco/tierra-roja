@@ -19,7 +19,7 @@ overflow-y: scroll;
     }
 }
 .names-container {
-    margin: 140px 0 0 50px;
+    margin: 140px 0;
     .mover {
         font-family: ${props => props.theme.font.primary};
         font-size: 1.5rem;

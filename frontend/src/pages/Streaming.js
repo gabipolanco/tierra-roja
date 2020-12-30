@@ -1,7 +1,21 @@
 import React, {useState, useEffect } from 'react'
 import { getOneStreamingFn } from '../services/streaming'
 import { Row, Col, Skeleton, Typography } from 'antd'
+import styled from 'styled-components'
 import ReactHlsPlayer from 'react-hls-player'
+
+const StreamingStyled = styled.div`
+h2 {
+    margin-top: 20vh;
+    font-size: 1.5rem;
+}
+@media ${props => props.theme.device.laptop} {
+    h2 {
+        margin-top: 0;
+        font-size: 2rem;
+    }
+}
+`
 
 const Streaming = ({match: {params: {id}}}) => {
     const [streaming, setStreaming] = useState(null)
@@ -15,7 +29,7 @@ const Streaming = ({match: {params: {id}}}) => {
     }, [id])
 
     return (
-        <div className="page">
+        <StreamingStyled className="page">
         {streaming ?
         <div>
             <Row>
@@ -43,7 +57,7 @@ const Streaming = ({match: {params: {id}}}) => {
             </Col>
         </Row>
         }
-        </div>
+        </StreamingStyled>
     )
 }
 
