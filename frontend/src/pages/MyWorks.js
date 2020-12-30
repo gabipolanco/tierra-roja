@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import { Card, Col, Row, Button, Modal, Form, Input, Select, Typography } from 'antd';
+import { Card, Col, Row, Button, Modal, Form, Input, InputNumber, Select, Typography } from 'antd';
 import { useContextInfo } from '../hooks/context'
 import { createWorkFn, getOneWorkFn, editWorkFn, deleteWorkFn } from '../services/works'
 import axios from 'axios'
@@ -154,6 +154,13 @@ const MyWorks = () => {
                     >
                         <Input addonBefore="ARS$"/>
                     </Form.Item>
+
+                    <Form.Item
+                        label="Cantidad disponible"
+                        name="qty"
+                    >
+                        <InputNumber min="1" defaultValue="1" />
+                    </Form.Item>
                 
                     <Form.Item {...tailLayout}>
                         <button className="btn" type="submit" style={{width: "230px"}}>
@@ -217,6 +224,13 @@ const MyWorks = () => {
                         initialValue={workToBeEdited.price}
                     >
                         <Input addonBefore="ARS$"/>
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Cantidad disponible"
+                        name="qty"
+                    >
+                        <InputNumber min="1" defaultValue={workToBeEdited.qty} />
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>

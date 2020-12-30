@@ -3,25 +3,25 @@ const Work = require('../models/Work')
 const Artist = require('../models/Artist')
 
 exports.createWork = async (req, res) => {
-    const { workType, title, media, description, price } = req.body
+    const { workType, title, media, description, price, qty } = req.body
     const userId = req.user.id
     let {artistId} = await User.findById(userId)
     if (!artistId) {
-        const newWork = await Work.create({workType, title, media, description, price})
+        const newWork = await Work.create({workType, title, media, description, price, qty})
         await User.findByIdAndUpdate(userId, { $push : { artWork: newWork._id } }, {new: true})
         return res.status(201).json({message: "Work created", newWork})
     }
-    const newWork = await Work.create({workType, title, media, artistId, description, price})
+    const newWork = await Work.create({workType, title, media, artistId, description, price, qty})
     await User.findByIdAndUpdate(userId, { $push : { artWork: newWork._id } }, {new: true})
     res.status(201).json({message: "Work created", newWork})
 }
 
 exports.editWork = async (req, res) => {
     const workId = req.params.id
-    const { workType, title, media, description, price } = req.body
+    const { workType, title, media, description, price, qty } = req.body
     const userId = req.user.id
     const {artistId} = await User.findById(userId)
-    const editedWork = await Work.findByIdAndUpdate(workId, { workType, title, media, artistId, description, price}, {new: true})
+    const editedWork = await Work.findByIdAndUpdate(workId, { workType, title, media, artistId, description, price, qty}, {new: true})
     res.status(200).json({message: "Work edited", editedWork})
 }
 
@@ -40,13 +40,15 @@ exports.addWorkToCart = async (req, res) => {
     const userId = req.user.id
     const { id } = req.params
     const user = await User.findById(userId)
+    const originalProduct = await Work.findById(id)
+
     const product = user.cart.find(p => p.product.toString() === id)
     if (product === undefined) {
         await User.findByIdAndUpdate(userId, { $push : { cart: {product: id} } }, {new: true})
         return res.status(201).json({message: "Product added"})
     } else {
         const newCart = user.cart.map(p => {
-            if (p.product.toString() === id) {
+            if (p.product.toString() === id && p.qty < originalProduct.qty) {
                 p.qty += 1
                 return p 
             }
