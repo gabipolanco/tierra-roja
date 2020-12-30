@@ -118,13 +118,13 @@ const Cart = () => {
                         
                         </Col>
                         <Col xs={{offset: 2, span: 10, order: 1}} sm={{offset: 1, span: 5, order: 2}} lg={{offset: 0}}>
-                            <Typography.Text>{p.product.title}</Typography.Text>
+                            <Typography.Text strong>{p.product.title}</Typography.Text>
                         </Col>
                         <Col xs={{offset: 2, span: 20, order: 3}} sm={{offset: 2, span: 6}} lg={{offset: 0, span: 8}}>
-                            <Typography.Text>Cant: <InputNumber style={{width: "40px", marginLeft: "20px"}} defaultValue={p.qty} onChange={(qty) => changeQty(p._id, qty)} /></Typography.Text>
+                            <Typography.Text secondary>Cant: <InputNumber min="1" max="10" style={{width: "40px", marginLeft: "20px"}} defaultValue={p.qty} onChange={(qty) => changeQty(p._id, qty)} /></Typography.Text>
                         </Col>
                         <Col xs={{offset: 2, span: 20, order: 4}} sm={{offset: 1, span: 5}}>
-                            <Typography.Text>$ {subtotal}</Typography.Text>
+                            <Typography.Text strong>$ {subtotal}</Typography.Text>
                         </Col>
                     </Row>
                 </Col>
