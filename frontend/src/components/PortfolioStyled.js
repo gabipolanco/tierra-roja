@@ -41,38 +41,32 @@ export default styled.div`
     }
 
     .wrapper {
-        transform: rotate(-30deg);
-        position: absolute;
-        height: 125vw;
-        width: 125vw;
-        top: 19vw;
-        left: -38vw;
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
         .left {
             display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             position: relative;
-            height: 150%;
-            width: 40%;
+            height: 50%;
+            width: 100%;
             background-color: rgba(0,0,0, .4);
             &>div {
                 display: flex;
                 flex-direction: column;
-                space-between: center;
+                justify-content: center;
                 align-items: center;
-                margin-top: 80%;
-                margin-right: 10%;
-                transform: rotate(30deg);
                 h2, h3 {
                     display: block;
-                    max-width: 200px;
+                    max-width: 300px;
                 }
             }
             .social {
                 width: 150px;
                 display: flex;
                 justify-content: space-evenly;
-                margin-top: 50px;
+                margin-top: 20px;
                 a {
                     color: white;
                     font-size: 24px;
@@ -81,43 +75,31 @@ export default styled.div`
         }
         .right {
             display: flex;
-            width: 60%;
-            height: 100%;
+            flex-direction: column;
+            width: 100%;
+            height: 60%;
             .inner-rest {
-                height: 40vh;
-                width: 100%;
-                margin: 2px 4px;
-                background-color: rgba(0,0,0, .4);
+                display: none;
             }
             .inner-rest2 {
-                height: 40vh;
-                width: 100%;
-                margin: 2px 4px;
-                background-color: rgba(0,0,0, .4);
+               display: none;
             }
             .right-left {
-                width: 40%;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                height: 100%;
+                height: 75%;
             }
             .right-right {
-                width: 60%;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                height: 100%;
-                padding-left: 4px;
-                .inner-rest {
-                    margin-top: 20vh;
-                    height: 70vh;
-                }
-                .inner-btn {
-                    padding-right: 160px;
-                }
+                height: 25%;
             }
             .inner-btn {
+                z-index: 10;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -130,9 +112,6 @@ export default styled.div`
                     transform: scale(.95);
                     cursor: pointer;
                 }
-                h3{
-                    transform: rotate(30deg);
-                }
             }
         }
     }
@@ -143,29 +122,35 @@ export default styled.div`
     right: 0;
     width: 100vw;
     height: 100%;
-    padding: 80px;
+    padding: 80px 30px 80px 80px;
     background-color: rgba(255,255,255);
     text-align: justify;
     transition: all .4s ease;
     overflow-y: scroll;
+    z-index: 20;
 }
-.bio img {
-    height: 50%;
-    width: 30%;
-    object-fit: scale-down;
-    margin: 70px 40px 0 0;
+.bio {
+    display: flex;
+    flex-wrap: wrap;
+    img {
+        height: 30%;
+        width: 100%;
+        object-fit: scale-down;
+    }
 }
 .arte {
     .art-container {
-        width: 100%;
+        position: relative;
+        width: 90%;
+        margin-left: 5%;
         .border {
-            padding: 60px;
-            max-height: 480px;
+            padding: 30px;
+            max-height: 380px;
             box-shadow: 0 0 3px black;
         }
         .img-container {
             position: relative;
-            max-height: 360px;
+            max-height: 318px;
             overflow: hidden;
             img {
                 transition: all .6s ease;
@@ -178,10 +163,10 @@ export default styled.div`
         }
         .arrow-left {
             position: absolute;
-            top: 40vh;
-            left: 30px;
-            font-size: 30px;
-            color: #f0f0f0;
+            top: 10vh;
+            left: -30px;
+            font-size: 20px;
+            color: black;
             cursor: pointer;
             z-index: 15;
             display: block;
@@ -190,10 +175,10 @@ export default styled.div`
         }
         .arrow-right {
             position: absolute;
-            top: 40vh;
-            right: 30px;
-            font-size: 30px;
-            color: #f0f0f0;
+            top: 10vh;
+            right: -30px;
+            font-size: 20px;
+            color: black;
             cursor: pointer;
             z-index: 15;
             display: block;
@@ -203,7 +188,6 @@ export default styled.div`
         .info {
             text-align: right;
             padding: 30px;
-            line-height: 10px;
             font-size: 14px;
             font-weight: bold;
             color: black;
@@ -215,6 +199,7 @@ export default styled.div`
     .border {
         padding: 20px;
         max-height: 480px;
+        max-width: 340px;
         box-shadow: 0 0 3px black;
     }
     .img-container2 {
@@ -228,9 +213,122 @@ export default styled.div`
 }
 .close{
     position: fixed;
-    right: 100px;
-    top: 100px;
+    right: 60px;
+    top: 80px;
     cursor: pointer;
+    color: black;
+    font-family: ${props => props.theme.font.primary};
+    font-size: 18px;
+    text-align: center;
+}
+@media ${props => props.theme.device.lgPhone} {
+    .arte {
+        .art-container {
+            .arrow-left {
+                top: 20vh;
+            }
+            .arrow-right {
+                top: 20vh;
+            }
+        }
+    }
+} 
+@media ${props => props.theme.device.tablet} { 
+    .wrapper {
+        flex-direction: row;
+        transform: rotate(-30deg);
+        transform-origin: top left;
+        position: absolute;
+        height: 125vw;
+        width: 125vw;
+        top: 19vw;
+        left: -38vw;
+        .left {
+            justify-content: flex-end;
+            align-items: flex-start;
+            height: 150%;
+            width: 40%;
+            &>div {
+                margin-top: 80%;
+                margin-right: 10%;
+                transform: rotate(30deg);
+                h2, h3 {
+                    max-width: 200px;
+                }
+            }
+        }
+        .right {
+            flex-direction: row;
+            width: 60%;
+            height: 100%;
+            .inner-rest {
+                display: block;
+                height: 40vh;
+                width: 100%;
+                margin: 2px 4px;
+                background-color: rgba(0,0,0, .4);
+            }
+            .inner-rest2 {
+                display: block;
+                height: 40vh;
+                width: 100%;
+                margin: 2px 4px;
+                background-color: rgba(0,0,0, .4);
+            }
+            .right-left {
+                width: 40%;
+                height: 100%;
+            }
+            .right-right {
+                width: 60%;
+                height: 100%;
+                padding-left: 4px;
+                .inner-rest {
+                    margin-top: 20vh;
+                    height: 70vh;
+                }
+                .inner-btn {
+                    padding-right: 160px;
+                }
+            }
+            .inner-btn {
+                h3{
+                    transform: rotate(30deg);
+                }
+            }
+        }
+    }
+    .bio {
+        img {
+            height: 50%;
+            width: 30%;
+            margin: 70px 40px 0 0;
+        }
+        .content {
+            width: 60%;
+        }
+    }
+    .arte {
+        .art-container {
+            .border {
+                max-height: 480px;
+                padding: 60px;
+            }
+            .img-container {
+                max-height: 360px;
+            }
+            .arrow-left {
+                top: 30vh;
+                left: -30px;
+                font-size: 30px;
+            }
+            .arrow-right {
+                top: 30vh;
+                right: -30px;
+                font-size: 30px;
+            }
+        }
+    }
 }
 @media ${props => props.theme.device.laptop} {
     .cover-image {
@@ -267,6 +365,19 @@ export default styled.div`
     }
     .bio, .arte, .courses, .store {
         width: 70vw;
+        padding: 80px;
+    }
+    .arte {
+        .art-container {
+            margin-left: 0;
+            width: 100%;
+            .info {
+                line-height: 10px;
+            }
+        }
+    }
+    .close {
+        right: 100px;
     }
 }
 `

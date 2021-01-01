@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
+import ShowMoreText from 'react-show-more-text'
 import { getMyCoursesFn } from '../services/courses'
 import {Row, Col, Typography, Divider, Button } from 'antd'
 import { useContextInfo } from '../hooks/context'
@@ -40,37 +42,48 @@ const DashboardStudent = () => {
                 
                 return <Row gutter={[16, 16]}>
 
-                <Col offset={2} span={4}>
+                <Col xs={{offset: 2, span: 20 }} lg={{offset: 1, span: 7 }} style={{paddingBottom: "50px"}}>
                     <Typography.Title level={5}>{course.name}</Typography.Title>
                     <Typography.Text>Del: {desde} al {hasta}</Typography.Text><br/>
-                    <Typography.Text>{course.description}</Typography.Text>
+                    <ShowMoreText
+                                lines={3}
+                                more='Más info'
+                                less='Ocultar'
+                                expanded={false}
+                            >{course.description}</ShowMoreText>
                 </Col>
 
-                <Col offset={2} span={16}>
+                <Col xs={{offset: 2, span: 20 }} lg={{offset: 0, span: 16}}>
+                    {course.classes && course.classes.map(c => 
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
                             <Row>
-                                <Col span={12}>
-                                    <Typography.Title level={5}>Clase 1</Typography.Title>
-                                    <Typography.Text>Descripcion</Typography.Text>
+                                <Col xs={{offset: 2, span: 20}} lg={{offset: 0, span: 10}}>
+                                    <Typography.Title level={5}>{c.name}</Typography.Title>
+                                    <ShowMoreText
+                                        lines={3}
+                                        more='Más info'
+                                        less='Ocultar'
+                                        expanded={false}
+                                    >{c.description}</ShowMoreText>
                                 </Col>
 
-                                <Col span={4}>
-                                <Button><i className="fas fa-video"></i></Button>
+                                <Col xs={{offset: 1, span: 7}} lg={{offset: 0, span: 4}}>
+                                    <Link rel="noopener noreferrer" to={`/streaming/${c.video}`}><Button style={{marginTop: "40px"}}><i className="fas fa-video"></i></Button></Link>
                                 </Col>
                                 
-                                <Col span={4}>
-                                    <a  rel="noopener noreferrer" target="_blank" href="https://docs.google.com/presentation/d/1K2CRicqER3cuYwphjJE7aFGSGw75PlmgKt6vcngVjhY/edit#slide=id.gb09b282031_0_1"><Button><i className="fas fa-photo-video"></i></Button></a>
+                                <Col xs={{offset: 1, span: 7}} lg={{offset: 0, span: 4}}>
+                                    <a rel="noopener noreferrer" target="_blank" href={c.slideShowLink}><Button style={{marginTop: "40px"}}><i className="fas fa-photo-video"></i></Button></a>
                                 </Col>
 
-                                <Col span={4}>
-                                    <Button><i className="fas fa-folder-open"></i></Button>
+                                <Col xs={{offset: 1, span: 7}} lg={{offset: 0, span: 4}}>
+                                    <a rel="noopener noreferrer" target="_blank" href={c.contentLink}><Button style={{marginTop: "40px"}}><i className="fas fa-folder-open"></i></Button></a>
                                 </Col>
                             </Row>
                             <Divider />
                         </Col>
 
-                    </Row>
+                    </Row>)}
                 </Col>
 
                 <Divider />

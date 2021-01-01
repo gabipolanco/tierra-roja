@@ -83,8 +83,10 @@ const Checkout = ({match: {params: {total}}}) => {
             <Link className="back" to="/cart"><i className="fas fa-arrow-left"></i>Carrito</Link>
            <Typography.Title level={2}>Checkout</Typography.Title>
 
-            {products && products.map((p) => (
-            <Row className="product">
+            {products && products.map((p) => {
+            const subtotal = parseInt(p.product.price) * p.qty
+
+            return (<Row className="product">
                 <Divider />
                 <Col xs={{offset: 4, span: 4, order: 1}} sm={{offset: 1, span: 2}} >
                     <img src={p.product.media} alt="Producto" />
@@ -92,17 +94,17 @@ const Checkout = ({match: {params: {total}}}) => {
                 <Col xs={{order: 2, offset: 2, span: 14}} sm={{offset: 0, span: 21}}>
                     <Row>
                         <Col xs={{offset: 8, span: 10, order: 1}} sm={{offset: 3, span: 5, order: 2}} lg={{offset: 2}}>
-                            <Typography.Text>{p.product.title}</Typography.Text>
+                            <Typography.Text strong>{p.product.title}</Typography.Text>
                         </Col>
                         <Col xs={{offset: 2, span: 20, order: 3}} sm={{offset: 2, span: 6}} lg={{offset: 0, span: 8}}>
-                            <Typography.Text>Cant: {p.qty}</Typography.Text>
+                            <Typography.Text secondary>{p.qty} x ${p.product.price}</Typography.Text>
                         </Col>
                         <Col xs={{offset: 2, span: 20, order: 4}} sm={{offset: 1, span: 5}}>
-                            <Typography.Text>$ {p.product.price}</Typography.Text>
+                            <Typography.Text strong>$ {subtotal}</Typography.Text>
                         </Col>
                     </Row>
                 </Col>
-            </Row>))}
+            </Row>)})}
 
             <Divider />
 

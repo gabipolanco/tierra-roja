@@ -17,7 +17,11 @@ const workSchema = new Schema({
       ref: "Artist"
   },
   description: String,
-  price: String
+  price: String,
+  qty: {
+    type: Number,
+    default: 1
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',

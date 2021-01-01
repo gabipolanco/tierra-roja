@@ -77,7 +77,9 @@ const Cart = () => {
         function getTotal() {
             let prices = []
            if(products) {
-              products.map(p => prices.push(parseInt(p.product.price * p.qty)))
+              products.forEach(p => {
+                  if (p.product) prices.push(parseInt(p.product.price * p.qty))
+                })
               count = prices.length ? prices.reduce((acc, curr) => acc + curr) : 0  
             }
             setTotal(count)
@@ -102,13 +104,13 @@ const Cart = () => {
             <Typography.Title level={2}>Carrito</Typography.Title>
 
             {products && products.map((p) => {
-            const subtotal = parseInt(p.product.price) * p.qty
+            const subtotal = p.product ? parseInt(p.product.price) * p.qty : 0
             return (
             <Row className="product">
                 <Divider />
-                <Col xs={{offset: 4, span: 4, order: 1}} sm={{offset: 1, span: 2}} >
+                {p.product && <Col xs={{offset: 4, span: 4, order: 1}} sm={{offset: 1, span: 2}} >
                     <img src={p.product.media} alt="Producto" />
-                </Col>
+                </Col>}
                 <Col xs={{order: 2, offset: 2, span: 14}} sm={{offset: 0, span: 21}}>
                     <Row>
                         <Col xs={{offset: 4, span: 2, order: 2}} sm={{offset: 1, span: 1, order: 1}}>
@@ -117,15 +119,17 @@ const Cart = () => {
                             } } className="far fa-trash-alt"></i>
                         
                         </Col>
-                        <Col xs={{offset: 2, span: 10, order: 1}} sm={{offset: 1, span: 5, order: 2}} lg={{offset: 0}}>
-                            <Typography.Text>{p.product.title}</Typography.Text>
+                        {p.product ? <><Col xs={{offset: 2, span: 10, order: 1}} sm={{offset: 1, span: 5, order: 2}} lg={{offset: 0}}>
+                            <Typography.Text strong>{p.product.title}</Typography.Text>
                         </Col>
                         <Col xs={{offset: 2, span: 20, order: 3}} sm={{offset: 2, span: 6}} lg={{offset: 0, span: 8}}>
-                            <Typography.Text>Cant: <InputNumber style={{width: "40px", marginLeft: "20px"}} defaultValue={p.qty} onChange={(qty) => changeQty(p._id, qty)} /></Typography.Text>
+                            <Typography.Text secondary>Cant: <InputNumber min="1" max={p.product.qty} style={{width: "40px", marginLeft: "20px"}} defaultValue={p.qty} onChange={(qty) => changeQty(p._id, qty)} /></Typography.Text>
                         </Col>
                         <Col xs={{offset: 2, span: 20, order: 4}} sm={{offset: 1, span: 5}}>
-                            <Typography.Text>$ {subtotal}</Typography.Text>
-                        </Col>
+                            <Typography.Text strong>$ {subtotal}</Typography.Text>
+                        </Col></> : <Col xs={{offset: 2, span: 16, order: 2}}>
+                            <Typography.Text>Este producto no está más disponible</Typography.Text>
+                        </Col>}
                     </Row>
                 </Col>
             </Row>)})}

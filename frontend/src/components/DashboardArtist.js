@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import ShowMoreText from 'react-show-more-text'
 import { createCourseFn, editCourseFn, deleteCourseFn, getOneCourseFn, 
     addClassFn, getOneClassFn, editClassFn, deleteClassFn } from '../services/courses'
 import {Row, Col, Typography, Divider, Button, Modal, Form, Input, Select, DatePicker } from 'antd'
@@ -179,36 +180,60 @@ const DashboardArtist = () => {
                 
                 return <Row gutter={[16, 16]}>
 
-                <Col offset={2} span={4}>
-                    <i onClick={() => {
-                        setEditCourse(course._id)
-                        showModal2()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "-40px", zIndex: "5"}} className="far fa-edit"></i>
-                    <i onClick={() => {
-                        setEditCourse(course._id)
-                        showModal3()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "-80px", color: "red", zIndex: "5"}} className="far fa-trash-alt"></i>
-                   <i onClick={() => {
-                        setEditCourse(course._id)
-                        showModal4()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "-120px", zIndex: "5"}} className="fas fa-plus"></i>
-                   
-                    <Typography.Title level={5}>{course.name}</Typography.Title>
-                    {course.date.length !== 0 && <Typography.Text>Del: {desde} al {hasta}</Typography.Text>}<br/>
-                    <Typography.Text>{course.description}</Typography.Text>
+                <Col xs={{offset: 2, span: 20 }} lg={{offset: 1, span: 7 }}>
+                    <Row>
+                        <Col xs={20} lg={18} style={{paddingBottom: "50px"}}>
+                            <Typography.Title level={5}>{course.name}</Typography.Title>
+                            {course.date.length !== 0 && <Typography.Text>Del: {desde} al {hasta}</Typography.Text>}<br/>
+                            <ShowMoreText
+                                lines={3}
+                                more='Más info'
+                                less='Ocultar'
+                                expanded={false}
+                            >{course.description}</ShowMoreText>
+                        </Col>
+
+                        <Col xs={{offset: 1, span: 3}} lg={{ span: 5}}>
+                            <Row>
+                                <Col xs={24} lg={8}>
+                                    <i onClick={() => {
+                                        setEditCourse(course._id)
+                                        showModal2()
+                                    } } style={{cursor: "pointer"}} className="far fa-edit"></i>
+                                </Col>
+                                <Col xs={24} lg={8}>
+                                    <i onClick={() => {
+                                        setEditCourse(course._id)
+                                        showModal3()
+                                    } } style={{cursor: "pointer", color: "red"}} className="far fa-trash-alt"></i>
+                                </Col>
+                                <Col xs={24} lg={8}>
+                                    <i onClick={() => {
+                                            setEditCourse(course._id)
+                                            showModal4()
+                                        } } style={{cursor: "pointer"}} className="fas fa-plus"></i>
+                                </Col>
+                            </Row> 
+                        </Col>  
+                    </Row>
                 </Col>
 
-                <Col offset={2} span={16}>
+                <Col xs={{offset: 2, span: 20 }} lg={{offset: 0, span: 16}}>
                     {course.classes && course.classes.map(c => 
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
                             <Row>
-                                <Col span={10}>
+                                <Col xs={18} lg={10}>
                                     <Typography.Title level={5}>{c.name}</Typography.Title>
-                                    <Typography.Text>{c.description}</Typography.Text>
+                                    <ShowMoreText
+                                        lines={3}
+                                        more='Más info'
+                                        less='Ocultar'
+                                        expanded={false}
+                                    >{c.description}</ShowMoreText>
                                 </Col>
 
-                                <Col span={1}>
+                                <Col xs={{span: 1, offset: 1}} lg={{offset: 0}}>
                                 <i onClick={() => {
                                     setEditCourse(course._id)
                                     setEditClass(c._id)
@@ -216,7 +241,7 @@ const DashboardArtist = () => {
                                 } } style={{cursor: "pointer", zIndex: "5"}} className="far fa-edit"></i>
                                 </Col>
 
-                                <Col span={1}>
+                                <Col xs={{span: 1, offset: 1}} lg={{offset: 0}}>
                                 <i onClick={() => {
                                     setEditCourse(course._id)
                                     setEditClass(c._id)
@@ -224,16 +249,16 @@ const DashboardArtist = () => {
                                 } } style={{cursor: "pointer", color: "red", zIndex: "5"}} className="far fa-trash-alt"></i>
                                 </Col>
 
-                                <Col span={4}>
-                                    <Link rel="noopener noreferrer" to={`/streaming/${c.video}`}><Button>Clase</Button></Link>
+                                <Col xs={{offset: 2, span: 20}} md={{offset: 1, span: 7}} lg={{offset: 0, span: 4}}>
+                                    <Link rel="noopener noreferrer" to={`/streaming/${c.video}`}><Button style={{marginTop: "40px", minWidth: "110px"}}>Clase</Button></Link>
                                 </Col>
                                 
-                                <Col span={4}>
-                                    <a rel="noopener noreferrer" target="_blank" href={c.slideShowLink}><Button>Diapositivas</Button></a>
+                                <Col xs={{offset: 2, span: 20}} md={{offset: 1, span: 7}} lg={{offset: 0, span: 4}}>
+                                    <a rel="noopener noreferrer" target="_blank" href={c.slideShowLink}><Button style={{marginTop: "40px", minWidth: "110px"}}>Diapositivas</Button></a>
                                 </Col>
 
-                                <Col span={4}>
-                                    <a rel="noopener noreferrer" target="_blank" href={c.contentLink}><Button>Material</Button></a>
+                                <Col xs={{offset: 2, span: 20}} md={{offset: 1, span: 7}} lg={{offset: 0, span: 4}}>
+                                    <a rel="noopener noreferrer" target="_blank" href={c.contentLink}><Button style={{marginTop: "40px", minWidth: "110px"}}>Material</Button></a>
                                 </Col>
                             </Row>
                             <Divider />
@@ -262,7 +287,7 @@ const DashboardArtist = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    style={{margin: "0 15%", fontFamily: "Roboto"}}
                     >
                     <Form.Item
                         label="Nombre del curso"
@@ -309,7 +334,7 @@ const DashboardArtist = () => {
                     onFinish={onFinish2}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    style={{margin: "0 15%", fontFamily: "Roboto"}}
                     >
                      <Form.Item
                         label="Nombre del curso"
