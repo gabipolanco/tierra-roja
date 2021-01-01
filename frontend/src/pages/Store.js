@@ -84,7 +84,7 @@ const StoreStyled = styled.div`
                 margin-bottom: 40px;
                 .course {
                     background-color: white; 
-                    margin: 40px; 
+                    margin: 40px 10px; 
                     padding: 20px;
                     border-bottom: 1px solid #e8eaed;
                     .description {
@@ -150,6 +150,11 @@ const StoreStyled = styled.div`
                 }
                 #courses-title h4 {
                     font-size: 1.25rem;
+                }
+                #courses {
+                    .course {
+                        margin: 40px 60px;
+                    }
                 }
             }
         }

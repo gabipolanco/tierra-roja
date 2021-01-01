@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { Card, Col, Row, Button, Modal, Form, Input, Select, DatePicker, Typography } from 'antd';
+import styled from 'styled-components'; 
 import { useContextInfo } from '../hooks/context'
 import { createStreamingFn, getOneStreamingFn, editStreamingFn, deleteStreamingFn } from '../services/streaming'
+
+const LinkStyled = styled.div`
+    position: fixed; 
+    top: 70px; 
+    left: 70px; 
+    z-index: 5;
+    span {
+        display: none;
+    }
+    @media ${props => props.theme.device.tablet} {
+        span {
+            display: inline-block;
+        }
+    }
+`
 
 const MyStreamings = () => {
     const { user, artist, myStreamings, setMyStreamingsFn } = useContextInfo()
@@ -85,7 +101,7 @@ const MyStreamings = () => {
 
     return user && (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Perfil</Link>
+            <LinkStyled><Link to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i><span>Perfil</span></Link></LinkStyled>
             <h1>Mis streamings</h1>
             {user.role === "artist" ? <div>
             <Button onClick={showModal}>Agregar un streaming</Button>

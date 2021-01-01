@@ -21,7 +21,7 @@ font-family: ${props => props.theme.font.secondary};
     }
 }
  button {
-    min-width: 110px;
+    min-width: 128px;
     margin-bottom: 15px;
  }
  @media ${props => props.theme.device.tablet} {
@@ -93,10 +93,10 @@ const Profile = () => {
                                     <img src={user.image} alt=""/>
                                 </div>
                             </Col>
-                            <Col xs={{offset: 6, span: 15}} sm={{offset: 7}} md={{offset: 2, span: 20}}>
+                            <Col xs={{offset: 4, span: 15}} sm={{offset: 7}} md={{offset: 2, span: 20}}>
                                 <input type="file" name="image" onChange={handleUploadFile} style={{float: "left", margin: "40px 0", width: "250px"}} />
                             </Col>
-                            <Col span={22}>
+                            <Col xs={{offset: 2, span: 22}} sm={{offset: 1}}>
                                 <Button onClick={handleSubmit} disabled={!img}>{status}</Button>
                             </Col>
                         </Row> 
@@ -106,33 +106,31 @@ const Profile = () => {
                 <Col xs={{offset: 2, span: 20}} md={{span: 16}}>
                 {user.role === "artist" ? 
                     <Row style={{height: "100%"}} align="bottom">
-                        <Col xs={{span: 24}} sm={{span: 5, offset: 1}} md={{span: 4}}>
+                        <Col xs={{offset: 4, span: 20}} sm={{span: 5, offset: 1}} md={{span: 4}}>
                             <Link to="/myworks"><Button>Trabajos</Button></Link>
                         </Col>
-                        <Col xs={{span: 24}} sm={{span: 5, offset: 1}} md={{span: 4}}>                            
+                        <Col xs={{offset: 4, span: 20}} sm={{span: 5, offset: 1}} md={{span: 4}}>                            
                             <Link to="/artist"><Button>Portfolio</Button></Link>
                         </Col>
-                        <Col xs={{span: 24}} sm={{span: 5, offset: 1}} md={{span: 4}}>                            
+                        <Col xs={{offset: 4, span: 20}} sm={{span: 5, offset: 1}} md={{span: 4}}>                            
                             <Link to="/mystreamings"><Button>Streamings</Button></Link>
                         </Col>
-                        <Col xs={{span: 24}} sm={{span: 5, offset: 1}} md={{span: 4}}>                            
+                        <Col xs={{offset: 4, span: 20}} sm={{span: 5, offset: 1}} md={{span: 4}}>                            
                             <Link to="/dashboard"><Button>Dashboard</Button></Link>
                         </Col>
                     </Row> 
-                     : <div>
-                 {user.role === "student" ? 
-                    <Row>
-                        <Col xs={{span: 24}} md={{span: 5, offset: 1}}>
-                            <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>
-                        </Col>
-                        <Col xs={{span: 24}} md={{span: 5, offset: 1}}>
-                            <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
-                        </Col>
-                    </Row> 
-                    : <div>
-                        
-                    </div>}
-            </div>}
+                    :  <Row style={{height: "100%"}} align="bottom">
+                            {user.role === "student" ? 
+                               <>
+                                <Col  xs={{offset: 4, span: 20}} sm={{span: 10, offset: 2}} md={{offset: 4, span: 6}}>
+                                    <Link style={{margin: "0 30px"}} to="/mystreamings"><Button>Mis streamings</Button></Link>
+                                </Col>
+                                <Col  xs={{offset: 4, span: 20}} sm={{span: 10, offset: 2}} md={{offset: 0, span: 6}}>
+                                    <Link style={{margin: "0 30px"}} to="/dashboard"><Button>Dashboard</Button></Link>
+                                </Col>
+                                </>
+                                : <></>}
+                    </Row>}
                 </Col>
                 
                 <Col xs={{offset: 4, span: 18}} md={{offset: 2, span: 20}}>    

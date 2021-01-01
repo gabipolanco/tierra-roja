@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { Card, Col, Row, Button, Modal, Form, Input, InputNumber, Select, Typography } from 'antd';
+import styled from 'styled-components'; 
 import { useContextInfo } from '../hooks/context'
 import { createWorkFn, getOneWorkFn, editWorkFn, deleteWorkFn } from '../services/works'
 import axios from 'axios'
+
+const LinkStyled = styled.div`
+    position: fixed; 
+    top: 70px; 
+    left: 70px; 
+    z-index: 5;
+    span {
+        display: none;
+    }
+    @media ${props => props.theme.device.tablet} {
+        span {
+            display: inline-block;
+        }
+    }
+`
 
 const MyWorks = () => {
     const { artist, works, setUserWorksFn } = useContextInfo()
@@ -101,7 +117,7 @@ const MyWorks = () => {
 
     return (
         <div className="page">
-            <Link style={{position: "fixed", top: "70px", left: "70px", zIndex: "5"}} className="back" to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i>Perfil</Link>
+            <LinkStyled><Link to="/profile"><i style={{marginRight: "10px"}} className="fas fa-arrow-left"></i><span>Perfil</span></Link></LinkStyled>
             <h1>Mis trabajos</h1>
             <Button onClick={showModal}>Agregar un trabajo</Button>
 
@@ -265,11 +281,11 @@ const MyWorks = () => {
                     <i onClick={() => {
                         setEditWork(work._id)
                         showModal2()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "40px", zIndex: "5"}} className="far fa-edit"></i>
+                    } } style={{cursor: "pointer", position: "absolute", top: "20px", right: "7%", zIndex: "5"}} className="far fa-edit"></i>
                     <i onClick={() => {
                         setEditWork(work._id)
                         showModal3()
-                    } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "40px", color: "red", zIndex: "5"}} className="far fa-trash-alt"></i>
+                    } } style={{cursor: "pointer", position: "absolute", top: "20px", left: "7%", color: "red", zIndex: "5"}} className="far fa-trash-alt"></i>
                     <Card hoverable cover={<img style={{objectFit: "cover", height: "250px"}} src={work.media} alt={work.title} />} title={work.title} bordered={false}>
                     <Typography.Text>{work.description}</Typography.Text><br />
                     {work.price && <> <Typography.Text>$ {work.price}</Typography.Text><br /></>}
