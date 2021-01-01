@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import HomeStyled from '../components/HomeStyled'
 
 const Cover = styled.div `
 display: flex;
@@ -55,7 +56,7 @@ const Home = () => {
  
 
     return (
-        <div>
+        <HomeStyled>
             <div className="outer-wrapper">
                 <div className="wrapper">
 
@@ -127,7 +128,7 @@ const Home = () => {
 
                 </div>       
             </div>
-        </div>
+        </HomeStyled>
     )
 }
 

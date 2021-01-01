@@ -92,11 +92,11 @@ const OnePortfolio = ({match: {params: {id}}}) => {
     return artist && (
         <div className="page">
             <Row>
-                <PortfolioStyled onClick={closeWindow}>
+                <PortfolioStyled>
                     <img className="cover-image" src={artist.coverImage} alt={artist.name}/>
                     <Link className="back" to="/portfolios"><i className="fas fa-arrow-left"></i>Portfolios</Link>
                     
-                    <div className="wrapper">
+                    <div onClick={closeWindow} className="wrapper">
                         <div className="left" >
                             <div>
                             <h2>{artist.name}</h2>
@@ -137,7 +137,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                     {bio && <div className="bio">
                         <div onClick={close} className="close">X</div>
                         {user && <img src={user.image} alt={artist.name}/>}
-                        <div>
+                        <div className="content">
                             <h2>Bio</h2>
                             <p>{artist.bio}</p>
                         </div>
@@ -203,7 +203,7 @@ const OnePortfolio = ({match: {params: {id}}}) => {
                                 <h2>Tienda</h2>
                             </Col>
                             {products && products.map(p => ( 
-                                <Col offset={1} span={11} className="art-container">
+                                <Col xs={{offset: 2, span: 20}} md={{offset: 1, span: 11}} className="art-container">
                                     <div className="border">
                                     <div className="img-container2">
                                         <img style={{objectFit: "scale-down", height: "300px"}} src={p.media} alt={p.title} />

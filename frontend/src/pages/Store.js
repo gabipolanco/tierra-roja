@@ -84,7 +84,7 @@ const StoreStyled = styled.div`
                 margin-bottom: 40px;
                 .course {
                     background-color: white; 
-                    margin: 40px; 
+                    margin: 40px 10px; 
                     padding: 20px;
                     border-bottom: 1px solid #e8eaed;
                     .description {
@@ -151,6 +151,11 @@ const StoreStyled = styled.div`
                 #courses-title h4 {
                     font-size: 1.25rem;
                 }
+                #courses {
+                    .course {
+                        margin: 40px 60px;
+                    }
+                }
             }
         }
     }
@@ -188,11 +193,11 @@ const Store = () => {
         getCourses()
     }, [search])
 
-    function onSearch({target}) {
+    const onSearch = ({target}) => {
         setSearch(target.value)
     }
 
-    async function addToCart(id) {
+    const addToCart = async (id) => {
         await addToCartFn(id)
         setCartFn()
     }
@@ -206,8 +211,8 @@ const Store = () => {
                     <Row type="flex" align="middle">
                         <Col span={24}><Search placeholder="Buscar" onChange={onSearch} /></Col>
                         <Col span={24}><Link to="/cart">Carrito</Link></Col>
-                        <Col span={24}><HashLink to="/store#products">Productos</HashLink></Col>
-                        <Col span={24}><HashLink to="/store#courses">Educación</HashLink></Col>
+                        <Col span={24}><HashLink smooth to="/store#products">Productos</HashLink></Col>
+                        <Col span={24}><HashLink smooth to="/store#courses">Educación</HashLink></Col>
                     </Row>
                 </Col>
                 <Col xs={{offset: 2, span:20}} lg={{offset: 1, span: 20}}>
@@ -228,9 +233,10 @@ const Store = () => {
                             <Row id="products">
                             {products && products.map(p => (p.price && <Col xs={{offset: 2, span: 20}} sm={{offset: 1, span: 10}} lg={{span: 7}} xl={{offset: 1, span: 5}}>
                                     <Card cover={<img alt={p.title} src={p.media} />}>
-                                        <Typography.Text>{p.title}</Typography.Text><br/>
+                                        <Typography.Text strong>{p.title}</Typography.Text><br/>
                                         <Typography.Text>$ {p.price}</Typography.Text><br/>
                                         {p.artistId && <Typography.Text>{p.artistId.name}</Typography.Text>}<br/>
+                                        <small>{p.qty} disponibles</small><br/>
                                         <Button onClick={() => {
                                             addToCart(p._id)
                                             }}>Agregar al carrito</Button>
