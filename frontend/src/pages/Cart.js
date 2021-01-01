@@ -77,7 +77,9 @@ const Cart = () => {
         function getTotal() {
             let prices = []
            if(products) {
-              products.map(p => {if (p.product) prices.push(parseInt(p.product.price * p.qty))})
+              products.forEach(p => {
+                  if (p.product) prices.push(parseInt(p.product.price * p.qty))
+                })
               count = prices.length ? prices.reduce((acc, curr) => acc + curr) : 0  
             }
             setTotal(count)

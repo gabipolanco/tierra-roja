@@ -106,7 +106,7 @@ const MyStreamings = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px"}}
+                    style={{margin: "0 15%"}}
                     >
                      <Form.Item
                         label="Título de la clase/concierto/charla"
@@ -163,7 +163,7 @@ const MyStreamings = () => {
                     onFinish={onFinish2}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px"}}
+                    style={{margin: "0 15%"}}
                     >
                      <Form.Item
                         label="Título de la clase/concierto/charla"

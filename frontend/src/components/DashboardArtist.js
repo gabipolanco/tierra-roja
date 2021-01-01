@@ -262,7 +262,7 @@ const DashboardArtist = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    style={{margin: "0 15%", fontFamily: "Roboto"}}
                     >
                     <Form.Item
                         label="Nombre del curso"
@@ -309,7 +309,7 @@ const DashboardArtist = () => {
                     onFinish={onFinish2}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    style={{margin: "0 15%", fontFamily: "Roboto"}}
                     >
                      <Form.Item
                         label="Nombre del curso"

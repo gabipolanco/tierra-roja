@@ -55,7 +55,7 @@ const EditPortfolio = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px"}}
+                    style={{margin: "0 15%"}}
                     >
                     <Typography.Title level={2}>Editar portfolio</Typography.Title>
                      <Form.Item

@@ -45,9 +45,11 @@ const MyWorks = () => {
 
         const onFinish2 = async (values) => {
             let media
+            let qty
             img ? media = img : media = workToBeEdited.media
+            values.qty ? qty = values.qty : qty = workToBeEdited.qty
             const workId = workToBeEdited._id
-            await editWorkFn(workId, {...values, media})
+            await editWorkFn(workId, {...values, media, qty})
             setUserWorksFn()
             setIsModal2Visible(false)
             setWorkToBeEdited(null)
@@ -119,7 +121,7 @@ const MyWorks = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    style={{margin: "0 15%", fontFamily: "Roboto"}}
                     >
                      <Form.Item
                         label="Título de la obra/producto"
@@ -186,7 +188,7 @@ const MyWorks = () => {
                     onFinish={onFinish2}
                     onFinishFailed={onFinishFailed}
                     layout="vertical"
-                    style={{margin: "0 80px", fontFamily: "Roboto"}}
+                    style={{margin: "0 15%", fontFamily: "Roboto"}}
                     >
                      <Form.Item
                         label="Título de la obra/producto"
@@ -230,7 +232,7 @@ const MyWorks = () => {
                         label="Cantidad disponible"
                         name="qty"
                     >
-                        <InputNumber min="1" defaultValue={workToBeEdited.qty} />
+                        <InputNumber min="1" />
                     </Form.Item>
                 
                     <Form.Item {...tailLayout}>
@@ -271,7 +273,8 @@ const MyWorks = () => {
                     <Card hoverable cover={<img style={{objectFit: "cover", height: "250px"}} src={work.media} alt={work.title} />} title={work.title} bordered={false}>
                     <Typography.Text>{work.description}</Typography.Text><br />
                     {work.price && <> <Typography.Text>$ {work.price}</Typography.Text><br /></>}
-                    {artist && <Typography.Text>{artist.name}</Typography.Text>}
+                    {artist && <Typography.Text>{artist.name}</Typography.Text>}<br />
+                    <Typography.Text>{work.qty} disponibles</Typography.Text>
                     </Card>
                 </Col>))}
             </Row> : <div></div>}
