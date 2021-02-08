@@ -36,7 +36,7 @@ const SignupForm = () => {
         setIsModalVisible(false);
         setRegistered(true)
       } catch(err) {
-        console.log(err.response.data.err)
+        console.log(err)
       }
     };
   
@@ -71,6 +71,12 @@ const SignupForm = () => {
           name="password"
           label="Contraseña"
           rules={[
+            // {
+            //   required: true,
+            //   type: "regexp",
+            //   pattern: new RegExp("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}"),
+            //   message: "Wrong format!"
+            // },
             {
               required: true,
               message: 'Por favor ingresa una contraseña!',

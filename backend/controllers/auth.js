@@ -32,7 +32,7 @@ exports.signupProcess = async (req, res) => {
         const user = await User.findOne({ email })
         if (user) {
             return res.status(406).json({
-                message: "Error"
+                message: "Error with username"
             })
         }
         const salt = bcrypt.genSaltSync(12)
