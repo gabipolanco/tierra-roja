@@ -4,7 +4,9 @@
 
 ### Developers: [Gabriela Polanco Ferreyra](https://github.com/gabipolanco) & [Tomas Scattini](https://github.com/Tomasscattini)
 
-![logo_tierra_roja](https://res.cloudinary.com/tomiscattini/image/upload/v1607558046/tierra-roja/Imagenes%20pagina/clayhands_oyavyk.jpg?fbclid=IwAR128FysTZNY8Z9Un8NYJ2mnmnn9pEnDjLvtI21YSZyRJcJd51SgBPCydck)
+![logo_tierra_roja](https://res.cloudinary.com/tomiscattini/image/upload/v1607960585/tierra-roja/Imagenes%20pagina/clayhands_qmduob.jpg)
+
+👉👉## [Website](https://tierra-roja.herokuapp.com/)👈👈
 
 ### User to try the website:
 
